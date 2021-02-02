@@ -25,8 +25,23 @@ namespace ToPlan.Models
             this.Password = p;
             this.FechaNacimiento = f;
             this.Preferences = pre;
+            this.Admin = false;
         }
 
         public User() { }
+    }
+
+    public class UserDTO
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string FechaNacimiento { get; set; }
+        public UserDTO(string n, string s, string f)
+        {
+            
+            this.Name = char.ToUpper(n[0]) + n.Substring(1);
+            this.Surname = char.ToUpper(s[0]) + s.Substring(1);
+            this.FechaNacimiento = f;
+        }
     }
 }
