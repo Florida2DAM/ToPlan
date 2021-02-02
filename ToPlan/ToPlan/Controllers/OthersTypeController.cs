@@ -11,6 +11,7 @@ namespace ToPlan.Controllers
     {
         // GET api/values
         [Route("api/Other/Get")]
+        //Devuelve un subtipo de gastronomy a partir de una id
         public OtherDTO Get(string n)
         {
             OthersTypesRepository rep = new OthersTypesRepository();
@@ -18,6 +19,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Other")]
+        //Comprueba si existe un subtipo Other a partir de una id
         public bool GetCheck(string n)
         {
             OthersTypesRepository rep = new OthersTypesRepository();
@@ -26,6 +28,7 @@ namespace ToPlan.Controllers
 
 
         [Route("api/Other")]
+        //Insertar un nuevo subtipo de Other
         public void PostOther(string n)
         {
             OthersTypesRepository rep = new OthersTypesRepository();
@@ -33,6 +36,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Other")]
+        //Elimina un objeto Other a partir de su id
         public void Delete(int id)
         {
             OthersTypesRepository rep = new OthersTypesRepository();

@@ -10,6 +10,7 @@ namespace ToPlan.Controllers
     public class LeisureTypeController : ApiController
     {
         [Route("api/Leisure/Get")]
+        //Devuelve un subtipo de Leisure a partir de una id
         public LeisureDTO Get(string n)
         {
             LeisureTypesRespository rep = new LeisureTypesRespository();
@@ -17,6 +18,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Leisure")]
+        //Comprueba si existe un subtipo Leisure a partir de una id
         public bool GetCheck(string n)
         {
             LeisureTypesRespository rep = new LeisureTypesRespository();
@@ -24,6 +26,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Leisure")]
+        //Insertar un nuevo subtipo de Leisure
         public void PostLeisure(string n)
         {
             LeisureTypesRespository rep = new LeisureTypesRespository();
@@ -31,6 +34,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Leisure")]
+        //Elimina un objetivo Leisure a partir de su id
         public void Delete(int id)
         {
             LeisureTypesRespository rep = new LeisureTypesRespository();
