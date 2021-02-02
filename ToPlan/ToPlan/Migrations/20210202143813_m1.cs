@@ -68,7 +68,8 @@ namespace ToPlan.Migrations
                     Surname = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     FechaNacimiento = table.Column<string>(nullable: true),
-                    Preferences = table.Column<string>(nullable: true)
+                    Preferences = table.Column<string>(nullable: true),
+                    Admin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

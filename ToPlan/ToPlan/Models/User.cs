@@ -13,6 +13,7 @@ namespace ToPlan.Models
         public string Password { get; set; }
         public string FechaNacimiento { get; set; }
         public string Preferences { get; set; }
+        public bool Admin { get; set; }
 
         public List<Event> Events { get; set; }
 

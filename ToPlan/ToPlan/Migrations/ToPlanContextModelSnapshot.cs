@@ -137,6 +137,9 @@ namespace ToPlan.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("Admin")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("FechaNacimiento")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 

@@ -253,9 +253,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20210202111243_m1.cs" />
-    <Compile Include="Migrations\20210202111243_m1.designer.cs">
-      <DependentUpon>20210202111243_m1.cs</DependentUpon>
+    <Compile Include="Migrations\20210202143813_m1.cs" />
+    <Compile Include="Migrations\20210202143813_m1.designer.cs">
+      <DependentUpon>20210202143813_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ToPlanContextModelSnapshot.cs" />
     <Compile Include="Models\Event.cs" />
