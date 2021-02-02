@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
     public class LeisureTypeController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        [Route("api/Leisure/Get")]
+        public LeisureDTO Get(string n)
         {
-            return new string[] { "value1", "value2" };
+            LeisureTypesRespository rep = new LeisureTypesRespository();
+            return rep.Get(n);
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [Route("api/Leisure")]
+        public bool GetCheck(string n)
         {
-            return "value";
+            LeisureTypesRespository rep = new LeisureTypesRespository();
+            return rep.Check(n);
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
+        [Route("api/Leisure")]
+        public void PostLeisure(string n)
         {
+            LeisureTypesRespository rep = new LeisureTypesRespository();
+            rep.Save(n);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
+        [Route("api/Leisure")]
         public void Delete(int id)
         {
+            LeisureTypesRespository rep = new LeisureTypesRespository();
+            rep.DeleteLeisure(id);
         }
     }
 }

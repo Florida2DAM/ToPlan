@@ -18,4 +18,14 @@ namespace ToPlan.Models
 
         public LeisureType() { }
     }
+    public class LeisureDTO
+    {
+        public int LeisureTypeId { get; set; }
+        public string Name { get; set; }
+        public LeisureDTO(int i, string n)
+        {
+            this.LeisureTypeId = i;
+            this.Name = char.ToUpper(n[0]) + n.Substring(1); ;
+        }
+    }
 }
