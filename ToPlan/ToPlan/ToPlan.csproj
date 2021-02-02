@@ -248,6 +248,7 @@
     <Compile Include="Controllers\LeisureTypeController.cs" />
     <Compile Include="Controllers\OthersTypeController.cs" />
     <Compile Include="Controllers\SportTypeController.cs" />
+    <Compile Include="Controllers\SportTypeRepository.cs" />
     <Compile Include="Controllers\UsersControllers.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

@@ -15,6 +15,7 @@ namespace ToPlan.Models
             try
             {
                 context.Users.Add(u);
+                context.SaveChanges();
             }catch(Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
