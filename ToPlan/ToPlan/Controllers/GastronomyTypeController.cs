@@ -3,36 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
     public class GastronomyTypeController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        [Route("api/Gastronomy/Get")]
+        public GastronomyDTO Get(string n)
         {
-            return new string[] { "value1", "value2" };
+            GastronomyTypesRepository rep = new GastronomyTypesRepository();
+            return rep.Get(n);
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [Route("api/Gastronomy")]
+        public bool GetCheck(string n)
         {
-            return "value";
+            GastronomyTypesRepository rep = new GastronomyTypesRepository();
+            return rep.Check(n);
+        }
+        [Route("api/Gastronomy")]
+        public void PostGastronomy(string n)
+        {
+            GastronomyTypesRepository rep = new GastronomyTypesRepository();
+            rep.Save(n);
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
+        [Route("api/Gastronomy")]
         public void Delete(int id)
         {
+            GastronomyTypesRepository rep = new GastronomyTypesRepository();
+            rep.DeleteGastronomy(id);
         }
     }
 }

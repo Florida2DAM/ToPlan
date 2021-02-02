@@ -18,4 +18,14 @@ namespace ToPlan.Models
 
         public GastronomyType() { }
     }
+    public class GastronomyDTO
+    {
+        public int GastronomyTypeId { get; set; }
+        public string Name { get; set; }
+        public GastronomyDTO(int i, string n)
+        {
+            this.GastronomyTypeId = i;
+            this.Name = char.ToUpper(n[0]) + n.Substring(1); ;
+        }
+    }
 }
