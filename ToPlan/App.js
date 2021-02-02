@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,8 +15,8 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {UserScreen} from "./Components/UserScreen";
-import {LoginScreen} from "./Components/LoginScreen";
+import {UserScreen} from "./screens/UserScreen";
+import {LoginScreen} from "./screens/LoginScreen";
 
 import {
   Header,
@@ -26,14 +26,18 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-     <LoginScreen></LoginScreen>
+export class App extends Component{
 
+  render() {
+    return (
+      <>
+        <LoginScreen></LoginScreen>
     </>
   );
 };
+}
+
+  
 
 const styles = StyleSheet.create({
   scrollView: {

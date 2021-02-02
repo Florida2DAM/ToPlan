@@ -7,8 +7,8 @@ import {
     Text,
     StatusBar,Image
 } from 'react-native';
-import {EventMiddle} from "./EventMiddle";
-import {NavBar} from "./NavBar";
+import {EventMiddle} from "../Components/eventMiddle/EventMiddle";
+import {NavBar} from "../Components/navBar/NavBar";
 
 
 export class UserScreen extends React.Component {
