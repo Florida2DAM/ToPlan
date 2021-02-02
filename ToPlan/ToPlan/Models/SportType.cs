@@ -13,8 +13,18 @@ namespace ToPlan.Models
 
         public SportType(string n)
         {
-            this.Name = n;
+            this.Name = char.ToUpper(n[0]) + n.Substring(1);
         }
         public SportType() { }
+    }
+    public class SportDTO
+    {
+        public int SportTypeId { get; set; }
+        public string Name { get; set; }
+        public SportDTO(int i, string n)
+        {
+            this.SportTypeId = i;
+            this.Name = char.ToUpper(n[0]) + n.Substring(1); ;
+        }
     }
 }

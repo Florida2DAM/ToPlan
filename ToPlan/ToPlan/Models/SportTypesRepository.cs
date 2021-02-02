@@ -50,14 +50,14 @@ namespace ToPlan.Models
                 return false;
             }
         }
-        internal SportType Get(string n)
+        internal SportDTO Get(string n)
         {
             ToPlanContext context = new ToPlanContext();
             SportType s;
             try
             {
                 s = context.SportTypes.Single(z => z.Name.Equals(n.ToLower()));
-                return s;
+                return new SportDTO(s.SportTypeId,s.Name);
             }catch(Exception e)
             {
                 Debug.WriteLine("Error de conexion");

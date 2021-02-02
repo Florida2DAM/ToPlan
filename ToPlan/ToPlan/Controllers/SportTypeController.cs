@@ -9,9 +9,8 @@ namespace ToPlan.Controllers
 {
     public class SportTypeController : ApiController
     {
-        // GET api/values
         [Route("api/Sport/Get")]
-        public SportType Get(string n)
+        public SportDTO Get(string n)
         {
             SportTypesRepository rep = new SportTypesRepository();
             return rep.Get(n);
@@ -31,10 +30,6 @@ namespace ToPlan.Controllers
             rep.Save(n);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
         [Route("api/Sport")]
         public void Delete(int id)

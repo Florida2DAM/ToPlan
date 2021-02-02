@@ -18,4 +18,15 @@ namespace ToPlan.Models
 
         public OtherType() { }
     }
+
+    public class OtherDTO
+    {
+        public int OtherTypeId { get; set; }
+        public string Name { get; set; }
+        public OtherDTO(int i, string n)
+        {
+            this.OtherTypeId = i;
+            this.Name = char.ToUpper(n[0]) + n.Substring(1); ;
+        }
+    }
 }

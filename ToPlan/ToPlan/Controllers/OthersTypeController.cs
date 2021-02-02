@@ -3,36 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
     public class OthersTypeController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        [Route("api/Other/Get")]
+        public OtherDTO Get(string n)
         {
-            return new string[] { "value1", "value2" };
+            OthersTypesRepository rep = new OthersTypesRepository();
+            return rep.Get(n);
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [Route("api/Other")]
+        public bool GetCheck(string n)
         {
-            return "value";
+            OthersTypesRepository rep = new OthersTypesRepository();
+            return rep.Check(n);
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
+
+        [Route("api/Other")]
+        public void PostOther(string n)
         {
+            OthersTypesRepository rep = new OthersTypesRepository();
+            rep.Save(n);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
+        [Route("api/Other")]
         public void Delete(int id)
         {
+            OthersTypesRepository rep = new OthersTypesRepository();
+            rep.DeleteOther(id);
         }
+
     }
 }
