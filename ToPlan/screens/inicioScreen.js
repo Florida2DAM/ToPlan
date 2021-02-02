@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { Component } from 'react';
 import {
   Image,
@@ -32,7 +24,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import ButtonPlan from './Components/button/ButtonPlan';
 
-export class App extends Component{
+export class InicioScreen extends Component{
   loginCheck = () => {
     alert('comprobacion de login');
   }
@@ -80,4 +72,4 @@ const styleLogin = StyleSheet.create({
   },
 });
 
-export default App;
+export default InicioScreen;
