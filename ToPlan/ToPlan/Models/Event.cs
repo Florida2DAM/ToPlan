@@ -12,7 +12,7 @@ namespace ToPlan.Models
         public string EventDate { get; set; }
         public string City { get; set; }
         public string Province { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
         public string Description { get; set; }
         public int MaxMembers { get; set; }
         public string ListMembers { get; set; }
@@ -20,36 +20,15 @@ namespace ToPlan.Models
 
         public string UserId { get; set; }
         public User User { get; set; }
-        public int GastronomyTypeId { get; set; }
-        public GastronomyType GastronomyType { get; set; }
-        public int LeisureTypeId { get; set; }
-        public LeisureType LeisureType { get; set; }
-        public int SportTypeId { get; set; }
-        public SportType SportType { get; set; }
-        public int OtherTypeId { get; set; }
-        public OtherType OtherType { get; set; }
+        public int TypeId { get; set; }
+        public Type Types { get; set; }
 
-        public Event(string ed, string c, string p, string t,int st, string d, int m, string ce) 
+        public Event(string ed, string c, string p, int t, string d, int m, string ce)
         {
             this.EventDate = ed;
             this.City = c;
             this.Province = p;
-            this.Type = t.ToLower();
-            if (this.Type.Equals("gastronomy"))
-            {
-                this.GastronomyTypeId = st;
-            }
-            else if(this.Type.Equals("sports"))
-            {
-                this.SportTypeId = st;
-            }else if (this.Type.Equals("leisure"))
-            {
-                this.LeisureTypeId = st;
-            }
-            else
-            {
-                this.OtherTypeId = st;
-            }
+            this.Type = t;
             this.Description = d;
             this.MaxMembers = m;
             this.CreatorEmail = ce;
@@ -59,5 +38,45 @@ namespace ToPlan.Models
         public Event() { }
 
 
+    }
+
+    public class EventDTO 
+    {
+        public string City { get; set; }
+        public string Date { get; set; }
+        public string Category { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+
+        public EventDTO(string c, string d, string cat, string t, string n, string s)
+        {
+            this.City = char.ToUpper(c[0]) + c.Substring(1);
+            this.Date = d;
+            this.Category = char.ToUpper(cat[0]) + cat.Substring(1);
+            this.Type = char.ToUpper(t[0]) + t.Substring(1);
+            this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1);
+        }
+    }
+
+    public class EventDTO2
+    {
+        public string City { get; set; }
+        public string Date { get; set; }
+        public string Category { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public int Participants { get; set; }
+        public int MaxParticipants { get; set; }
+
+        public EventDTO2(string c, string d, string cat, string t, string n, string s,int p, int mp)
+        {
+            this.City = char.ToUpper(c[0]) + c.Substring(1);
+            this.Date = d;
+            this.Category = char.ToUpper(cat[0]) + cat.Substring(1);
+            this.Type = char.ToUpper(t[0]) + t.Substring(1);
+            this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1);
+            this.Participants = p;
+            this.MaxParticipants = mp;
+        }
     }
 }

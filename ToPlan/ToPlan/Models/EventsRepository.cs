@@ -44,7 +44,7 @@ namespace ToPlan.Models
             }
         }
 
-        internal void UpdateEventType(int id, string t, int st)
+        internal void UpdateEventType(int id, int t)
         {
             ToPlanContext context = new ToPlanContext();
             Event aux;
@@ -52,35 +52,6 @@ namespace ToPlan.Models
             {
                 aux = context.Events.Single(b => b.EventId == id);
                 aux.Type = t;
-
-                if (aux.Type.Equals("gastronomy"))
-                {
-                    aux.SportType = null;
-                    aux.LeisureType = null;
-                    aux.OtherType = null;
-                    aux.GastronomyTypeId = st;
-                }
-                else if (aux.Type.Equals("sports"))
-                {
-                    aux.LeisureType = null;
-                    aux.OtherType = null;
-                    aux.GastronomyType = null;
-                    aux.SportTypeId = st;
-                }
-                else if (aux.Type.Equals("leisure"))
-                {
-                    aux.GastronomyType = null;
-                    aux.SportType = null;
-                    aux.OtherType = null;
-                    aux.LeisureTypeId = st;
-                }
-                else
-                {
-                    aux.GastronomyType = null;
-                    aux.SportType = null;
-                    aux.LeisureType = null;
-                    aux.OtherTypeId = st;
-                }
                 context.Events.Update(aux);
                 context.SaveChanges();
             }
@@ -197,7 +168,7 @@ namespace ToPlan.Models
 
         }
 
-        internal string GetType(int id)
+        internal int GetType(int id)
         {
             ToPlanContext context = new ToPlanContext();
             Event e;
@@ -210,42 +181,57 @@ namespace ToPlan.Models
             catch (Exception a)
             {
                 Debug.WriteLine("Error de conexion:");
+                return -1;
+            }
+        }
+
+        internal EventDTO Even1(int id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event x;
+            Type t;
+            User u;
+            try
+            {
+                x = context.Events.Single(p => p.EventId == id);
+                t = context.Types.Single(p => p.TypeId == x.Type);
+                u = context.Users.Single(p => p.UserId == x.CreatorEmail);
+                return new EventDTO(x.City, x.EventDate, t.Name, t.Subtype, u.Name, u.Surname);
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return null;
+            }
+        }
+        internal EventDTO2 Even2(int id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event x;
+            Type t;
+            User u;
+            string[] lista;
+            int aux = 0;
+            try
+            {
+                x = context.Events.Single(p => p.EventId == id);
+                t = context.Types.Single(p => p.TypeId == x.Type);
+                u = context.Users.Single(p => p.UserId == x.CreatorEmail);
+                if (!x.ListMembers.Equals(""))
+                {
+                    lista = x.ListMembers.Split(';');
+                    aux = lista.Length;
+                }
+                return new EventDTO2(x.City, x.EventDate, t.Name, t.Subtype, u.Name, u.Surname,aux,x.MaxMembers);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion:");
                 return null;
             }
         }
 
-        internal int GetSubtype(int id)
-        {
-            ToPlanContext context = new ToPlanContext();
-            Event e;
-            try
-            {
-                e = context.Events.Single(p => p.EventId == id);
-                if (e.Type.Equals("gastronomy"))
-                {
-                    return e.GastronomyTypeId;
 
-                }
-                else if (e.Type.Equals("sports"))
-                {
-                    return e.SportTypeId;
-                }
-                else if (e.Type.Equals("leisure"))
-                {
-                    return e.LeisureTypeId;
-                }
-                else
-                {
-                    return e.OtherTypeId;
-                }
-
-            }
-            catch (Exception a)
-            {
-                Debug.WriteLine("Error de conexion:");
-                return -1;
-            }
-        }
 
     }
 }

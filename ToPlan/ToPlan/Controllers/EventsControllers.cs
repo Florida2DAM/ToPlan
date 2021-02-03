@@ -25,18 +25,24 @@ namespace ToPlan.Controllers
             return rep.GetList(id);
         }
 
+        [Route("api/Event1")]
+        public EventDTO GetEvent1(int id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.Even1(id);
+        }
+        [Route("api/Event2")]
+        public EventDTO2 GetEvent2(int id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.Even2(id);
+        }
+
         [Route("api/Event/Type")]
-        public string GetType(int id)
+        public int GetType(int id)
         {
             EventsRepository rep = new EventsRepository();
             return rep.GetType(id);
-        }
-
-        [Route("api/Event/Subtype")]
-        public int GetSubtype(int id)
-        {
-            EventsRepository rep = new EventsRepository();
-            return rep.GetSubtype(id);
         }
 
         [Route("api/Event")]
@@ -62,10 +68,10 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/Type")]
-        public void PutEventType(int id, string t, int st)
+        public void PutEventType(int id, int t)
         {
             EventsRepository rep = new EventsRepository();
-            rep.UpdateEventType(id, t, st);
+            rep.UpdateEventType(id, t);
         }
 
 

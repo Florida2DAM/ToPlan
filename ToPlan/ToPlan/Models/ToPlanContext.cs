@@ -9,10 +9,7 @@ namespace ToPlan.Models
     public class ToPlanContext:DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<GastronomyType> GastronomyTypes { get; set; }
-        public DbSet<SportType> SportTypes { get; set; }
-        public DbSet<LeisureType> LeisureTypes { get; set; }
-        public DbSet<OtherType> OtherTypes { get; set; }
+        public DbSet<Type> Types { get; set; }
         public DbSet<Event> Events { get; set; }
 
         public ToPlanContext() { }

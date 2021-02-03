@@ -34,102 +34,48 @@ namespace ToPlan.Migrations
                     b.Property<string>("EventDate")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("GastronomyTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LeisureTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ListMembers")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("MaxMembers")
                         .HasColumnType("int");
 
-                    b.Property<int>("OtherTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Province")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("SportTypeId")
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("GastronomyTypeId");
-
-                    b.HasIndex("LeisureTypeId");
-
-                    b.HasIndex("OtherTypeId");
-
-                    b.HasIndex("SportTypeId");
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("ToPlan.Models.GastronomyType", b =>
+            modelBuilder.Entity("ToPlan.Models.Type", b =>
                 {
-                    b.Property<int>("GastronomyTypeId")
+                    b.Property<int>("TypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("GastronomyTypeId");
-
-                    b.ToTable("GastronomyTypes");
-                });
-
-            modelBuilder.Entity("ToPlan.Models.LeisureType", b =>
-                {
-                    b.Property<int>("LeisureTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Subtype")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("LeisureTypeId");
+                    b.HasKey("TypeId");
 
-                    b.ToTable("LeisureTypes");
-                });
-
-            modelBuilder.Entity("ToPlan.Models.OtherType", b =>
-                {
-                    b.Property<int>("OtherTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("OtherTypeId");
-
-                    b.ToTable("OtherTypes");
-                });
-
-            modelBuilder.Entity("ToPlan.Models.SportType", b =>
-                {
-                    b.Property<int>("SportTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("SportTypeId");
-
-                    b.ToTable("SportTypes");
+                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("ToPlan.Models.User", b =>
@@ -162,27 +108,9 @@ namespace ToPlan.Migrations
 
             modelBuilder.Entity("ToPlan.Models.Event", b =>
                 {
-                    b.HasOne("ToPlan.Models.GastronomyType", "GastronomyType")
+                    b.HasOne("ToPlan.Models.Type", "Types")
                         .WithMany("Events")
-                        .HasForeignKey("GastronomyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ToPlan.Models.LeisureType", "LeisureType")
-                        .WithMany("Events")
-                        .HasForeignKey("LeisureTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ToPlan.Models.OtherType", "OtherType")
-                        .WithMany("Events")
-                        .HasForeignKey("OtherTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ToPlan.Models.SportType", "SportType")
-                        .WithMany("Events")
-                        .HasForeignKey("SportTypeId")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
