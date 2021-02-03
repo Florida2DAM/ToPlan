@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,Image,TextInput,Button
-} from 'react-native';
-import {EventMiddle} from "../Components/eventMiddle/EventMiddle";
-import {NavBar} from "../Components/navBar/NavBar";
+import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import ExploreScreen from './ExploreScreen';
 
 
 export class LoginScreen extends React.Component {
@@ -97,3 +89,4 @@ const styles = StyleSheet.create({
 
 
 });
+export default LoginScreen;
