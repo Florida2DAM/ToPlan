@@ -18,10 +18,25 @@ namespace ToPlan.Controllers
             return aux;
         }
 
-        
-        public string Get(int id)
+        [Route("api/Event/List")]
+        public List<User> GetList(int id)
         {
-            return "value";
+            EventsRepository rep = new EventsRepository();
+            return rep.GetList(id);
+        }
+
+        [Route("api/Event/Type")]
+        public string GetType(int id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.GetType(id);
+        }
+
+        [Route("api/Event/Subtype")]
+        public int GetSubtype(int id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.GetSubtype(id);
         }
 
         [Route("api/Event")]
@@ -31,12 +46,29 @@ namespace ToPlan.Controllers
             rep.Save(e);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        [Route("api/Event/User")]
+        public void PostUserList(int id, string n)
         {
+            EventsRepository rep = new EventsRepository();
+            rep.InsertUser(id, n);
         }
 
-        
+
+        [Route("api/Event")]
+        public void Put(int id, string f, string c, string p, string d, int max)
+        {
+            EventsRepository rep = new EventsRepository();
+            rep.UpdateEvent(id, f, c, p, d, max);
+        }
+
+        [Route("api/Event/Type")]
+        public void PutEventType(int id, string t, int st)
+        {
+            EventsRepository rep = new EventsRepository();
+            rep.UpdateEventType(id, t, st);
+        }
+
+
         [Route("api/Event")]
         public void DeleteEvent(int id)
         {

@@ -18,6 +18,22 @@ namespace ToPlan.Controllers
             return aux;
         }
 
+        [Route("api/User/CheckMail")]
+        //Devuelve true si es correcto el email y false si es incorrecto
+        public bool CheckMail(string m)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.CheckMail(m);
+        }
+
+        [Route("api/User/CheckAdmin")]
+        //Comprueba si un usuario es admin o no
+        public bool CheckAdmin(string id)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.CheckAdmin(id);
+        }
+
         [Route("api/User/GetPassword")]
         //Devuelve la password de un usuario en especifico a partir de una id
         public string GetPassword(string id)

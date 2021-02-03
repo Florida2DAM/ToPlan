@@ -9,6 +9,7 @@ namespace ToPlan.Models
 {
     public class UsersRepository
     {
+        public string[] emails = { "@gmail.com", "@outlook.com", "@hotmail.com", "@floridauniversitaria.es" };
         internal void Save(User u)
         {
             ToPlanContext context = new ToPlanContext();
@@ -16,7 +17,8 @@ namespace ToPlan.Models
             {
                 context.Users.Add(u);
                 context.SaveChanges();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
             }
@@ -38,13 +40,14 @@ namespace ToPlan.Models
                     {
                         return false;
                     }
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Debug.WriteLine("Error");
                     return false;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
                 return false;
@@ -91,7 +94,8 @@ namespace ToPlan.Models
             {
                 u = context.Users.Single(v => v.UserId.Equals(id.ToLower()));
                 return ToDTO(u);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
                 return null;
@@ -107,12 +111,13 @@ namespace ToPlan.Models
             {
                 u = context.Users.Single(v => v.UserId.Equals(id.ToLower()));
                 final = u.Preferences.Split(';');
-                for(int i = 0; i < final.Length; i++)
+                for (int i = 0; i < final.Length; i++)
                 {
-                    final[i]= char.ToUpper(final[i][0]) + final[i].Substring(1);
+                    final[i] = char.ToUpper(final[i][0]) + final[i].Substring(1);
                 }
                 return final;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
                 return null;
@@ -133,7 +138,7 @@ namespace ToPlan.Models
                 return null;
             }
         }
-        internal void ChangePassword(string id, string p) 
+        internal void ChangePassword(string id, string p)
         {
             ToPlanContext context = new ToPlanContext();
             User u;
@@ -143,7 +148,8 @@ namespace ToPlan.Models
                 u.Password = p;
                 context.Users.Update(u);
                 context.SaveChanges();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
             }
@@ -157,7 +163,8 @@ namespace ToPlan.Models
             {
                 u = context.Users.Single(r => r.UserId.Equals(id.ToLower()));
                 return u.Password;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
                 return null;
@@ -173,7 +180,8 @@ namespace ToPlan.Models
                 u = context.Users.Single(p => p.UserId.Equals(id.ToLower()));
                 context.Remove(u);
                 context.SaveChanges();
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
             }
@@ -201,6 +209,37 @@ namespace ToPlan.Models
         private UserDTO ToDTO(User u)
         {
             return new UserDTO(u.Name, u.Surname, u.FechaNacimiento);
+        }
+
+        internal bool CheckMail(string mail)
+        {
+            bool aux = false;
+            for (int i = 0; i < emails.Length; i++)
+            {
+                if (mail.EndsWith(emails[i]))
+                {
+                    aux = true;
+                }
+            }
+            return aux;
+
+        }
+
+        internal bool CheckAdmin(string id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User u;
+            try
+            {
+                u = context.Users.Single(v => v.UserId.Equals(id.ToLower()));
+                return u.Admin;
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+                return false;
+            }
         }
     }
 }

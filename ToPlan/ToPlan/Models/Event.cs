@@ -34,15 +34,15 @@ namespace ToPlan.Models
             this.EventDate = ed;
             this.City = c;
             this.Province = p;
-            this.Type = t;
-            if (this.Type.Equals("Gastronomy"))
+            this.Type = t.ToLower();
+            if (this.Type.Equals("gastronomy"))
             {
                 this.GastronomyTypeId = st;
             }
-            else if(this.Type.Equals("Sports"))
+            else if(this.Type.Equals("sports"))
             {
                 this.SportTypeId = st;
-            }else if (this.Type.Equals("Leisure"))
+            }else if (this.Type.Equals("leisure"))
             {
                 this.LeisureTypeId = st;
             }
@@ -53,8 +53,11 @@ namespace ToPlan.Models
             this.Description = d;
             this.MaxMembers = m;
             this.CreatorEmail = ce;
+            this.ListMembers = "";
         }
 
         public Event() { }
+
+
     }
 }
