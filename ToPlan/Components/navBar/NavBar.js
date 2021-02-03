@@ -17,16 +17,16 @@ export class NavBar extends React.Component {
             <View style={styles.footerNavbar}>
                 <Image
                     style={styles.icons}
-                    source={require('../Assets/home.png')}
+                    source={require('../../Assets/home.png')}
                 />
                 <Image
                     style={styles.icons}
 
-                    source={require('../Assets/user.png')}
+                    source={require('../../Assets/user.png')}
                 /><Image
                 style={styles.icons}
 
-                source={require('../Assets/lupa.png')}
+                source={require('../../Assets/lupa.png')}
             />
 
             </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         justifyContent:"space-around",
-        backgroundColor:"grey",
+        backgroundColor:"white",
 
 
     },

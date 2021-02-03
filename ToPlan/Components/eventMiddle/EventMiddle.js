@@ -9,61 +9,56 @@ import {
 } from 'react-native';
 
 export class EventMiddle extends React.Component {
+    
     render() {
+        let plan = this.props.element;
         return (
             <View style={styles.mainContainer}>
                 <View style={styles.leftInfo}>
                     <View style={styles.place}>
                         <Image
                             style={styles.Icons}
-                            source={require('../Assets/location.png')}
+                            source={require('../../Assets/location.png')}
                         />
-                        <Text>Test</Text>
+                        <Text>{plan.location}</Text>
 
                     </View>
                     <View style={styles.place}>
                         <Image
                             style={styles.Icons}
-                            source={require('../Assets/clock.png')}
+                            source={require('../../Assets/clock.png')}
                         />
-                        <Text>Test</Text>
+                        <Text>{plan.date}</Text>
 
                     </View>
                 </View>
                 <View style={styles.middleInfo}>
 
-                        <Text>Test</Text>
+                        <Text>{plan.user}</Text>
                         <Image
                             style={styles.userLogo}
-                            source={require('../Assets/user.png')}
+                            source={require('../../Assets/user.png')}
                         />
-
-
-
-
                 </View>
                 <View style={styles.rigthInfo}>
                     <View style={styles.place}>
 
-                        <Text >Test</Text>
+                        <Text >{plan.category}</Text>
                         <Image
                             style={styles.Icons}
-                            source={require('../Assets/tenis.png')}
+                            source={require('../../Assets/tenis.png')}
                         />
 
                     </View>
                     <View style={styles.place}>
 
-                        <Text>Test</Text>
+                        <Text>{plan.type}</Text>
                         <Image
                             style={styles.Icons}
-                            source={require('../Assets/tenis.png')}
+                            source={require('../../Assets/tenis.png')}
                         />
-
                     </View>
-
                 </View>
-
             </View>
         )
     }
@@ -87,8 +82,8 @@ const styles = StyleSheet.create({
     },middleInfo:{
         display: "flex",
         justifyContent:"center",
-
         flexDirection:"column",
+        alignItems:'center',
 
     },
     rigthInfo:{

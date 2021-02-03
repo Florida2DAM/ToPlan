@@ -38,8 +38,8 @@ export class InicioScreen extends Component{
             <Image style={styleLogin.logo} source={require('./Assets/LogoSimple.png')}/>
           </View>
           <View style={styleLogin.inputContainer}>
-            <Input placeholder='Insert Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
-            <Input placeholder='Insert Password' secureTextEntry={true} leftIcon={<Icon name='lock' size={24} color='black'/>}/>
+            <Input placeholder='Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
+            <Input placeholder='Password' secureTextEntry={true} leftIcon={<Icon name='lock' size={24} color='black'/>}/>
           </View>
           <ButtonPlan metodo={this.loginCheck} title={'Login'}></ButtonPlan>     
         </View>

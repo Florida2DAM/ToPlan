@@ -5,53 +5,47 @@
  * @format
  * @flow strict-local
  */
-
 import React, { Component } from 'react';
 import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
+  FlatList,
+  Image,  
+  StyleSheet,  
   View,
-  Text,
-  StatusBar,
-  Button,
 } from 'react-native';
-import { Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-
-
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import ButtonPlan from './Components/button/ButtonPlan';
+import { Text } from 'react-native-elements';
+import { EventMiddle } from './Components/eventMiddle/EventMiddle';
+import { NavBar } from './Components/navBar/NavBar';
 
 export class App extends Component{
-  loginCheck = () => {
-    alert('comprobacion de login');
-  }
+  constructor(props){
+    super(props);
+
+    this.state = {
+      planes:[{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+      {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+      {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+      {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
+    }
+  } 
 
   render() {
     return (
-      <>
-      <ScrollView>
+      <>      
         <View style={styleLogin.loginContainer}>
           <View style={styleLogin.logoContainer}>
             <Image style={styleLogin.logo} source={require('./Assets/LogoSimple.png')}/>
+            <Text h3>ToPlan</Text>
           </View>
-          <View style={styleLogin.inputContainer}>
-            <Input placeholder='Insert Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
-            <Input placeholder='Insert Password' secureTextEntry={true} leftIcon={<Icon name='lock' size={24} color='black'/>}/>
+          <View style={styleLogin.inputContainer}>          
+          <FlatList
+              data={this.state.planes}
+              keyExtractor={(item, index) => index.toString()}
+              style={{padding:5}}
+              renderItem={({item}) => (<EventMiddle element={item}></EventMiddle>)}>
+          </FlatList>
           </View>
-          <ButtonPlan metodo={this.loginCheck} title={'Login'}></ButtonPlan>     
-        </View>
-      </ScrollView>       
+          <View style={styleLogin.navContainer}><NavBar></NavBar></View>       
+        </View>         
     </>
   );
 };
@@ -61,21 +55,24 @@ const styleLogin = StyleSheet.create({
   loginContainer: {
     backgroundColor: 'white',
     flex:1,
-    flexDirection:'column',
-    alignItems:'center',
+    
   },
   logoContainer: {
-    marginTop:50,
+    flex:1,
     alignItems:'center',
   },
   inputContainer:{
-    marginTop:50,
-    width:'80%',
+    flex:3,    
     // #dddbdc
+  },
+  navContainer: {
+    flex:0,
 
   },
   logo: {
-
+    resizeMode:'stretch',
+    width:150,
+    height:150,
 
   },
 });
