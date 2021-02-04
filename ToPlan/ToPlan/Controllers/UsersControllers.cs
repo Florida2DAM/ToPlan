@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
+
     public class UsersController : ApiController
     {
         [Route("api/User/Check")]
