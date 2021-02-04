@@ -3,6 +3,7 @@ import { Button } from "react-native-elements";
 import {StyleSheet} from 'react-native';
 
 
+
 export class ButtonPlan extends Component {
     constructor(props){
     super(props);
@@ -20,7 +21,7 @@ const styleButton = StyleSheet.create({
     button: {
       backgroundColor: '#ffcc57',
       width:300,
-            
+
     },
   }
 );

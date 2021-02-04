@@ -13,8 +13,8 @@ import {
     View,
 } from 'react-native';
 import {Text} from 'react-native-elements';
-import {EventMiddle} from './Components/eventMiddle/EventMiddle';
-import {NavBar} from './Components/navBar/NavBar';
+import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
+import {NavBar} from '../Components/navBar/NavBar';
 
 export class ExploreScreen extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ export class ExploreScreen extends Component {
             <>
                 <View style={styleLogin.loginContainer}>
                     <View style={styleLogin.logoContainer}>
-                        <Image style={styleLogin.logo} source={require('./Assets/LogoSimple.png')}/>
+                        <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
                         <Text h3>ToPlan</Text>
                     </View>
                     <View style={styleLogin.inputContainer}>

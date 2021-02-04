@@ -8,33 +8,38 @@
 import React, { Component } from 'react';
 import {
   FlatList,
-  Image,  
-  StyleSheet,  
+  Image,
+  StyleSheet,
   View,
 } from 'react-native';
+
+
 import { Text } from 'react-native-elements';
+
+
 import { EventMiddle } from './Components/eventMiddle/EventMiddle';
 import { NavBar } from './Components/navBar/NavBar';
+import LoginScreen from "./screens/LoginScreen";
+import UserScreen from "./screens/UserScreen";
 
 export class App extends Component{
   constructor(props){
     super(props);
 
     this.state = {}
-      
-  } 
+
+  }
 
   render() {
     return (
-      <>      
-            
+      <>
     </>
   );
 };
-} 
+}
 
 const styleLogin = StyleSheet.create({
-  
+
 });
 
 export default App;
