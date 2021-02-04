@@ -12,7 +12,6 @@ namespace ToPlan.Models
         public string EventDate { get; set; }
         public string City { get; set; }
         public string Province { get; set; }
-        public int Type { get; set; }
         public string Description { get; set; }
         public int MaxMembers { get; set; }
         public string ListMembers { get; set; }
@@ -28,11 +27,11 @@ namespace ToPlan.Models
             this.EventDate = ed;
             this.City = c;
             this.Province = p;
-            this.Type = t;
             this.Description = d;
             this.MaxMembers = m;
             this.CreatorEmail = ce;
             this.ListMembers = "";
+            this.TypeId = t;
         }
 
         public Event() { }

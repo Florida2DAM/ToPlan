@@ -8,7 +8,7 @@ using ToPlan.Models;
 namespace ToPlan.Migrations
 {
     [DbContext(typeof(ToPlanContext))]
-    [Migration("20210203172941_m1")]
+    [Migration("20210204141631_m1")]
     partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,6 @@ namespace ToPlan.Migrations
 
                     b.Property<string>("Province")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
 
                     b.Property<int>("TypeId")
                         .HasColumnType("int");

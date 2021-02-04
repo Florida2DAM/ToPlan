@@ -47,7 +47,6 @@ namespace ToPlan.Migrations
                     EventDate = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Province = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     MaxMembers = table.Column<int>(nullable: false),
                     ListMembers = table.Column<string>(nullable: true),

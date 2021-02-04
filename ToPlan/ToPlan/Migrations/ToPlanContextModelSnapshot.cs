@@ -43,9 +43,6 @@ namespace ToPlan.Migrations
                     b.Property<string>("Province")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
