@@ -17,7 +17,7 @@ namespace ToPlan.Models
 
         public List<Event> Events { get; set; }
 
-        public User(string id, string n, string s, string p, string f, string pre) 
+        public User(string id, string n, string s, string p, string f, string pre)
         {
             this.UserId = id;
             this.Name = n;
@@ -36,9 +36,10 @@ namespace ToPlan.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string FechaNacimiento { get; set; }
+
         public UserDTO(string n, string s, string f)
         {
-            
+
             this.Name = char.ToUpper(n[0]) + n.Substring(1);
             this.Surname = char.ToUpper(s[0]) + s.Substring(1);
             this.FechaNacimiento = f;

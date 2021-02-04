@@ -8,17 +8,17 @@ namespace ToPlan.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Types",
+                name: "TypePlans",
                 columns: table => new
                 {
-                    TypeId = table.Column<int>(nullable: false)
+                    TypePlanId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Subtype = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Types", x => x.TypeId);
+                    table.PrimaryKey("PK_TypePlans", x => x.TypePlanId);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,16 +52,16 @@ namespace ToPlan.Migrations
                     ListMembers = table.Column<string>(nullable: true),
                     CreatorEmail = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    TypeId = table.Column<int>(nullable: false)
+                    TypePlanId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.EventId);
                     table.ForeignKey(
-                        name: "FK_Events_Types_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "Types",
-                        principalColumn: "TypeId",
+                        name: "FK_Events_TypePlans_TypePlanId",
+                        column: x => x.TypePlanId,
+                        principalTable: "TypePlans",
+                        principalColumn: "TypePlanId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Events_Users_UserId",
@@ -72,9 +72,9 @@ namespace ToPlan.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_TypeId",
+                name: "IX_Events_TypePlanId",
                 table: "Events",
-                column: "TypeId");
+                column: "TypePlanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_UserId",
@@ -88,7 +88,7 @@ namespace ToPlan.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Types");
+                name: "TypePlans");
 
             migrationBuilder.DropTable(
                 name: "Users");

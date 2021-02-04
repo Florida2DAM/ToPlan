@@ -5,19 +5,20 @@ using System.Web;
 
 namespace ToPlan.Models
 {
-    public class Type
+    public class TypePlan
     {
-        public int TypeId { get; set; }
+        public int TypePlanId { get; set; }
         public string Name { get; set; }
         public string Subtype { get; set; }
         public List<Event> Events { get; set; }
 
-        public Type(string n, string s)
+        public TypePlan(string n, string s)
         {
             this.Name = n;
             this.Subtype = s;
         }
 
-        public Type() { }
+        public TypePlan() { }
+
     }
 }

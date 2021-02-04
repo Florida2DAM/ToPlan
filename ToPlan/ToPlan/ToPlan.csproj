@@ -244,22 +244,22 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EventsControllers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TypesController.cs" />
+    <Compile Include="Controllers\TypesPlanController.cs" />
     <Compile Include="Controllers\UsersControllers.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20210204141631_m1.cs" />
-    <Compile Include="Migrations\20210204141631_m1.designer.cs">
-      <DependentUpon>20210204141631_m1.cs</DependentUpon>
+    <Compile Include="Migrations\20210204151751_m1.cs" />
+    <Compile Include="Migrations\20210204151751_m1.designer.cs">
+      <DependentUpon>20210204151751_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ToPlanContextModelSnapshot.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventsRepository.cs" />
     <Compile Include="Models\ToPlanContext.cs" />
-    <Compile Include="Models\Type.cs" />
-    <Compile Include="Models\TypesRepository.cs" />
+    <Compile Include="Models\TypePlan.cs" />
+    <Compile Include="Models\TypePlansRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

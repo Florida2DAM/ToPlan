@@ -6,15 +6,14 @@ using System.Web;
 
 namespace ToPlan.Models
 {
-    public class TypesRepository
+    public class TypePlansRepository
     {
-
-        internal void Save(Type t)
+        internal void Save(TypePlan t)
         {
             ToPlanContext context = new ToPlanContext();
             try
             {
-                context.Types.Add(t);
+                context.TypePlans.Add(t);
                 context.SaveChanges();
             }
             catch (Exception a)
@@ -23,19 +22,19 @@ namespace ToPlan.Models
             }
         }
 
-        internal List<Type> GetTypes()
+        internal List<TypePlan> GetTypes()
         {
             ToPlanContext context = new ToPlanContext();
-            List<Type> lista = new List<Type>();
+            List<TypePlan> lista = new List<TypePlan>();
             try
             {
-                lista = context.Types.ToList();
+                lista = context.TypePlans.ToList();
                 return lista;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return null;
             }
         }
-
     }
 }

@@ -43,7 +43,7 @@ namespace ToPlan.Migrations
                     b.Property<string>("Province")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int>("TypePlanId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -51,16 +51,16 @@ namespace ToPlan.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("TypePlanId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("ToPlan.Models.Type", b =>
+            modelBuilder.Entity("ToPlan.Models.TypePlan", b =>
                 {
-                    b.Property<int>("TypeId")
+                    b.Property<int>("TypePlanId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -70,9 +70,9 @@ namespace ToPlan.Migrations
                     b.Property<string>("Subtype")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("TypeId");
+                    b.HasKey("TypePlanId");
 
-                    b.ToTable("Types");
+                    b.ToTable("TypePlans");
                 });
 
             modelBuilder.Entity("ToPlan.Models.User", b =>
@@ -105,9 +105,9 @@ namespace ToPlan.Migrations
 
             modelBuilder.Entity("ToPlan.Models.Event", b =>
                 {
-                    b.HasOne("ToPlan.Models.Type", "Types")
+                    b.HasOne("ToPlan.Models.TypePlan", "TypePlans")
                         .WithMany("Events")
-                        .HasForeignKey("TypeId")
+                        .HasForeignKey("TypePlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

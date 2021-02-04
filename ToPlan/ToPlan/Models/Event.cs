@@ -19,8 +19,8 @@ namespace ToPlan.Models
 
         public string UserId { get; set; }
         public User User { get; set; }
-        public int TypeId { get; set; }
-        public Type Types { get; set; }
+        public int TypePlanId { get; set; }
+        public TypePlan TypePlans { get; set; }
 
         public Event(string ed, string c, string p, int t, string d, int m, string ce)
         {
@@ -31,7 +31,7 @@ namespace ToPlan.Models
             this.MaxMembers = m;
             this.CreatorEmail = ce;
             this.ListMembers = "";
-            this.TypeId = t;
+            this.TypePlanId = t;
         }
 
         public Event() { }

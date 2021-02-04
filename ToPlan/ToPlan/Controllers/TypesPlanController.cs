@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
-    public class TypesController : ApiController
+    public class TypesPlanController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        [Route("api/TypePlan/List")]
+        public List<TypePlan> ListTypes()
         {
-            return new string[] { "value1", "value2" };
+            TypePlansRepository rep = new TypePlansRepository();
+            return rep.GetTypes();
         }
 
         // GET api/values/5
@@ -20,9 +23,12 @@ namespace ToPlan.Controllers
             return "value";
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
+        // Inserta un nuevo tipo
+        [Route("api/TypePlan")]
+        public void Post([FromBody] TypePlan t)
         {
+            TypePlansRepository rep = new TypePlansRepository();
+            rep.Save(t);
         }
 
         // PUT api/values/5
