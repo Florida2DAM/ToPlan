@@ -25,13 +25,12 @@ export class UserScreen extends React.Component {
                             <Text style={{fontSize: 18}}>test test,34</Text>
                             <Text style={{fontSize: 18}}>test test,34</Text>
                             <Text style={{fontSize: 18}}>test test,34</Text>
-
                         </View>
 
 
                     </View>
-                    <EventMiddle></EventMiddle>
-                    <EventMiddle></EventMiddle>
+                    <EventMiddle/>
+                    <EventMiddle/>
                     <Text style={{padding: 20, fontSize: 20}}>Plan Preferences</Text>
                     <View style={styles.containerPreferences}>
                         <Image
