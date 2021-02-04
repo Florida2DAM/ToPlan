@@ -1,40 +1,37 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  FlatList,
-  Image,  
-  StyleSheet,  
-  View,
+    FlatList,
+    Image,
+    StyleSheet,
+    View,
 } from 'react-native';
-import { Text } from 'react-native-elements';
-import { EventMiddle } from './Components/eventMiddle/EventMiddle';
-import { NavBar } from './Components/navBar/NavBar';
+import {Button, Text} from 'react-native-elements';
+import {EventMiddle} from './Components/eventMiddle/EventMiddle';
+import {NavBar} from './Components/navBar/NavBar';
 
-export class App extends Component{
-  constructor(props){
-    super(props);
+export class App extends Component {
+    constructor(props) {
+        super(props);
 
-    this.state = {}
-      
-  } 
+        this.state = {
+            planes: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
+                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
+        };
+    }
 
-  render() {
-    return (
-      <>      
-            
-    </>
-  );
-};
-} 
+    render() {
+        return (
+            <>
+                
+            </>
+        );
+    };
+}
 
 const styleLogin = StyleSheet.create({
-  
+    
 });
 
 export default App;

@@ -9,7 +9,7 @@ import {Button, Text} from 'react-native-elements';
 import {EventMiddle} from './Components/eventMiddle/EventMiddle';
 import {NavBar} from './Components/navBar/NavBar';
 
-export class InicioScreen extends Component {
+export class ExploreScreen extends Component {
     constructor(props) {
         super(props);
 
@@ -101,4 +101,4 @@ const styleLogin = StyleSheet.create({
   },
 });
 
-export default InicioScreen;
+export default ExploreScreen;
