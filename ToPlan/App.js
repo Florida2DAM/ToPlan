@@ -19,7 +19,7 @@ import { Text } from 'react-native-elements';
 
 import { EventMiddle } from './Components/eventMiddle/EventMiddle';
 import { NavBar } from './Components/navBar/NavBar';
-import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 import UserScreen from "./screens/UserScreen";
 
 export class App extends Component{
@@ -33,6 +33,7 @@ export class App extends Component{
   render() {
     return (
       <>
+          <UserScreen></UserScreen>
     </>
   );
 };

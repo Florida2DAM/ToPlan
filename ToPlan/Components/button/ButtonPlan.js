@@ -12,7 +12,7 @@ export class ButtonPlan extends Component {
     render(){
         return(
             <>
-            <Button title={this.props.title} onPress={this.props.metodo} buttonStyle={styleButton.button}></Button>
+            <Button title={this.props.title} onPress={this.props.metodo} buttonStyle={[styleButton.button,{width:this.props.size,marginTop:this.props.topmargin}]}></Button>
             </>
         );
     }
@@ -20,8 +20,6 @@ export class ButtonPlan extends Component {
 const styleButton = StyleSheet.create({
     button: {
       backgroundColor: '#ffcc57',
-      width:300,
-
     },
   }
 );

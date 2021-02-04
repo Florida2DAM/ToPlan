@@ -39,9 +39,10 @@ export class UserScreen extends React.Component {
                             <Text style={{fontSize: 18}}>{this.state.mail}</Text>
                             <Text style={{fontSize: 18}}>{this.state.phoneNumber}</Text>
                             <Text style={{fontSize: 18}}>{this.state.birthDate}</Text>
-{/*
-                            <ButtonPlan title={"Edit"}></ButtonPlan>
-*/}
+
+
+                            <ButtonPlan size={100} topmargin={10} title={"Edit"} ></ButtonPlan>
+
                         </View>
 
 
@@ -94,6 +95,7 @@ const styles = StyleSheet.create({
 
 
     },
+
     navigationContainer: {
         flexDirection: 'column',
         flex:0
@@ -122,11 +124,12 @@ const styles = StyleSheet.create({
     },
     containerUser: {
         backgroundColor: 'lightgray',
-display:'flex',        flexDirection: 'row',
+        display:'flex',
+        flexDirection: 'row',
         justifyContent: 'space-around',
         padding: 10,
         marginTop: 50,
-        height: 150,
+        height: 200,
 
     },
     navContainer: {

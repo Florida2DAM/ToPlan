@@ -5,7 +5,7 @@ import {Linking} from "react-native";
 import {ButtonPlan} from "../Components/button/ButtonPlan"
 
 
-export class LoginScreen extends React.Component {
+export class RegisterScreen extends React.Component {
     constructor(props) {
         super();
         this.state={url:'http://google.com'}
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default LoginScreen;
+export default RegisterScreen;
