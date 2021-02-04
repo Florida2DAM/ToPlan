@@ -1,92 +1,49 @@
-import React from 'react';
-import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
-import ExploreScreen from './ExploreScreen';
+import React, {Component} from 'react';
+import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import {Input} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ButtonPlan from './Components/button/ButtonPlan';
 
+export class LoginScreen extends Component {
 
-export class LoginScreen extends React.Component {
     render() {
         return (
-            <ScrollView>
-                <View style={styles.mainContainer}>
-                    <View style={styles.containerLogo}>
-                        <Image
-                            style={styles.mainLogo}
-                            source={require('../Assets/LogoSimple.png')}
-                        />
+            <>
+                <ScrollView>
+                    <View style={styleLogin.loginContainer}>
+                        <View style={styleLogin.logoContainer}>
+                            <Image style={styleLogin.logo} source={require('./Assets/LogoSimple.png')}/>
+                        </View>
+                        <View style={styleLogin.inputContainer}>
+                            <Input placeholder='Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
+                            <Input placeholder='Password' secureTextEntry={true}
+                                   leftIcon={<Icon name='lock' size={24} color='black'/>}/>
+                        </View>
+                        <ButtonPlan metodo={this.loginCheck} title={'Login'}/>
                     </View>
-                    <View style={styles.containerInfo}>
-                        <Image
-                            style={styles.userLogo}
-                            source={require('../Assets/user.png')}
-                        />
-                        <Text style={styles.label}>UserName</Text>
-                        <TextInput style={styles.textInputs} placeholder={"UserName"}>
-
-                        </TextInput>
-                        <Text style={styles.label}>Password</Text>
-                        <TextInput style={styles.textInputs} placeholder={"Password"}>
-
-                        </TextInput>
-                        <Text style={styles.label}>E-mail</Text>
-                        <TextInput style={styles.textInputs} placeholder={"E-mail"}>
-
-                        </TextInput>
-                        <Text style={styles.label}>Name</Text>
-                        <TextInput style={styles.textInputs} placeholder={"Name"}>
-
-                        </TextInput>
-
-
-
-                    </View>
-                    <Button title={"Sign Up"} color={"orange"}></Button>
-
-                </View>
-            </ScrollView>
-
-
-        )
-    }
-
+                </ScrollView>
+            </>
+        );
+    };
 }
-const styles = StyleSheet.create({
-    mainContainer:{
-        display:"flex",
-        flexDirection:"column",
 
+const styleLogin = StyleSheet.create({
+    loginContainer: {
+        backgroundColor: 'white',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
     },
-    containerLogo:{
-
-        marginTop:20,
-        marginLeft:20
+    logoContainer: {
+        marginTop: 50,
+        alignItems: 'center',
     },
-    containerInfo:{
-        alignSelf:"center",
-        padding:20
-
+    inputContainer: {
+        marginTop: 50,
+        width: '80%',
+        // #dddbdc
     },
-    mainLogo:{
-        width: 56,
-        height: 65,
-    },
-    userLogo:{
-        width: 150,
-        height: 150,
-        alignSelf:"center"
-    },
-    textInputs:{
-       borderWidth:1,
-        borderColor:"black",
-        borderRadius:7,
-        width:320,
-        marginTop:10
-    },
-    label:{
-        fontSize:20,
-        fontFamily:"Aeonik",
-        marginTop:20
-    },
-
-
+    logo: {},
 });
+
 export default LoginScreen;

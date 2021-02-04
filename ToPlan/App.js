@@ -13,25 +13,20 @@ export class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            planes: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
-        };
-    }
+    this.state = {}
 
-    render() {
-        return (
-            <>
-                
-            </>
-        );
-    };
+  }
+
+  render() {
+    return (
+      <>
+    </>
+  );
+};
 }
 
 const styleLogin = StyleSheet.create({
-    
+
 });
 
 export default App;

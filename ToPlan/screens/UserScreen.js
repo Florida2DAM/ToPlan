@@ -1,14 +1,28 @@
 import React from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
-import {NavBar} from '../Components/navBar/NavBar';
+import {ButtonPlan} from "../Components/button/ButtonPlan"
+import {NavBar} from "../Components/navBar/NavBar"
+
 
 
 export class UserScreen extends React.Component {
+    constructor(props) {
+        super();
+        this.state ={
+            name:'TestName',
+            surname:'TestSurName',
+            mail:'test@test.com',
+            phoneNumber:'testNumber',
+            age:'23',
+            birthDate:'test/test/test',
+            planes:[{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}]
+        }
+    }
     render() {
         return (
-            <ScrollView>
                 <View style={styles.mainContainer}>
+                    <View style={styles.contentContainer}>
                     <View style={styles.containerLogo}>
                         <Image
                             style={styles.mainLogo}
@@ -21,16 +35,20 @@ export class UserScreen extends React.Component {
                             source={require('../Assets/user.png')}
                         />
                         <View style={styles.containerInfo}>
-                            <Text style={{fontSize: 23}}>test test,34</Text>
-                            <Text style={{fontSize: 18}}>test test,34</Text>
-                            <Text style={{fontSize: 18}}>test test,34</Text>
-                            <Text style={{fontSize: 18}}>test test,34</Text>
+                            <Text style={{fontSize: 20}}>{this.state.name} {this.state.surname},{this.state.age}</Text>
+                            <Text style={{fontSize: 18}}>{this.state.mail}</Text>
+                            <Text style={{fontSize: 18}}>{this.state.phoneNumber}</Text>
+                            <Text style={{fontSize: 18}}>{this.state.birthDate}</Text>
+
+
+                            <ButtonPlan size={100} topmargin={10} title={"Edit"} ></ButtonPlan>
+
                         </View>
 
 
                     </View>
-                    <EventMiddle/>
-                    <EventMiddle/>
+                    <EventMiddle element={this.state.planes[0]} />
+                    <EventMiddle element={this.state.planes[0]}/>
                     <Text style={{padding: 20, fontSize: 20}}>Plan Preferences</Text>
                     <View style={styles.containerPreferences}>
                         <Image
@@ -49,9 +67,14 @@ export class UserScreen extends React.Component {
                             source={require('../Assets/ITALIAN.png')}
                         />
                     </View>
+                    </View>
+                    <View style={styles.navigationContainer}>
+                        <NavBar ></NavBar>
+                    </View>
                 </View>
-                <NavBar styles={{justifyContent: 'flex-end'}}/>
-            </ScrollView>
+
+
+
 
 
         );
@@ -61,8 +84,22 @@ export class UserScreen extends React.Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        display: 'flex',
         flexDirection: 'column',
+        flex:1
+
+    },
+    contentContainer: {
+        flexDirection: 'column',
+        flex:4
+
+
+
+    },
+
+    navigationContainer: {
+        flexDirection: 'column',
+        flex:0
+
 
     },
     containerLogo: {
@@ -76,8 +113,9 @@ const styles = StyleSheet.create({
         height: 65,
     },
     userLogo: {
-        width: 130,
-        height: 130,
+        width: 100,
+        height: 100,
+        marginTop:20
     },
     preferences: {
         width: 60,
@@ -86,12 +124,15 @@ const styles = StyleSheet.create({
     },
     containerUser: {
         backgroundColor: 'lightgray',
-        display: 'flex',
+        display:'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         padding: 10,
         marginTop: 50,
-        height: 150,
+        height: 200,
+
+    },
+    navContainer: {
 
     },
     containerInfo: {
