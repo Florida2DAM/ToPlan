@@ -33,7 +33,6 @@ export class App extends Component{
   render() {
     return (
       <>
-          <UserScreen></UserScreen>
     </>
   );
 };
