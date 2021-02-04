@@ -53,6 +53,7 @@ namespace ToPlan.Models
                 return false;
             }
         }
+
         internal void BecomeAdmin(string id)
         {
             ToPlanContext context = new ToPlanContext();
