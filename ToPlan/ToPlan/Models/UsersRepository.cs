@@ -242,5 +242,28 @@ namespace ToPlan.Models
                 return false;
             }
         }
+
+        internal int GetAgeUser(string id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User aux;
+            try
+            {
+                aux = context.Users.Where(b => b.UserId.Equals(id.ToLower())).FirstOrDefault();
+                string date = aux.FechaNacimiento;
+                var datetime = DateTime.Parse(date);
+                int age = DateTime.Today.AddTicks(-datetime.Ticks).Year - 1;
+                return age;
+
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+                return -1;
+            }
+            
+
+        }
     }
 }
