@@ -483,3 +483,10 @@ C:\Users\samii\Desktop\Adrian\DAM\Proyecto\ToPlan\ToPlan\obj\Debug\ToPlan.csproj
 C:\Users\samii\Desktop\Adrian\DAM\Proyecto\ToPlan\ToPlan\obj\Debug\ToPlan.csproj.CopyComplete
 C:\Users\samii\Desktop\Adrian\DAM\Proyecto\ToPlan\ToPlan\obj\Debug\ToPlan.dll
 C:\Users\samii\Desktop\Adrian\DAM\Proyecto\ToPlan\ToPlan\obj\Debug\ToPlan.pdb
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.dll
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.Security.dll
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Owin.dll
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.xml
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.Security.xml
+C:\Users\Administrator\Desktop\Proyecto\ToPlan\ToPlan\bin\Microsoft.Owin.Security.Facebook.xml
