@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {Component} from 'react';
 import {
     FlatList,
@@ -20,6 +22,10 @@ export class App extends Component {
   render() {
     return (
       <>
+      <NavigationContainer>
+        <Text>hola mundo</Text>
+      </NavigationContainer>
+      
     </>
   );
 };
