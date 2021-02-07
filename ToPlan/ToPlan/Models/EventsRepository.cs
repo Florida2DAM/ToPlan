@@ -231,7 +231,41 @@ namespace ToPlan.Models
             }
         }
 
-
+        internal List<EventDTO> Even3()
+        {
+            ToPlanContext context = new ToPlanContext();
+            List<EventDTO> final = new List<EventDTO>();
+            DateTime Today = DateTime.Now;
+            List<Event> aux2 = new List<Event>();
+            int aux = 0;
+            DateTime date;
+            TypePlan t;
+            User u;
+            try
+            {
+                aux2 = context.Events.ToList();
+                for(int i = 0; i < aux2.Count; i++)
+                {
+                    t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
+                    u = context.Users.Single(p => p.UserId == aux2[i].UserId);
+                    date = DateTime.Parse(aux2[i].EventDate.ToString());
+                    if (DateTime.Compare(date, Today) > 0)
+                    {
+                        final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                        aux++;
+                    }
+                    if(aux == 4)
+                    {
+                        return final;
+                    }
+                }
+                return final;
+            }catch(Exception e)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return null;
+            }
+        }
 
     }
 }

@@ -249,7 +249,7 @@ namespace ToPlan.Models
             User aux;
             try
             {
-                aux = context.Users.Where(b => b.UserId.Equals(id.ToLower())).FirstOrDefault();
+                aux = context.Users.Single(b => b.UserId.Equals(id.ToLower()));
                 string date = aux.FechaNacimiento;
                 var datetime = DateTime.Parse(date);
                 int age = DateTime.Today.AddTicks(-datetime.Ticks).Year - 1;

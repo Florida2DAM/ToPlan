@@ -24,6 +24,12 @@ namespace ToPlan.Controllers
             EventsRepository rep = new EventsRepository();
             return rep.GetList(id);
         }
+        [Route("api/Event3")]
+        public List<EventDTO> GetListEvents()
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.Even3();
+        }
 
         [Route("api/Event1")]
         public EventDTO GetEvent1(int id)
