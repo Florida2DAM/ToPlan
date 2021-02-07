@@ -11,7 +11,7 @@ namespace ToPlan.Controllers
     public class EventsController : ApiController
     {
         [Route("api/Event/Check")]
-        public bool CheckId(int id)
+        public bool GetCheckId(int id)
         {
             EventsRepository rep = new EventsRepository();
             bool aux = rep.CheckEventId(id);

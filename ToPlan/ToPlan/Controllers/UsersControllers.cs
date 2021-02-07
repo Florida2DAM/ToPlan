@@ -12,7 +12,7 @@ namespace ToPlan.Controllers
     {
         [Route("api/User/Check")]
         //Comprueba si existe un Usuario a partir de una id. Devuelve true si no existe y false si existe
-        public bool CheckId(string id)
+        public bool GetCheckId(string id)
         {
             UsersRepository rep = new UsersRepository();
             bool aux = rep.CheckId(id);
@@ -29,7 +29,7 @@ namespace ToPlan.Controllers
 
         [Route("api/User/CheckMail")]
         //Devuelve true si es correcto el email y false si es incorrecto
-        public bool CheckMail(string m)
+        public bool GetCheckMail(string m)
         {
             UsersRepository rep = new UsersRepository();
             return rep.CheckMail(m);
@@ -37,7 +37,7 @@ namespace ToPlan.Controllers
 
         [Route("api/User/CheckAdmin")]
         //Comprueba si un usuario es admin o no
-        public bool CheckAdmin(string id)
+        public bool GetCheckAdmin(string id)
         {
             UsersRepository rep = new UsersRepository();
             return rep.CheckAdmin(id);
