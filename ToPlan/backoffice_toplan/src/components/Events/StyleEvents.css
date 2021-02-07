@@ -1,0 +1,43 @@
+.groupUpdate {
+    flex: 1;
+    margin: 3px;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.update input{
+    flex: 1;
+    margin:3px
+}
+.update button{
+    align-self: center;
+}
+
+.tabview-demo .tabview-custom i, .tabview-demo .tabview-custom span {
+    vertical-align: middle;
+}
+
+.tabview-demo .tabview-custom span {
+    margin: 0 .5rem;
+}
+
+.tabview-demo .p-button {
+    margin-right: .25rem;
+}
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}
+
+.card {
+    margin-bottom: 2rem;
+}
+
+.grupo {
+    display: flex;
+    flex-direction: row;
+
+}

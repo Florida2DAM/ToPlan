@@ -1,13 +1,13 @@
 import './App.css';
-import {DeleteEvents} from "./components/Events/DeleteEvents";
-import {UpdateEvents} from "./components/Events/UpdateEvents";
+import {Events} from "./components/Events/Events";
+
 
 function App() {
-  return (
-    <div className="App">
 
-    </div>
-  );
+    return (
+        <div  className="App">
+        </div>
+    );
 }
 
 export default App;
