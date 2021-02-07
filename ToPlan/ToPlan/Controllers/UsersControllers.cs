@@ -18,6 +18,13 @@ namespace ToPlan.Controllers
             bool aux = rep.CheckId(id);
             return aux;
         }
+        [Route("api/User1")]
+        //Devuelve un UserDTO2
+        public UserDTO2 GetUser1(string id)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.GetUserDTO2(id);
+        }
 
         [Route("api/User/GetAge")]
         //Devuelve la edad de un usuario a partir de una id

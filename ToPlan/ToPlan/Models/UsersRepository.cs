@@ -262,8 +262,27 @@ namespace ToPlan.Models
                 Debug.WriteLine("Error de conéxion");
                 return -1;
             }
-            
+        }
 
+        internal UserDTO2 GetUserDTO2(string id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User aux;
+            int age;
+            DateTime date;
+            try
+            {
+                aux = context.Users.Single(p => p.UserId.Equals(id.ToLower()));
+                date = DateTime.Parse(aux.FechaNacimiento);
+                age = DateTime.Today.AddTicks(-date.Ticks).Year - 1;
+                return new UserDTO2(aux.Name, aux.Surname, age, aux.UserId, aux.Preferences);
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+                return null;
+            }
         }
     }
 }

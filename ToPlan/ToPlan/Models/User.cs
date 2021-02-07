@@ -45,4 +45,18 @@ namespace ToPlan.Models
             this.FechaNacimiento = f;
         }
     }
+
+    public class UserDTO2
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string[] Preferences { get; set; }
+
+        public UserDTO2(string n, string s, int ed, string e, string p)
+        {
+            this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1) + "," + ed.ToString();
+            this.Email = e;
+            this.Preferences = p.Split(';');
+        }
+    }
 }

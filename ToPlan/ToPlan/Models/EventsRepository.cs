@@ -267,7 +267,7 @@ namespace ToPlan.Models
             }
         }
 
-        internal List<EventDTO> EventsSport()
+        internal List<EventDTO> EventsType(string g)
         {
             ToPlanContext context = new ToPlanContext();
             List<EventDTO> final = new List<EventDTO>();
@@ -286,70 +286,10 @@ namespace ToPlan.Models
                     date = DateTime.Parse(aux2[i].EventDate);
                     if (DateTime.Compare(date, Today) >= 0)
                     {
-                        if (t.Name.Equals("gastronomy"))
+                        if (t.Name.Equals(g))
                         {
                             final.Add(new EventDTO(aux2[i].City, aux2[i].Description, t.Name, t.Subtype, u.Name, u.Surname));
                         }
-                    }
-                }
-                return final;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error de conexion:");
-                return null;
-            }
-        }
-        internal List<EventDTO> EventsSport()
-        {
-            ToPlanContext context = new ToPlanContext();
-            List<EventDTO> final = new List<EventDTO>();
-            List<Event> aux2 = new List<Event>();
-            DateTime Today = DateTime.Now;
-            DateTime date;
-            TypePlan t;
-            User u;
-            try
-            {
-                aux2 = context.Events.ToList();
-                for (int i = 0; i < aux2.Count; i++)
-                {
-                    t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
-                    u = context.Users.Single(p => p.UserId == aux2[i].UserId);
-                    date = DateTime.Parse(aux2[i].EventDate);
-                    if (DateTime.Compare(date, Today) >= 0)
-                    {
-                        if (t.Name.Equals("sport"))
-                        {
-                            final.Add(new EventDTO(aux2[i].City, aux2[i].Description, t.Name, t.Subtype, u.Name, u.Surname));
-                        }
-                    }
-                }
-                return final;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error de conexion:");
-                return null;
-            }
-        }
-        internal List<EventDTO> EventsLeisure()
-        {
-            ToPlanContext context = new ToPlanContext();
-            List<EventDTO> final = new List<EventDTO>();
-            List<Event> aux2 = new List<Event>();
-            TypePlan t;
-            User u;
-            try
-            {
-                aux2 = context.Events.ToList();
-                for (int i = 0; i < aux2.Count; i++)
-                {
-                    t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
-                    u = context.Users.Single(p => p.UserId == aux2[i].UserId);
-                    if (t.Name.Equals("leisure"))
-                    {
-                        final.Add(new EventDTO(aux2[i].City, aux2[i].Description, t.Name, t.Subtype, u.Name, u.Surname));
                     }
                 }
                 return final;
