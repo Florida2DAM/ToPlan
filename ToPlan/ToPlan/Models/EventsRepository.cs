@@ -195,7 +195,7 @@ namespace ToPlan.Models
             {
                 x = context.Events.Single(p => p.EventId == id);
                 t = context.TypePlans.Single(p => p.TypePlanId == x.TypePlanId);
-                u = context.Users.Single(p => p.UserId == x.CreatorEmail);
+                u = context.Users.Single(p => p.UserId == x.UserId);
                 return new EventDTO(x.City, x.EventDate, t.Name, t.Subtype, u.Name, u.Surname);
             }
             catch(Exception e)
@@ -216,7 +216,7 @@ namespace ToPlan.Models
             {
                 x = context.Events.Single(p => p.EventId == id);
                 t = context.TypePlans.Single(p => p.TypePlanId == x.TypePlanId);
-                u = context.Users.Single(p => p.UserId == x.CreatorEmail);
+                u = context.Users.Single(p => p.UserId == x.UserId);
                 if (!x.ListMembers.Equals(""))
                 {
                     lista = x.ListMembers.Split(';');

@@ -25,9 +25,6 @@ namespace ToPlan.Migrations
                     b.Property<string>("City")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("CreatorEmail")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 

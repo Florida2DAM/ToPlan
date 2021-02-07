@@ -15,7 +15,6 @@ namespace ToPlan.Models
         public string Description { get; set; }
         public int MaxMembers { get; set; }
         public string ListMembers { get; set; }
-        public string CreatorEmail { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }
@@ -29,7 +28,7 @@ namespace ToPlan.Models
             this.Province = p;
             this.Description = d;
             this.MaxMembers = m;
-            this.CreatorEmail = ce;
+            this.UserId = ce;
             this.ListMembers = "";
             this.TypePlanId = t;
         }

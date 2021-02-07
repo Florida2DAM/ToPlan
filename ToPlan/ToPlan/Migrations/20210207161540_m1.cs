@@ -50,7 +50,6 @@ namespace ToPlan.Migrations
                     Description = table.Column<string>(nullable: true),
                     MaxMembers = table.Column<int>(nullable: false),
                     ListMembers = table.Column<string>(nullable: true),
-                    CreatorEmail = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     TypePlanId = table.Column<int>(nullable: false)
                 },
