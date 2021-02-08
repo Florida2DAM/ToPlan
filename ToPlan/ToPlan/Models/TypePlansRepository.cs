@@ -33,7 +33,39 @@ namespace ToPlan.Models
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Error de conexion");
                 return null;
+            }
+        }
+
+        internal void UpdateType(int id, string n, string s)
+        {
+            ToPlanContext context = new ToPlanContext();
+            TypePlan t;
+            try
+            {
+                t = context.TypePlans.Single(p => p.TypePlanId == id);
+                t.Name = n.ToLower();
+                t.Subtype = s.ToLower();
+            }catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
+            }
+        }
+
+        internal void DeleteType(int id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            TypePlan t;
+            try
+            {
+                t = context.TypePlans.Single(p => p.TypePlanId == id);
+                context.Remove(t);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
             }
         }
     }

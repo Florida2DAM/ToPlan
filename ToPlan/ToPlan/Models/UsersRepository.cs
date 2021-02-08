@@ -156,19 +156,26 @@ namespace ToPlan.Models
             }
         }
 
-        internal string GetPasswrod(string id)
+        internal bool GetPasswrod(string id, string p)
         {
             ToPlanContext context = new ToPlanContext();
             User u;
             try
             {
                 u = context.Users.Single(r => r.UserId.Equals(id.ToLower()));
-                return u.Password;
+                if (p.Equals(u.Password))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
-                return null;
+                return false;
             }
         }
 

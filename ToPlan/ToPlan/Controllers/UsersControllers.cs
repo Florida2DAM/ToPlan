@@ -51,12 +51,11 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/User/GetPassword")]
-        //Devuelve la password de un usuario en especifico a partir de una id
-        public string GetPassword(string id)
+        //Devuelve true si la pasword coincide o false si no.
+        public bool GetPassword(string id, string p)
         {
             UsersRepository rep = new UsersRepository();
-            string aux = rep.GetPasswrod(id);
-            return aux;
+            return rep.GetPasswrod(id,p);
         }
 
         [Route("api/UserDTO")]
