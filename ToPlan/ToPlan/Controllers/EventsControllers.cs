@@ -30,6 +30,12 @@ namespace ToPlan.Controllers
             EventsRepository rep = new EventsRepository();
             return rep.Even3();
         }
+        [Route("api/Event/EventsUser")]
+        public List<EventDTO> GetEventsUser(string id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.EventsUser(id);
+        }
         [Route("api/Event/Gastronomy")]
         public List<EventDTO> GetListEventsGastronomy()
         {
