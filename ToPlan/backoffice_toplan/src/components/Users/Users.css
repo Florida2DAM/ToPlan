@@ -1,0 +1,56 @@
+button{
+    background-color: #FFCC58;
+    font-family: 'Arial';
+    font-size: 13px;
+    border-color: #FFCC58;
+    animation-name: out;
+    animation-duration: 0.1s;
+    padding: 3px;
+    margin: 10px;
+
+
+}
+.grupo {
+    background-color: #e8e8e8;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.separador {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.column{
+    width:100px;
+}
+button:hover{
+
+
+
+}
+.editContainer{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.inputText{
+
+    margin-top: 10px;
+}
+.mainContainerUpdate{
+}
+.edit{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50px;
+    padding: 10px;
+
+}
+
+

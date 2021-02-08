@@ -1,27 +1,49 @@
 import logo from './logo.svg';
 import './App.css';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Toast } from 'primereact/toast';
+import React from "react";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import {GetUsers} from "./components/Users/GetUsers";
+import {UpdateUser} from "./components/Users/UpdateUser";
+import {DeleteUser} from "./components/Users/DeleteUser";
+import {Users} from "./components/Users/Users";
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/saga-orange/theme.css';
+import 'primereact/resources/primereact.css';
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+          <Router>
+              <div className={"link"}>
+                  <nav className={"navBar"}>
+                      <Link className={"link"} to="/users">Users &nbsp; &nbsp;</Link><br/>
+                      <Link className={"link"} to="/Events">Events</Link>
+                  </nav>
+                  <Switch>
+                      <Route path="/users">
+                          <Users />
+                      </Route>
+                      <Route path="/events">
+                      </Route>
+
+
+                  </Switch>
+              </div>
+          </Router>
+
+
+
+
+      </div>
   );
 }
 
