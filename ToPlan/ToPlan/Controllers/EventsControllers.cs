@@ -40,6 +40,13 @@ namespace ToPlan.Controllers
             EventsRepository rep = new EventsRepository();
             return rep.Even3();
         }
+        [Route("api/Event/Type")]
+        //Devuelve una lista con los eventos seguna la preferencia introducida
+        public List<Event> GetEventsByType(string p)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.EventsByType(p);
+        }
         [Route("api/Event/EventsUser")]
         //Devuelve una lista con los eventos en los que un usuario está apuntado
         public List<EventDTO> GetEventsUser(string id)

@@ -13,6 +13,7 @@ namespace ToPlan.Models
             ToPlanContext context = new ToPlanContext();
             try
             {
+                e.ListMembers = e.UserId;
                 context.Events.Add(e);
                 context.SaveChanges();
             }
@@ -391,6 +392,31 @@ namespace ToPlan.Models
             {
                 Debug.WriteLine("Error de conexion:");
                 return false;
+            }
+        }
+
+        internal List<Event> EventsByType(string s)
+        {
+            ToPlanContext context = new ToPlanContext();
+            List<Event> lista;
+            List<Event> final = new List<Event>();
+            TypePlan t;
+            try
+            {
+                lista = context.Events.ToList();
+                for(int i = 0; i < lista.Count; i++)
+                {
+                    t = context.TypePlans.Single(p => p.TypePlanId == lista[i].TypePlanId);
+                    if (t.Subtype.Equals(s.ToLower()))
+                    {
+                        final.Add(lista[i]);
+                    }
+                }
+                return final;
+            }catch(Exception e)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return null;
             }
         }
 
