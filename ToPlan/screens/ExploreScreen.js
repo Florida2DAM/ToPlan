@@ -8,31 +8,91 @@ import {
 import {Button, Text} from 'react-native-elements';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
+import axios from 'axios';
+
+const urlEventsBySport = 'http://3.95.8.159:44360/api/Event/Sport';
+const urlEventsByLeisure = 'http://3.95.8.159:44360/api/Event/Leisure';
+const urlEventsByGastronomy = 'http://3.95.8.159:44360/api/Event/Gastronomy';
 
 export class ExploreScreen extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            leisure: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
-            sports: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
-            gastronomy: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                    {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
-            planes: [{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'},
-                {user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}],
+            leisure: [],
+            sports: [],
+            gastronomy: [],
+            type: [],
+            sportVisibility:'none',
+            gastronomyVisibility:'flex',
+            leisureVisibility:'none',
 
         };
     }
+
+    getEventsBySports = async () => {
+        try {
+            axios
+                .get(urlEventsBySport)
+                .then(response => {
+                    if (response.data === null || response.data.length === 0) {
+                        alert('error de conexion');
+                    }else {
+                        this.setState({sports: response.data});
+                    }
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            console.log(err);
+        }
+    };
+    getEventsByLeisure = async () => {
+        try {
+            axios
+                .get(urlEventsByLeisure)
+                .then(response => {
+                    if (response.data === null || response.data.length === 0) {
+                        alert('error de conexion');
+                    }else {
+                        this.setState({leisure: response.data});
+                    }
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            /*console.log(err);*/
+        }
+    };
+    getEventsByGastronomy = async () => {
+        try {
+            axios
+                .get(urlEventsByGastronomy)
+                .then(response => {
+                    if (response.data === null || response.data.length === 0) {
+                        alert('error de conexion');
+                    }else {
+                        this.setState({gastronomy: response.data});
+                    }
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            /*console.log(err);*/
+        }
+    };
+
+    componentDidMount = () => {
+        this.getEventsBySports();
+        this.getEventsByLeisure();
+        this.getEventsByGastronomy();
+        this.setState({type: this.state.sports});
+
+
+    };
 
     render() {
         return (
@@ -53,9 +113,21 @@ export class ExploreScreen extends Component {
                         <View style={styleLogin.menuSeparator}><Image style={styleLogin.Icons} source={require('../Assets/ocio.png')}/></View>
                       </View>
                         <FlatList
-                            data={this.state.planes}
+                            data={this.state.sports}
                             keyExtractor={(item, index) => index.toString()}
-                            style={{padding: 5}}
+                            style={{padding: 5, display:this.state.sportVisibility }}
+                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                        </FlatList>
+                        <FlatList
+                            data={this.state.leisure}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={{padding: 5, display:this.state.leisureVisibility }}
+                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                        </FlatList>
+                        <FlatList
+                            data={this.state.gastronomy}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={{padding: 5, display:this.state.gastronomyVisibility }}
                             renderItem={({item}) => (<EventMiddle element={item}/>)}>
                         </FlatList>
                     </View>

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {
     SafeAreaView,
@@ -5,7 +6,7 @@ import {
     ScrollView,
     View,
     Text,
-    StatusBar,Image
+    StatusBar, Image, Pressable,
 } from 'react-native';
 
 
@@ -13,25 +14,23 @@ import {
 export class NavBar extends React.Component {
     render() {
         return (
-            <ScrollView>
             <View style={styles.footerNavbar}>
-                <Image
+                <Pressable onPress={this.props.create}>
+                    <Image
                     style={styles.icons}
-                    source={require('../../Assets/home.png')}
-
-                />
-                <Image
-                    style={styles.icons}
-
-                    source={require('../../Assets/user.png')}
-                /><Image
-                style={styles.icons}
-
-                source={require('../../Assets/lupa.png')}
-            />
-
+                    source={require('../../Assets/home.png')}/>
+                </Pressable>
+                <Pressable onPress={this.props.user}>
+                    <Image
+                        style={styles.icons}
+                        source={require('../../Assets/user.png')}/>
+                </Pressable>
+                <Pressable onPress={this.props.find}>
+                    <Image
+                        style={styles.icons}
+                        source={require('../../Assets/lupa.png')}/>
+                </Pressable>
             </View>
-            </ScrollView>
         )
     }
 

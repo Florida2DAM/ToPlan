@@ -6,8 +6,6 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import React, {Component} from 'react';
 import {
@@ -19,12 +17,9 @@ import {
 import {Text} from 'react-native-elements';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
-import axios, {Axios} from 'axios';
+import axios from 'axios';
 
-import LoginScreen from './LoginScreen';
-import ButtonPlan from '../Components/button/ButtonPlan';
-
-const url = 'http://3.95.8.159:44360/api/Event3';
+const urlEventsByDate = 'http://3.95.8.159:44360/api/Event3';
 
 
 
@@ -39,7 +34,7 @@ export class InicioScreen extends Component {
     getEventsByDate = async () => {
         try {
             axios
-                .get(url)
+                .get(urlEventsByDate)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
                         alert('error de conexion');
@@ -56,12 +51,18 @@ export class InicioScreen extends Component {
     };
 
     componentDidMount = () => {
-      this.getEventsByDate(url);
+      this.getEventsByDate(urlEventsByDate);
 
 
     };
     nextScreen = () => {
         this.props.navigation.navigate('Login');
+    }
+    exploreScreen = () => {
+        this.props.navigation.navigate('Explore');
+    }
+    userScreen = () => {
+        this.props.navigation.navigate('User');
     }
 
     render() {
@@ -78,11 +79,10 @@ export class InicioScreen extends Component {
                             data={this.state.planes}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5}}
-                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                            renderItem={({item}) => (<Pressable onPress={this.nextScreen}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
-                        <ButtonPlan metodo={this.nextScreen} size={100} topmargin={10} title={'aceptar'} />
                     </View>
-                    <View style={styleLogin.navContainer}><NavBar/></View>
+                    <View style={styleLogin.navContainer}><NavBar user={this.userScreen} find={this.exploreScreen}/></View>
                 </View>
             </>
         );
