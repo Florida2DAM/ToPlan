@@ -93,6 +93,14 @@ namespace ToPlan.Controllers
             rep.Save(u);
         }
 
+        [Route("api/User/WithoutPreferences")]
+        //Insertar un nuevo usuario 
+        public void PostUserWithoutPreferences([FromBody] User u)
+        {
+            UsersRepository rep = new UsersRepository();
+            rep.SaveUserWithoutPreferences(u);
+        }
+
         [Route("api/User/AdminT")]
         //Añade permisos de administrador un usuario
         public void PutAdminT(string id)

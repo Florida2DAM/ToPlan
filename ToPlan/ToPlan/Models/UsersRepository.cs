@@ -284,5 +284,24 @@ namespace ToPlan.Models
                 return null;
             }
         }
+
+        internal void SaveUserWithoutPreferences(User u)
+        {
+            ToPlanContext context = new ToPlanContext();
+            try
+            {
+                context.Users.Add(u);
+                string preferences = u.Preferences;
+                preferences = null;
+                context.SaveChanges();
+                
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+               
+            }
+        }
     }
 }
