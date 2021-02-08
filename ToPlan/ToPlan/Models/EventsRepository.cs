@@ -73,23 +73,23 @@ namespace ToPlan.Models
                     aux = context.Events.Where(b => b.EventId == id).FirstOrDefault();
                     if (aux == null)
                     {
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        return true;
                     }
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine("Error");
-                    return false;
+                    return true;
                 }
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
-                return false;
+                return true;
             }
         }
 
@@ -109,28 +109,6 @@ namespace ToPlan.Models
             }
         }
 
-        internal void InsertUser(int id, string n)
-        {
-            ToPlanContext context = new ToPlanContext();
-            Event u;
-            try
-            {
-                u = context.Events.Single(p => p.EventId == id);
-                if (u.ListMembers == "")
-                {
-                    u.ListMembers = n.ToLower();
-                }
-                else
-                {
-                    u.ListMembers = u.ListMembers + ";" + n.ToLower();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error de conexion:");
-
-            }
-        }
 
         internal List<User> GetList(int id)
         {
@@ -308,14 +286,19 @@ namespace ToPlan.Models
             List<Event> aux2 = new List<Event>();
             TypePlan t;
             User u;
+            string[] aux;
             try
             {
                 aux2 = context.Events.Where(p => p.UserId.Equals(id.ToLower())).ToList();
                 for(int i = 0; i < aux2.Count; i++)
                 {
-                    t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
-                    u = context.Users.Single(p => p.UserId == aux2[i].UserId);
-                    final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                    aux = aux2[i].ListMembers.Split(';');
+                    if (Array.Exists(aux, element=>element.Equals(id)))
+                    {
+                        t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
+                        u = context.Users.Single(p => p.UserId == aux2[i].UserId);
+                        final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                    }
                 }
                 return final;
 
@@ -324,6 +307,90 @@ namespace ToPlan.Models
             {
                 Debug.WriteLine("Error de conexion:");
                 return null;
+            }
+        }
+
+        internal bool AddUser(int id, string e)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event e1;
+            String[] aux;
+            try
+            {
+                e1 = context.Events.Single(p => p.EventId == id);
+                aux = e1.ListMembers.Split(';');
+                if ((aux.Length + 1) < e1.MaxMembers)
+                {
+                    e1.ListMembers = e1.ListMembers + ";" + e;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }catch(Exception e2)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return false;
+            }
+        }
+        internal bool RemoveUser(int id, string e)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event e1;
+            String[] aux;
+            bool aux2 = false;
+            try
+            {
+                e1 = context.Events.Single(p => p.EventId == id);
+                aux = e1.ListMembers.Split(';');
+                e1.ListMembers = "";
+                for(int i =0; i < aux.Length; i++)
+                {
+                    if (!aux[i].Equals(e.ToLower()))
+                    {
+                        if (i == 0)
+                        {
+                            e1.ListMembers = aux[i];
+                        }
+                        else
+                        {
+                            e1.ListMembers = e1.ListMembers + ";" + aux[i];
+                        }
+                        aux2 = true;
+                    }
+                }
+                return aux2;
+            }
+            catch (Exception e2)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return false;
+            }
+        }
+
+        internal bool CheckUserEvent(int id, string n)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event e1;
+            String[] aux;
+            bool aux2 = false;
+            try
+            {
+                e1 = context.Events.Single(p => p.EventId == id);
+                aux = e1.ListMembers.Split(';');
+                for (int i = 0; i < aux.Length; i++)
+                {
+                    if (aux[i].Equals(n.ToLower()))
+                    {
+                        aux2 = true;
+                    }
+                }
+                return aux2;
+            }catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return false;
             }
         }
 

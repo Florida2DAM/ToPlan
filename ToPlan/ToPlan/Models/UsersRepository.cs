@@ -34,23 +34,23 @@ namespace ToPlan.Models
                     aux = context.Users.Where(b => b.UserId.Equals(id.ToLower())).FirstOrDefault();
                     if (aux == null)
                     {
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        return true;
                     }
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine("Error");
-                    return false;
+                    return true;
                 }
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error de conéxion");
-                return false;
+                return true;
             }
         }
 

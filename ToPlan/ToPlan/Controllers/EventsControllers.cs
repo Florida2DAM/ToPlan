@@ -11,26 +11,37 @@ namespace ToPlan.Controllers
     public class EventsController : ApiController
     {
         [Route("api/Event/Check")]
+        //Devuelve true si existe un evento con esa ID
         public bool GetCheckId(int id)
         {
             EventsRepository rep = new EventsRepository();
             bool aux = rep.CheckEventId(id);
             return aux;
         }
+        [Route("api/Event/CheckUser")]
+        //Devuelve true si un usuario está apuntado en el evento.
+        public bool GetCheckUser(int id, string n)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.CheckUserEvent(id,n);
+        }
 
         [Route("api/Event/List")]
+        //Devuelve una lista de los usuarios que estan apuntados en el evento
         public List<User> GetList(int id)
         {
             EventsRepository rep = new EventsRepository();
             return rep.GetList(id);
         }
         [Route("api/Event3")]
+        //Devuelve una lista con 4 proximos eventos
         public List<EventDTO> GetListEvents()
         {
             EventsRepository rep = new EventsRepository();
             return rep.Even3();
         }
         [Route("api/Event/EventsUser")]
+        //Devuelve una lista con los eventos en los que un usuario está apuntado
         public List<EventDTO> GetEventsUser(string id)
         {
             EventsRepository rep = new EventsRepository();
@@ -82,11 +93,18 @@ namespace ToPlan.Controllers
             rep.Save(e);
         }
 
-        [Route("api/Event/User")]
-        public void PostUserList(int id, string n)
+        [Route("api/Event/AddUser")]
+        public bool PostAddUserList(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
-            rep.InsertUser(id, n);
+            return rep.AddUser(id, n);
+        }
+
+        [Route("api/Event/RemoveUser")]
+        public bool PostRemoveUserList(int id, string n)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.RemoveUser(id, n);
         }
 
 
