@@ -111,6 +111,23 @@ namespace ToPlan.Models
         }
 
 
+        internal List<Event> RecoverEvents()
+        {
+            ToPlanContext context = new ToPlanContext();
+            List<Event> u;
+            try
+            {
+                u = context.Events.ToList();
+                return u;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+                return null;
+            }
+        }
+
+
         internal List<User> GetList(int id)
         {
             ToPlanContext context = new ToPlanContext();

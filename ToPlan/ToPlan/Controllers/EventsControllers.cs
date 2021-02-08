@@ -19,11 +19,20 @@ namespace ToPlan.Controllers
             return aux;
         }
         [Route("api/Event/CheckUser")]
-        //Devuelve true si un usuario está apuntado en el evento.
+        //Devuelve true si un usuario está apuntado a un evento especifico.
         public bool GetCheckUser(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
             return rep.CheckUserEvent(id,n);
+        }
+
+        [Route("api/Event")]
+        //Recupera toda la lista de usuarios
+        public List<Event> GetEvents()
+        {
+            EventsRepository rep = new EventsRepository();
+            List<Event> lista = rep.RecoverEvents();
+            return lista;
         }
 
         [Route("api/Event/List")]
@@ -41,7 +50,7 @@ namespace ToPlan.Controllers
             return rep.Even3();
         }
         [Route("api/Event/Type")]
-        //Devuelve una lista con los eventos seguna la preferencia introducida
+        //Devuelve una lista con los eventos segun la preferencia introducida
         public List<Event> GetEventsByType(string p)
         {
             EventsRepository rep = new EventsRepository();
