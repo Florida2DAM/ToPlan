@@ -2,9 +2,24 @@ import React, {Component} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ButtonPlan from './Components/button/ButtonPlan';
+import ButtonPlan from '../Components/button/ButtonPlan';
+
+
 
 export class LoginScreen extends Component {
+
+    query = (url, param) => {
+
+        axios.get(url + '=' + param).then((respuesta) => {
+            if (respuesta.data.length === 0) {
+                alert("ningun usuario coincide con el nombre introducido");
+            } else {
+                this.setState({users: respuesta.data});
+            }
+        }).catch(e => {
+            console.log("Error de conexion con la API")
+        })
+    }
 
     render() {
         return (
@@ -12,14 +27,14 @@ export class LoginScreen extends Component {
                 <ScrollView>
                     <View style={styleLogin.loginContainer}>
                         <View style={styleLogin.logoContainer}>
-                            <Image style={styleLogin.logo} source={require('./Assets/LogoSimple.png')}/>
+                            <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
                         </View>
                         <View style={styleLogin.inputContainer}>
                             <Input placeholder='Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
                             <Input placeholder='Password' secureTextEntry={true}
                                    leftIcon={<Icon name='lock' size={24} color='black'/>}/>
                         </View>
-                        <ButtonPlan metodo={this.loginCheck} title={'Login'}/>
+                        <ButtonPlan size={300} topmargin={10} title={"Login"} ></ButtonPlan>
                     </View>
                 </ScrollView>
             </>

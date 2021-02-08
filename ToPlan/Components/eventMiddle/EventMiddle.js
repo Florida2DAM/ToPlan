@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 export class EventMiddle extends React.Component {
-    
+
     render() {
         let plan = this.props.element;
         return (
@@ -20,7 +20,7 @@ export class EventMiddle extends React.Component {
                             style={styles.Icons}
                             source={require('../../Assets/location.png')}
                         />
-                        <Text>{plan.location}</Text>
+                        <Text>{plan.City}</Text>
 
                     </View>
                     <View style={styles.place}>
@@ -28,13 +28,13 @@ export class EventMiddle extends React.Component {
                             style={styles.Icons}
                             source={require('../../Assets/clock.png')}
                         />
-                        <Text>{plan.date}</Text>
+                        <Text>{plan.Date}</Text>
 
                     </View>
                 </View>
                 <View style={styles.middleInfo}>
 
-                        <Text>{plan.user}</Text>
+                        <Text>{plan.Name}</Text>
                         <Image
                             style={styles.userLogo}
                             source={require('../../Assets/user.png')}
@@ -43,7 +43,7 @@ export class EventMiddle extends React.Component {
                 <View style={styles.rigthInfo}>
                     <View style={styles.place}>
 
-                        <Text >{plan.category}</Text>
+                        <Text >{plan.Category}</Text>
                         <Image
                             style={styles.Icons}
                             source={require('../../Assets/tenis.png')}
@@ -52,7 +52,7 @@ export class EventMiddle extends React.Component {
                     </View>
                     <View style={styles.place}>
 
-                        <Text>{plan.type}</Text>
+                        <Text>{plan.Type}</Text>
                         <Image
                             style={styles.Icons}
                             source={require('../../Assets/tenis.png')}

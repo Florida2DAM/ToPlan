@@ -78,7 +78,7 @@ export class RegisterScreen extends React.Component {
 
                     </View>
                     <View style={styles.containerCheckBox}>
-                        <ButtonPlan title={"Sign Up"} color={"orange"} style={styles.button} ></ButtonPlan>
+                        <ButtonPlan title={'Sign Up'} color={'orange'} style={styles.button} />
 
                     </View>
 

@@ -41,7 +41,7 @@ export class UserScreen extends React.Component {
                             <Text style={{fontSize: 18}}>{this.state.birthDate}</Text>
 
 
-                            <ButtonPlan size={100} topmargin={10} title={"Edit"} ></ButtonPlan>
+                            <ButtonPlan size={100} topmargin={10} title={'Edit'} />
 
                         </View>
 

@@ -18,6 +18,7 @@ export class NavBar extends React.Component {
                 <Image
                     style={styles.icons}
                     source={require('../../Assets/home.png')}
+
                 />
                 <Image
                     style={styles.icons}
