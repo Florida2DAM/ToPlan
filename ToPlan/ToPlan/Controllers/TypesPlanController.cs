@@ -11,7 +11,7 @@ namespace ToPlan.Controllers
     {
         // GET api/values
         [Route("api/TypePlan/List")]
-        public List<TypePlan> ListTypes()
+        public List<TypePlan> GetListTypes()
         {
             TypePlansRepository rep = new TypePlansRepository();
             return rep.GetTypes();
