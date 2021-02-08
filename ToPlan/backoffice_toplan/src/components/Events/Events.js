@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component,useState} from "react";
 import axios from "axios";
 import {Button} from "primereact/button";
 import {InputText} from "primereact/inputtext";
@@ -7,13 +7,16 @@ import {TabPanel, TabView} from "primereact/tabview";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
-
+import {Dropdown} from "primereact/dropdown";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
 
 export class Events extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            Events:[],
             EventId: '',
             date: '',
             city: '',
@@ -21,16 +24,20 @@ export class Events extends Component {
             description: '',
             maxMembers: '',
             TypePlanId: [],
-            Members:'',
-            UserId:'',
-            Type:''
+            Members: '',
+            UserId: '',
+            type: null,
+            Data:[]
         }
     }
 
+
     componentDidMount() {
-        axios.get("http://54.162.15.195:44360/api/TypePlan/List",{},{headers:{'Access-Control-Allow-Origin': '*'}}).then((response =>{
+        axios.get("https://jsonplaceholder.typicode.com/users", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
             console.log(response)
             this.setState({TypePlanId: response.data})
+            let data = this.state.TypePlanId.map(element=>(element.name));
+            this.setState({Data: data})
         })).catch((error => {
             console.log(error)
         }));
@@ -66,6 +73,8 @@ export class Events extends Component {
         });
 
     }
+
+
 
     onInputEventId = (event) => {
         this.setState({
@@ -129,49 +138,47 @@ export class Events extends Component {
 
     onInputChangeType = (event) => {
         this.setState({
-            Type: event.target.value
+            type: event.target.value
         });
     }
 
-
-
     render() {
+
+
         return (
             <div className="groupUpdate">
                 <div className="tabview-demo">
                     <div className="card">
                         <TabView>
                             <TabPanel header="Modificar">
-                                <div className="grupo">
-                                    <div className="update">
-                                        <h5>Update Event</h5>
-                                        <InputText placeholder={"EventId"} type={'number'}
-                                                   name="EventId" value={this.state.EventId}
-                                                   onChange={this.onInputEventId}
-                                        />
-                                        <InputText placeholder={"EventDate"} type={'text'}
-                                                   name="EventDate" value={this.state.date}
-                                                   onChange={this.onInputDate}
-                                        />
+                                <div className="update">
+                                    <h5>Update Event</h5>
+                                    <InputText placeholder={"EventId"} type={'number'}
+                                               name="EventId" value={this.state.EventId}
+                                               onChange={this.onInputEventId}
+                                    />
+                                    <InputText placeholder={"EventDate"} type={'text'}
+                                               name="EventDate" value={this.state.date}
+                                               onChange={this.onInputDate}
+                                    />
 
-                                        <InputText placeholder={"EventCity"} type={'text'}
-                                                   name="EventDate" value={this.state.city}
-                                                   onChange={this.onInputCity}
-                                        />
+                                    <InputText placeholder={"EventCity"} type={'text'}
+                                               name="EventDate" value={this.state.city}
+                                               onChange={this.onInputCity}
+                                    />
 
-                                        <InputText placeholder={"EventProvince"} type={'text'}
-                                                   name="EventDate" value={this.state.province}
-                                                   onChange={this.onInputProvince}
-                                        />
+                                    <InputText placeholder={"EventProvince"} type={'text'}
+                                               name="EventDate" value={this.state.province}
+                                               onChange={this.onInputProvince}
+                                    />
 
-                                        <InputText placeholder={"EventDescription"} type={'text'}
-                                                   name="EventDate" value={this.state.description}
-                                                   onChange={this.onInputDescription}
-                                        />
-                                        <p>
-                                            <Button label={"Update Event"} onClick={this.onSubmitUpdate}/>
-                                        </p>
-                                    </div>
+                                    <InputText placeholder={"EventDescription"} type={'text'}
+                                               name="EventDate" value={this.state.description}
+                                               onChange={this.onInputDescription}
+                                    />
+                                    <p>
+                                        <Button label={"Update Event"} onClick={this.onSubmitUpdate}/>
+                                    </p>
                                 </div>
                             </TabPanel>
                             <TabPanel header="Insertar">
@@ -202,11 +209,7 @@ export class Events extends Component {
                                                    name="Event Members" value={this.state.Members}
                                                    onChange={this.onInputMembers}
                                         />
-                                        <select name="TypePlan" className="InputType" onChange={this.onInputChangeType}>
-                                            {this.state.TypePlanId.map(element =>(
-                                                <option key={element.id} value={element.id}>Test</option>
-                                            ))}
-                                        </select>
+                                        <Dropdown autoWidth={true} value={this.state.type} options={this.state.Data} onChange={this.onInputChangeType} placeholder="Select a Type Plan"/>
                                     </div>
                                     <p><Button label={"Insert Event"} onClick={this.onSubmitInsertEvent}/></p>
                                 </div>
@@ -224,14 +227,17 @@ export class Events extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel header="Filtrar">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                    voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                    occaecati
-                                    cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia
-                                    animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-                                    distinctio.
-                                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                    minus.</p>
+                                <div className="DataTable">
+                                    <DataTable value={this.state.Events}>
+                                        <Column selectionMode="multiple" style={{width: '3em'}}/>
+                                        <Column field="EventoId" header="EventoId"/>
+                                        <Column field="Date" header="Date"/>
+                                        <Column field="City" header="City"/>
+                                        <Column field="Province" header="Province"/>
+                                        <Column field="Description" header="Description"/>
+                                        <Column field="UserId" header="UserId"/>
+                                    </DataTable>
+                                </div>
                             </TabPanel>
                         </TabView>
                     </div>
