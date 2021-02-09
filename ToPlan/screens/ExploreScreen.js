@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     FlatList,
-    Image,
+    Image, Pressable,
     StyleSheet,
     View,
 } from 'react-native';
@@ -91,8 +91,23 @@ export class ExploreScreen extends Component {
         this.getEventsByGastronomy();
         this.setState({type: this.state.sports});
 
-
     };
+
+    showGastronomy = () => {
+        this.setState({sporVisibility: 'none'});
+        this.setState({leisureVisibility: 'none'});
+        this.setState({gastronomyVisibility: 'flex'});
+    }
+    showSports = () => {
+        this.setState({sporVisibility: 'flex'});
+        this.setState({leisureVisibility: 'none'});
+        this.setState({gastronomyVisibility: 'none'});
+    }
+    showLeisure = () => {
+        this.setState({sporVisibility: 'none'});
+        this.setState({leisureVisibility: 'flex'});
+        this.setState({gastronomyVisibility: 'none'});
+    }
 
     render() {
         return (
@@ -108,9 +123,15 @@ export class ExploreScreen extends Component {
                     </View>
                     <View style={styleLogin.inputContainer}>
                       <View style={styleLogin.menuContainer}>
-                        <View style={styleLogin.menuSeparator}><Image style={styleLogin.Icons} source={require('../Assets/FORK.png')}/></View>
-                        <View style={styleLogin.menuSeparator}><Image style={styleLogin.Icons} source={require('../Assets/tenis.png')}/></View>
-                        <View style={styleLogin.menuSeparator}><Image style={styleLogin.Icons} source={require('../Assets/ocio.png')}/></View>
+                        <View style={styleLogin.menuSeparator}>
+                            <Pressable onPress={this.showGastronomy}><Image style={styleLogin.Icons} source={require('../Assets/FORK.png')}/></Pressable>
+                        </View>
+                        <View style={styleLogin.menuSeparator}>
+                            <Pressable onPress={this.showSports}><Image style={styleLogin.Icons} source={require('../Assets/tenis.png')}/></Pressable>
+                        </View>
+                        <View style={styleLogin.menuSeparator}>
+                            <Pressable onPress={this.showLeisure}><Image style={styleLogin.Icons} source={require('../Assets/ocio.png')}/></Pressable>
+                        </View>
                       </View>
                         <FlatList
                             data={this.state.sports}
