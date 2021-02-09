@@ -44,7 +44,7 @@ namespace ToPlan.Controllers
         }
         [Route("api/Event3")]
         //Devuelve una lista con 4 proximos eventos
-        public List<EventDTO> GetListEvents()
+        public List<EventDTO3> GetListEvents()
         {
             EventsRepository rep = new EventsRepository();
             return rep.Even3();
@@ -63,20 +63,20 @@ namespace ToPlan.Controllers
             EventsRepository rep = new EventsRepository();
             return rep.EventsUser(id);
         }
-        [Route("api/Event/Gastronomy")]
-        public List<EventDTO> GetListEventsGastronomy()
+        [Route("api/Event/Food")]
+        public List<EventDTO3> GetListEventsGastronomy()
         {
             EventsRepository rep = new EventsRepository();
-            return rep.EventsType("gastronomy");
+            return rep.EventsType("food");
         }
         [Route("api/Event/Sport")]
-        public List<EventDTO> GetListEventsSport()
+        public List<EventDTO3> GetListEventsSport()
         {
             EventsRepository rep = new EventsRepository();
             return rep.EventsType("sport");
         }
         [Route("api/Event/Leisure")]
-        public List<EventDTO> GetListEventsLeisure()
+        public List<EventDTO3> GetListEventsLeisure()
         {
             EventsRepository rep = new EventsRepository();
             return rep.EventsType("leisure");
@@ -125,10 +125,10 @@ namespace ToPlan.Controllers
 
 
         [Route("api/Event")]
-        public void Put(int id, string f, string c, string p, string d, int max)
+        public void Put(int id, string f, string c, string p, string d, int max, string dir)
         {
             EventsRepository rep = new EventsRepository();
-            rep.UpdateEvent(id, f, c, p, d, max);
+            rep.UpdateEvent(id, f, c, p, d, max, dir);
         }
 
         [Route("api/Event/Type")]

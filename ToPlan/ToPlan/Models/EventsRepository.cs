@@ -23,7 +23,7 @@ namespace ToPlan.Models
             }
         }
 
-        internal void UpdateEvent(int id, string f, string c, string p, string d, int max)
+        internal void UpdateEvent(int id, string f, string c, string p, string d, int max, string dir)
         {
             ToPlanContext context = new ToPlanContext();
             Event aux;
@@ -35,6 +35,7 @@ namespace ToPlan.Models
                 aux.Province = p;
                 aux.Description = d;
                 aux.MaxMembers = max;
+                aux.Direccion = dir;
                 context.Events.Update(aux);
                 context.SaveChanges();
             }
@@ -227,16 +228,19 @@ namespace ToPlan.Models
             }
         }
 
-        internal List<EventDTO> Even3()
+        internal List<EventDTO3> Even3()
         {
             ToPlanContext context = new ToPlanContext();
-            List<EventDTO> final = new List<EventDTO>();
+            List<EventDTO3> final = new List<EventDTO3>();
             DateTime Today = DateTime.Now;
             List<Event> aux2 = new List<Event>();
             int aux = 0;
             DateTime date;
             TypePlan t;
             User u;
+            User u2;
+            string[] aux3;
+            List<string> lista = new List<string>();
             try
             {
                 aux2 = context.Events.ToList();
@@ -245,9 +249,15 @@ namespace ToPlan.Models
                     t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
                     u = context.Users.Single(p => p.UserId == aux2[i].UserId);
                     date = DateTime.Parse(aux2[i].EventDate);
+                    aux3 = aux2[i].ListMembers.Split(';');
                     if (DateTime.Compare(date, Today) > 0)
                     {
-                        final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                        for(int j = 0; j < aux3.Length; j++)
+                        {
+                            u2 = context.Users.Single(p => p.UserId.Equals(aux3[j]));
+                            lista.Add(char.ToUpper(u2.Name[0]) + u2.Name.Substring(1) + " " + char.ToUpper(u2.Surname[0]) + u2.Surname.Substring(1));
+                        }
+                        final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista));
                         aux++;
                     }
                     if(aux == 4)
@@ -263,15 +273,18 @@ namespace ToPlan.Models
             }
         }
 
-        internal List<EventDTO> EventsType(string g)
+        internal List<EventDTO3> EventsType(string g)
         {
             ToPlanContext context = new ToPlanContext();
-            List<EventDTO> final = new List<EventDTO>();
+            List<EventDTO3> final = new List<EventDTO3>();
             List<Event> aux2 = new List<Event>();
             DateTime Today = DateTime.Now;
             DateTime date;
             TypePlan t;
             User u;
+            User u2;
+            string[] aux3;
+            List<string> lista = new List<string>();
             try
             {
                 aux2 = context.Events.ToList();
@@ -280,11 +293,17 @@ namespace ToPlan.Models
                     t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
                     u = context.Users.Single(p => p.UserId == aux2[i].UserId);
                     date = DateTime.Parse(aux2[i].EventDate);
+                    aux3 = aux2[i].ListMembers.Split(';');
                     if (DateTime.Compare(date, Today) >= 0)
                     {
+                        for (int j = 0; j < aux3.Length; j++)
+                        {
+                            u2 = context.Users.Single(p => p.UserId.Equals(aux3[j]));
+                            lista.Add(char.ToUpper(u2.Name[0]) + u2.Name.Substring(1) + " " + char.ToUpper(u2.Surname[0]) + u2.Surname.Substring(1));
+                        }
                         if (t.Name.Equals(g))
                         {
-                            final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                            final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista));
                         }
                     }
                 }

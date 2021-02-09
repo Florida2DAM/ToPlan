@@ -28,6 +28,9 @@ namespace ToPlan.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Direccion")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("EventDate")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
