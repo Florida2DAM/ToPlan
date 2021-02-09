@@ -109,6 +109,25 @@ namespace ToPlan.Controllers
             rep.Save(e);
         }
 
+        [Route("api/Eventfood")]
+        public List<Event> GetEventFood()
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.EvetsByType2("food");
+        }
+        [Route("api/Eventsport")]
+        public List<Event> GetEventSport()
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.EvetsByType2("sport");
+        }
+        [Route("api/Eventleisure")]
+        public List<Event> GetEventLeisure()
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.EvetsByType2("leisure");
+        }
+
         [Route("api/Event/AddUser")]
         public bool PostAddUserList(int id, string n)
         {
