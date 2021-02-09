@@ -34,6 +34,22 @@ namespace ToPlan.Controllers
             return rep.GetAgeUser(id);
         }
 
+        [Route("api/User/GetUserId")]
+        //Devuelve la edad de un usuario a partir de una id
+        public User GetUserId(string id)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.RecoverUserId(id);
+        }
+
+        [Route("api/User/GetUserName")]
+        //Devuelve la edad de un usuario a partir de una id
+        public User GetUserName(string name)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.RecoverUserName(name);
+        }
+
         [Route("api/User/CheckMail")]
         //Devuelve true si es correcto el email y false si es incorrecto
         public bool GetCheckMail(string m)

@@ -103,6 +103,38 @@ namespace ToPlan.Models
             }
         }
 
+        internal User RecoverUserId(string id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User u;
+            try
+            {
+                u = context.Users.Single(v => v.UserId.Equals(id.ToLower()));
+                return u;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
+                return null;
+            }
+        }
+
+        internal User RecoverUserName(string name)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User u;
+            try
+            {
+                u = context.Users.Single(v => v.Name.Equals(name.ToLower()));
+                return u;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
+                return null;
+            }
+        }
+
         internal string[] RecoverPreferences(string id)
         {
             ToPlanContext context = new ToPlanContext();
