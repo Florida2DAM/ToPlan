@@ -35,6 +35,8 @@ namespace ToPlan.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+            TypePlansRepository rep = new TypePlansRepository();
+            rep.DeleteType(id);
         }
     }
 }
