@@ -15,7 +15,6 @@ namespace ToPlan.Models
         public string Preferences { get; set; }
         public bool Admin { get; set; }
 
-        public List<Event> Events { get; set; }
 
         public User(string id, string n, string s, string p, string f, string pre)
         {

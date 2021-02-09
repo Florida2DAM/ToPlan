@@ -10,7 +10,7 @@ namespace ToPlan.Models
         public int TypePlanId { get; set; }
         public string Name { get; set; }
         public string Subtype { get; set; }
-        public List<Event> Events { get; set; }
+
 
         public TypePlan(string n, string s)
         {

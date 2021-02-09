@@ -18,9 +18,7 @@ namespace ToPlan.Models
         public string Direccion { get; set; }
 
         public string UserId { get; set; }
-        public User User { get; set; }
         public int TypePlanId { get; set; }
-        public TypePlan TypePlans { get; set; }
 
         public Event(string ed, string c, string p, int t, string d, int m, string ce)
         {

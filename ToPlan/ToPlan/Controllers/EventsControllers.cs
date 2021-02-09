@@ -113,7 +113,8 @@ namespace ToPlan.Controllers
         public List<Event> GetEventFood()
         {
             EventsRepository rep = new EventsRepository();
-            return rep.EvetsByType2("food");
+            List<Event> lista = rep.EvetsByType2("food");
+            return lista;
         }
         [Route("api/Eventsport")]
         public List<Event> GetEventSport()
