@@ -9,7 +9,7 @@ namespace ToPlan.Controllers
 {
     public class TypesPlanController : ApiController
     {
-        // GET api/values
+        // Devuelve una lista con los tipos de planes
         [Route("api/TypePlan/List")]
         public List<TypePlan> GetListTypes()
         {
@@ -26,13 +26,15 @@ namespace ToPlan.Controllers
         }
 
         // Modifica un subtipo
+        [Route("api/TypePlan")]
         public void Put(int id, string n, string s)
         {
             TypePlansRepository rep = new TypePlansRepository();
             rep.UpdateType(id, n, s);
         }
 
-        // DELETE api/values/5
+        // Borra un subtipo
+        [Route("api/TypePlan")]
         public void Delete(int id)
         {
             TypePlansRepository rep = new TypePlansRepository();
