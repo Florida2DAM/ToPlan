@@ -14,8 +14,7 @@ namespace ToPlan.Models
             ToPlanContext context = new ToPlanContext();
             try
             {
-                e.ListMembers = e.UserId;
-                context.Events.Add(e);
+                context.Events.Add(new Event(e.EventDate,e.City,e.Province,e.TypePlanId,e.Description,e.MaxMembers,e.UserId, e.Direccion));
                 context.SaveChanges();
             }
             catch (Exception a)
