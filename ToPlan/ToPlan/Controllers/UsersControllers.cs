@@ -127,6 +127,13 @@ namespace ToPlan.Controllers
             UsersRepository rep = new UsersRepository();
             rep.BecomeAdmin(id);
         }
+        [Route("api/User/NewMail")]
+        //Añade permisos de administrador un usuario
+        public bool PutMail(string id)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.AddMail(id);
+        }
 
         [Route("api/User/AdminF")]
         //Elimina permisos de administrador un usuario

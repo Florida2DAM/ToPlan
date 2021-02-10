@@ -9,7 +9,7 @@ namespace ToPlan.Models
 {
     public class UsersRepository
     {
-        public string[] emails = { "@gmail.com", "@outlook.com", "@hotmail.com", "@floridauniversitaria.es" };
+        private List<string> emails = new List<string>{ "@gmail.com", "@outlook.com", "@hotmail.com", "@floridauniversitaria.es" };
         internal void Save(User u)
         {
             ToPlanContext context = new ToPlanContext();
@@ -254,7 +254,7 @@ namespace ToPlan.Models
         internal bool CheckMail(string mail)
         {
             bool aux = false;
-            for (int i = 0; i < emails.Length; i++)
+            for (int i = 0; i < emails.Count; i++)
             {
                 if (mail.EndsWith(emails[i]))
                 {
@@ -263,6 +263,19 @@ namespace ToPlan.Models
             }
             return aux;
 
+        }
+
+        internal bool AddMail(string m)
+        {
+            if (CheckMail(m))
+            {
+                return false;
+            }
+            else
+            {
+                emails.Add(m);
+                return true;
+            }
         }
 
         internal bool CheckAdmin(string id)

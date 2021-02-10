@@ -18,6 +18,13 @@ namespace ToPlan.Controllers
             bool aux = rep.CheckEventId(id);
             return aux;
         }
+        [Route("api/Event/CheckType")]
+        public bool GetCheckType(string id)
+        {
+            EventsRepository rep = new EventsRepository();
+            bool aux = rep.CheckType(id);
+            return aux;
+        }
         [Route("api/Event/CheckUser")]
         //Devuelve true si un usuario está apuntado a un evento especifico.
         public bool GetCheckUser(int id, string n)
@@ -109,24 +116,12 @@ namespace ToPlan.Controllers
             rep.Save(e);
         }
 
-        [Route("api/Eventfood")]
-        public List<Event> GetEventFood()
+        [Route("api/Eventtype")]
+        public List<Event> GetEventFood(string id)
         {
             EventsRepository rep = new EventsRepository();
-            List<Event> lista = rep.EvetsByType2("food");
+            List<Event> lista = rep.EvetsByType2(id);
             return lista;
-        }
-        [Route("api/Eventsport")]
-        public List<Event> GetEventSport()
-        {
-            EventsRepository rep = new EventsRepository();
-            return rep.EvetsByType2("sport");
-        }
-        [Route("api/Eventleisure")]
-        public List<Event> GetEventLeisure()
-        {
-            EventsRepository rep = new EventsRepository();
-            return rep.EvetsByType2("leisure");
         }
 
         [Route("api/Event/AddUser")]
@@ -156,6 +151,13 @@ namespace ToPlan.Controllers
         {
             EventsRepository rep = new EventsRepository();
             rep.UpdateEventType(id, t);
+        }
+
+        [Route("api/Event/AddType")]
+        public bool PutAddType(string id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.AddType(id);
         }
 
 

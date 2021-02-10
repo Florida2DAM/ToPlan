@@ -8,6 +8,7 @@ namespace ToPlan.Models
 {
     public class EventsRepository
     {
+        private List<string> types = new List<string>{ "food", "leisure", "gastronomy"};
         internal void Save(Event e)
         {
             ToPlanContext context = new ToPlanContext();
@@ -484,6 +485,31 @@ namespace ToPlan.Models
             {
                 Debug.WriteLine("Error de conexion:");
                 return null;
+            }
+        }
+
+        internal bool CheckType(string t)
+        {
+            bool aux = false;
+            for(int i = 0;i< types.Count; i++)
+            {
+                if (types[i].Equals(t.ToLower()))
+                {
+                    aux = true;
+                }
+            }
+            return aux;
+        }
+        internal bool AddType(string t)
+        {
+            if (CheckType(t))
+            {
+                return false;
+            }
+            else
+            {
+                types.Add(t.ToLower());
+                return true;
             }
         }
     }
