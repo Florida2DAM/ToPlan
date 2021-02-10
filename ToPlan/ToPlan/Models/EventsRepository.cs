@@ -361,6 +361,8 @@ namespace ToPlan.Models
                 if ((aux.Length + 1) < e1.MaxMembers)
                 {
                     e1.ListMembers = e1.ListMembers + ";" + e;
+                    context.Events.Update(e1);
+                    context.SaveChanges();
                     return true;
                 }
                 else
@@ -389,7 +391,7 @@ namespace ToPlan.Models
                 {
                     if (!aux[i].Equals(e.ToLower()))
                     {
-                        if (i == 0)
+                        if (e1.ListMembers.Equals(""))
                         {
                             e1.ListMembers = aux[i];
                         }
@@ -397,6 +399,8 @@ namespace ToPlan.Models
                         {
                             e1.ListMembers = e1.ListMembers + ";" + aux[i];
                         }
+                        context.Events.Update(e1);
+                        context.SaveChanges();
                         aux2 = true;
                     }
                 }
