@@ -14,14 +14,8 @@ namespace ToPlan.Models
         {
             ToPlanContext context = new ToPlanContext();
             try
-            {
-                string aux = "";
-                for(int i =0;i< u.Preferences.Length; i++)
-                {
-                    aux = aux + u.Preferences[i];
-                }
-                
-                context.Users.Add(new User(u.UserId,u.Name,u.Surname,u.Password,u.FechaNacimiento,aux));
+            {                
+                context.Users.Add(u);
                 context.SaveChanges();
             }
             catch (Exception e)
