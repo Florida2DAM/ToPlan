@@ -15,7 +15,13 @@ namespace ToPlan.Models
             ToPlanContext context = new ToPlanContext();
             try
             {
-                context.Users.Add(u);
+                string aux = "";
+                for(int i =0;i< u.Preferences.Length; i++)
+                {
+                    aux = aux + u.Preferences[i];
+                }
+                
+                context.Users.Add(new User(u.UserId,u.Name,u.Surname,u.Password,u.FechaNacimiento,aux));
                 context.SaveChanges();
             }
             catch (Exception e)
@@ -119,13 +125,13 @@ namespace ToPlan.Models
             }
         }
 
-        internal User RecoverUserName(string name)
+        internal List<User> RecoverUserName(string name)
         {
             ToPlanContext context = new ToPlanContext();
-            User u;
+            List<User> u = new List<User>();
             try
             {
-                u = context.Users.Single(v => v.Name.Equals(name.ToLower()));
+                u = context.Users.Where(v => v.Name.Equals(name.ToLower())).ToList();
                 return u;
             }
             catch (Exception e)
