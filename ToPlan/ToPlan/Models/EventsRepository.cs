@@ -8,7 +8,7 @@ namespace ToPlan.Models
 {
     public class EventsRepository
     {
-        private List<string> types = new List<string>{ "food", "leisure", "gastronomy"};
+        private List<string> types = new List<string>{ "food", "leisure", "sport"};
         internal void Save(Event e)
         {
             ToPlanContext context = new ToPlanContext();
