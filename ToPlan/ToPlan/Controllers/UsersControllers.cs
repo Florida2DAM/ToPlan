@@ -126,7 +126,7 @@ namespace ToPlan.Controllers
             rep.BecomeAdmin(id);
         }
         [Route("api/User/NewMail")]
-        //Añade permisos de administrador un usuario
+        //Añade otro valor a los mails permitidos
         public bool PutMail(string id)
         {
             UsersRepository rep = new UsersRepository();
@@ -142,10 +142,10 @@ namespace ToPlan.Controllers
         }
         [Route("api/User/Password")]
         //Modifica la contraseña de un usuario a partir de su id
-        public void PutPassword(string id, string nid)
+        public void PutPassword(string id, string p)
         {
             UsersRepository rep = new UsersRepository();
-            rep.ChangePassword(id,nid);
+            rep.ChangePassword(id,p);
         }
 
         [Route("api/User")]
