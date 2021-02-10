@@ -241,12 +241,12 @@ namespace ToPlan.Models
             User u;
             User u2;
             string[] aux3;
-            List<string> lista = new List<string>();
             try
             {
                 aux2 = context.Events.ToList();
                 for (int i = 0; i < aux2.Count; i++)
                 {
+                    List<string> lista = new List<string>();
                     t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
                     u = context.Users.Single(p => p.UserId == aux2[i].UserId);
                     date = DateTime.Parse(aux2[i].EventDate);
