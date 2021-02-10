@@ -20,7 +20,7 @@ namespace ToPlan.Models
         public string UserId { get; set; }
         public int TypePlanId { get; set; }
 
-        public Event(string ed, string c, string p, int t, string d, int m, string ce)
+        public Event(string ed, string c, string p, int t, string d, int m, string ce, string dir)
         {
             this.EventDate = ed;
             this.City = c;
@@ -28,8 +28,9 @@ namespace ToPlan.Models
             this.Description = d;
             this.MaxMembers = m;
             this.UserId = ce;
-            this.ListMembers = "";
+            this.ListMembers = ce;
             this.TypePlanId = t;
+            this.Direccion = dir;
         }
 
         public Event() { }
