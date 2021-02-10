@@ -94,12 +94,14 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event1")]
+        //Devuelve un EventDTO
         public EventDTO GetEvent1(int id)
         {
             EventsRepository rep = new EventsRepository();
             return rep.Even1(id);
         }
         [Route("api/Event2")]
+        //Devuelve un EventDTO2
         public EventDTO2 GetEvent2(int id)
         {
             EventsRepository rep = new EventsRepository();
@@ -107,6 +109,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/Type")]
+        //Devuelve la id del tipo del evento
         public int GetType(int id)
         {
             EventsRepository rep = new EventsRepository();
@@ -114,6 +117,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event")]
+        //Añade un evento
         public void PostEvent([FromBody] Event e)
         {
             EventsRepository rep = new EventsRepository();
@@ -121,6 +125,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Eventtype")]
+        //Devuelve una lista con los eventos segun el tipo
         public List<Event> GetEventFood(string id)
         {
             EventsRepository rep = new EventsRepository();
@@ -129,14 +134,14 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/AddUser")]
-        public bool PostAddUserList(int id, string n)
+        public bool PutAddUserList(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
             return rep.AddUser(id, n);
         }
 
         [Route("api/Event/RemoveUser")]
-        public bool PostRemoveUserList(int id, string n)
+        public bool PutRemoveUserList(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
             return rep.RemoveUser(id, n);
