@@ -15,6 +15,7 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-orange/theme.css';
 import 'primereact/resources/primereact.css';
 import {Events} from "./components/Events/Events";
+import {TypePlan} from "./components/TypePlan/TypePlan";
 
 
 
@@ -27,6 +28,7 @@ function App() {
                   <nav className={"navBar"}>
                       <Link className={"link"} to="/users">Users &nbsp; &nbsp;</Link><br/>
                       <Link className={"link"} to="/events">Events</Link>
+                      <Link className={"link"} to="/TypePlan">TypePlan</Link>
                   </nav>
                   <Switch>
                       <Route path="/users">
@@ -35,7 +37,9 @@ function App() {
                       <Route path="/events">
                           <Events/>
                       </Route>
-
+                      <Route path="/TypePlan">
+                          <TypePlan/>
+                      </Route>
 
                   </Switch>
               </div>
