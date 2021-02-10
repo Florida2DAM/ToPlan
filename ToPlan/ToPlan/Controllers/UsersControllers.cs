@@ -36,18 +36,22 @@ namespace ToPlan.Controllers
 
         [Route("api/User/GetUserId")]
         //Devuelve la edad de un usuario a partir de una id
-        public User GetUserId(string id)
+        public List<User> GetUserId(string id)
         {
             UsersRepository rep = new UsersRepository();
-            return rep.RecoverUserId(id);
+            List<User> lista = new List<User>();
+            lista.Add(rep.RecoverUserId(id));
+            return lista;
         }
 
         [Route("api/User/GetUserName")]
         //Devuelve la edad de un usuario a partir de una id
-        public User GetUserName(string name)
+        public List<User> GetUserName(string name)
         {
             UsersRepository rep = new UsersRepository();
-            return rep.RecoverUserName(name);
+            List<User> lista = new List<User>();
+            lista.Add(rep.RecoverUserName(name));
+            return lista;
         }
 
         [Route("api/User/CheckMail")]
