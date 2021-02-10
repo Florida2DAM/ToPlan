@@ -134,6 +134,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/AddUser")]
+        //Añadimos a un USer a un evento
         public bool PutAddUserList(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
@@ -141,6 +142,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/RemoveUser")]
+        //Quitamos a un User de un evento
         public bool PutRemoveUserList(int id, string n)
         {
             EventsRepository rep = new EventsRepository();
@@ -149,6 +151,7 @@ namespace ToPlan.Controllers
 
 
         [Route("api/Event")]
+        //Modificamos los datos de un evento
         public void Put(int id, string f, string c, string p, string d, int max, string dir)
         {
             EventsRepository rep = new EventsRepository();
@@ -156,6 +159,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/Type")]
+        //Modificamos el tipo de un evento
         public void PutEventType(int id, int t)
         {
             EventsRepository rep = new EventsRepository();
@@ -163,6 +167,7 @@ namespace ToPlan.Controllers
         }
 
         [Route("api/Event/AddType")]
+        //Añade un tipo valido 
         public bool PutAddType(string id)
         {
             EventsRepository rep = new EventsRepository();
@@ -171,6 +176,7 @@ namespace ToPlan.Controllers
 
 
         [Route("api/Event")]
+        //Borra un evento
         public void DeleteEvent(int id)
         {
             EventsRepository rep = new EventsRepository();
