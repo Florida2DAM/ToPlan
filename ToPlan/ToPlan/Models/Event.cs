@@ -28,7 +28,7 @@ namespace ToPlan.Models
             this.Description = d;
             this.MaxMembers = m;
             this.UserId = ce;
-            this.ListMembers = "";
+            this.ListMembers = ce;
             this.TypePlanId = t;
         }
 

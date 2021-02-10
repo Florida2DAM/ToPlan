@@ -19,6 +19,7 @@ namespace ToPlan.Controllers
             return aux;
         }
         [Route("api/Event/CheckType")]
+        //Devuelve true si el tipo de evento es valido
         public bool GetCheckType(string id)
         {
             EventsRepository rep = new EventsRepository();
@@ -71,18 +72,21 @@ namespace ToPlan.Controllers
             return rep.EventsUser(id);
         }
         [Route("api/Event/Food")]
+        //Devuelve una lista de EventDTO3 de tipo food
         public List<EventDTO3> GetListEventsGastronomy()
         {
             EventsRepository rep = new EventsRepository();
             return rep.EventsType("food");
         }
         [Route("api/Event/Sport")]
+        //Devuelve una lista de EventDTO3 de tipo sport
         public List<EventDTO3> GetListEventsSport()
         {
             EventsRepository rep = new EventsRepository();
             return rep.EventsType("sport");
         }
         [Route("api/Event/Leisure")]
+        //Devuelve una lista de EventDTO3 de tipo leisure
         public List<EventDTO3> GetListEventsLeisure()
         {
             EventsRepository rep = new EventsRepository();
