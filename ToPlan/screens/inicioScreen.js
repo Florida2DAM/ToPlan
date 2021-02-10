@@ -56,7 +56,12 @@ export class InicioScreen extends Component {
 
     };
     nextScreen = () => {
+        //this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('Details')
+    }
+    loginScreen = () => {
         this.props.navigation.navigate('Login');
+        //this.props.navigation.navigate('Details')
     }
     exploreScreen = () => {
         this.props.navigation.navigate('Explore');
@@ -64,13 +69,17 @@ export class InicioScreen extends Component {
     userScreen = () => {
         this.props.navigation.navigate('User');
     }
+    createPlanScreen = () => {
+        this.props.navigation.navigate('CreatePlan');
+
+    }
 
     render() {
         return (
             <>
                 <View style={styleLogin.loginContainer}>
                     <View style={styleLogin.logoContainer}>
-                        <Pressable onPress={this.nextScreen}><Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/></Pressable>
+                        <Pressable onPress={this.loginScreen}><Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/></Pressable>
 
                         <Text h3>ToPlan</Text>
                     </View>
@@ -82,7 +91,7 @@ export class InicioScreen extends Component {
                             renderItem={({item}) => (<Pressable onPress={this.nextScreen}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
-                    <View style={styleLogin.navContainer}><NavBar user={this.userScreen} find={this.exploreScreen}/></View>
+                    <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>
                 </View>
             </>
         );

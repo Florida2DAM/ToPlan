@@ -7,11 +7,11 @@ import {
   ScrollView,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { NavBar } from './Components/navBar/NavBar';
-import ButtonPlan from './Components/button/ButtonPlan';
+import { NavBar } from '../Components/navBar/NavBar';
+import ButtonPlan from '../Components/button/ButtonPlan';
 
 
-export class PlanDetails extends Component {
+export class PlanDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ export class PlanDetails extends Component {
             <View style={styleDetails.loginContainer}>
               <View style={styleDetails.logoContainer}>
                 <View style={styleDetails.logoSubContainer}>
-                  <Image style={styleDetails.logo} source={require('./Assets/LogoSimple.png')} />
+                  <Image style={styleDetails.logo} source={require('../Assets/LogoSimple.png')} />
                 </View>
                 <View style={styleDetails.separador}>
                   <Text h3>PLAN DETAILS</Text>
@@ -49,15 +49,15 @@ export class PlanDetails extends Component {
                   <View>
                     <View>
                       <View style={styleDetails.planOption}>
-                        <Image style={styleDetails.Icons} source={require('./Assets/location.png')} />
+                        <Image style={styleDetails.Icons} source={require('../Assets/location.png')} />
                         <Text style={styleDetails.inputPanels}>{this.state.planLocation}</Text>
                       </View>
                       <View style={styleDetails.planOption}>
-                        <Image style={styleDetails.Icons} source={require('./Assets/clock.png')} />
+                        <Image style={styleDetails.Icons} source={require('../Assets/clock.png')} />
                         <Text style={styleDetails.inputPanels}>{this.state.planTime}</Text>
                       </View>
                       <View style={styleDetails.planOption}>
-                        <Image style={styleDetails.Icons} source={require('./Assets/cine.png')} />
+                        <Image style={styleDetails.Icons} source={require('../Assets/cine.png')} />
                         <Text style={styleDetails.inputPanels}>{this.state.planSubtype}</Text>
                       </View>
                     </View>
@@ -68,15 +68,15 @@ export class PlanDetails extends Component {
                       {/* Aqui los componentes de las personas en una flatlist primero hacer pruebas*/}
                       <View>
                         <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('./Assets/user.png')} />
+                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
                           <Text style={styleDetails.peopleText}>Adrián Pérez</Text>
                         </View>
                         <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('./Assets/user.png')} />
+                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
                           <Text style={styleDetails.peopleText}>Rafa Olaya</Text>
                         </View>
                         <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('./Assets/user.png')} />
+                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
                           <Text style={styleDetails.peopleText}>Jordi Cervera</Text>
                         </View>
 
@@ -207,4 +207,4 @@ const styleDetails = StyleSheet.create({
   },
 });
 
-export default PlanDetails;
+export default PlanDetailsScreen;

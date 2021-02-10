@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     containerUser: {
-        backgroundColor: 'lightgray',
+        backgroundColor: '#dddbdc',
         display:'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',

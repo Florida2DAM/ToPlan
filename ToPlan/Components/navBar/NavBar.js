@@ -18,7 +18,7 @@ export class NavBar extends React.Component {
                 <Pressable onPress={this.props.create}>
                     <Image
                     style={styles.icons}
-                    source={require('../../Assets/home.png')}/>
+                    source={require('../../Assets/plus.png')}/>
                 </Pressable>
                 <Pressable onPress={this.props.user}>
                     <Image

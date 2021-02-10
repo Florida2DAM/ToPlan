@@ -9,6 +9,8 @@ import LoginScreen from './screens/LoginScreen';
 import ExploreScreen from './screens/ExploreScreen';
 import UserScreen from './screens/UserScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import CreatePlanScreen from './screens/CreatePlan';
+import PlanDetailsScreen from './screens/PlanDetails';
 
 const pilaNavegacion = createStackNavigator();
 
@@ -28,6 +30,9 @@ export class App extends Component {
                 <pilaNavegacion.Screen name="Explore" component={ExploreScreen} />
                 <pilaNavegacion.Screen name="User" component={UserScreen} />
                 <pilaNavegacion.Screen name="Register" component={RegisterScreen} />
+                <pilaNavegacion.Screen name="Details" component={PlanDetailsScreen} />
+                <pilaNavegacion.Screen name="CreatePlan" component={CreatePlanScreen} />
+
             </pilaNavegacion.Navigator>
         </NavigationContainer>
   );

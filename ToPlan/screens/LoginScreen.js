@@ -20,6 +20,18 @@ export class LoginScreen extends Component {
             console.log("Error de conexion con la API")
         })
     }
+    transitionScreen = () => {
+
+        // añadir codigo para comprar si el usuario existe en la base de datos.
+
+        alert('Loggin OK');
+
+
+    }
+    registerScreen = () => {
+        this.props.navigation.navigate('Register');
+    }
+
 
     render() {
         return (
@@ -34,7 +46,12 @@ export class LoginScreen extends Component {
                             <Input placeholder='Password' secureTextEntry={true}
                                    leftIcon={<Icon name='lock' size={24} color='black'/>}/>
                         </View>
-                        <ButtonPlan size={300} topmargin={10} title={"Login"} ></ButtonPlan>
+                        <View style={styleLogin.buttonsContainer}>
+                            <View><ButtonPlan metodo={this.transitionScreen} size={140} topmargin={10} title={'Login'} /></View>
+                            <View><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10} title={'Register'} /></View>
+
+                        </View>
+
                     </View>
                 </ScrollView>
             </>
@@ -56,9 +73,14 @@ const styleLogin = StyleSheet.create({
     inputContainer: {
         marginTop: 50,
         width: '80%',
-        // #dddbdc
     },
-    logo: {},
+    buttonsContainer: {
+        display:'flex',
+        width: '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+
+    },
 });
 
 export default LoginScreen;

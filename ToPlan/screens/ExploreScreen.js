@@ -5,14 +5,14 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import {Button, Text} from 'react-native-elements';
+import {Text} from 'react-native-elements';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 
 const urlEventsBySport = 'http://3.95.8.159:44360/api/Event/Sport';
 const urlEventsByLeisure = 'http://3.95.8.159:44360/api/Event/Leisure';
-const urlEventsByGastronomy = 'http://3.95.8.159:44360/api/Event/Gastronomy';
+const urlEventsByGastronomy = 'http://3.95.8.159:44360/api/Event/Food';
 
 export class ExploreScreen extends Component {
     constructor(props) {
@@ -99,14 +99,24 @@ export class ExploreScreen extends Component {
         this.setState({gastronomyVisibility: 'flex'});
     }
     showSports = () => {
-        this.setState({sporVisibility: 'flex'});
+        this.setState({sportVisibility: 'flex'});
         this.setState({leisureVisibility: 'none'});
         this.setState({gastronomyVisibility: 'none'});
     }
     showLeisure = () => {
-        this.setState({sporVisibility: 'none'});
+        this.setState({sportVisibility: 'none'});
         this.setState({leisureVisibility: 'flex'});
         this.setState({gastronomyVisibility: 'none'});
+    }
+    exploreScreen = () => {
+        this.props.navigation.navigate('Explore');
+    }
+    userScreen = () => {
+        this.props.navigation.navigate('User');
+    }
+    createPlanScreen = () => {
+        this.props.navigation.navigate('CreatePlan');
+
     }
 
     render() {
@@ -152,7 +162,7 @@ export class ExploreScreen extends Component {
                             renderItem={({item}) => (<EventMiddle element={item}/>)}>
                         </FlatList>
                     </View>
-                    <View style={styleLogin.navContainer}><NavBar/></View>
+                    <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>
                 </View>
             </>
         );
@@ -182,7 +192,7 @@ const styleLogin = StyleSheet.create({
         flex: 3,
 
 
-        // #dddbdc
+
     },
     navContainer: {
         flex: 0,

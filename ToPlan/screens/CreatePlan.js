@@ -7,11 +7,11 @@ import {
   ScrollView,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { NavBar } from './Components/navBar/NavBar';
-import ButtonPlan from './Components/button/ButtonPlan';
+import { NavBar } from '../Components/navBar/NavBar';
+import ButtonPlan from '../Components/button/ButtonPlan';
 
 
-export class CreatePlan extends Component {
+export class CreatePlanScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ export class CreatePlan extends Component {
         <View style={styleCreate.createContainer}>
           <View style={styleCreate.logoContainer}>
             <View style={styleCreate.logoSubContainer}>
-              <Image style={styleCreate.logo} source={require('./Assets/LogoSimple.png')} />
+              <Image style={styleCreate.logo} source={require('../Assets/LogoSimple.png')} />
             </View>
             <View style={styleCreate.separador}>
               <Text h3>CREATE PLAN</Text>
@@ -40,27 +40,27 @@ export class CreatePlan extends Component {
             <ScrollView>
               <View style={[styleCreate.inputContainer, styleCreate.shadow]}>
                 <View style={styleCreate.menuContainer}>
-                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('./Assets/FORK.png')} /></View>
-                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('./Assets/tenis.png')} /></View>
-                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('./Assets/ocio.png')} /></View>
+                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('../Assets/FORK.png')} /></View>
+                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('../Assets/tenis.png')} /></View>
+                  <View style={styleCreate.menuSeparator}><Image style={[styleCreate.Icons, styleCreate.TopIcons]} source={require('../Assets/ocio.png')} /></View>
                 </View>
                 <View>
                   {/* Hacer un componente de esto pero me saltaban errores al crearlo */}
                   <View>
                     <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('./Assets/location.png')} />
+                      <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
                       <TextInput
                         style={styleCreate.inputPanels}
                       />
                     </View>
                     <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('./Assets/clock.png')} />
+                      <Image style={styleCreate.Icons} source={require('../Assets/clock.png')} />
                       <TextInput
                         style={styleCreate.inputPanels}
                       />
                     </View>
                     <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('./Assets/tenis.png')} />
+                      <Image style={styleCreate.Icons} source={require('../Assets/tenis.png')} />
                       <TextInput
                         style={styleCreate.inputPanels}
                       />
@@ -166,4 +166,4 @@ const styleCreate = StyleSheet.create({
   }
 });
 
-export default CreatePlan;
+export default CreatePlanScreen;
