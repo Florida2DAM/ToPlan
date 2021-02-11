@@ -24,8 +24,9 @@ namespace ToPlan.Models
 
     public class TypePlanDTO
     {
-        public int value { get; set; }
         public string label { get; set; }
+        public int value { get; set; }
+        
 
         public TypePlanDTO(int i, string t)
         {
