@@ -27,10 +27,6 @@ export class Events extends Component {
             TypePlanName: '',
             Members: '',
             UserId: '',
-            type: [
-                {label: 'Sport', code: 'EventSport'},
-                {label: 'Leisure', code: 'EventLeisure'},
-                {label: 'Food', code: 'EventFood'}],
             typeName: '',
             Data: '',
             isHidden: false,
@@ -65,8 +61,9 @@ export class Events extends Component {
     onSubmitInsertEvent = () => {
         const Type = this.state.TypePlanId[0];
         const TypePlanId = parseInt(Type);
+        console.log(TypePlanId);
 
-        axios.post('http://3.95.8.159:44360/api/Event', {
+        /*axios.post('http://3.95.8.159:44360/api/Event', {
             UserId: this.state.UserId,
             EventDate: this.state.date,
             City: this.state.city,
@@ -81,7 +78,7 @@ export class Events extends Component {
                 console.log(response);
             }, (error) => {
                 console.log(error);
-            })
+            })*/
     }
 
     onSubmitUpdate = () => {
@@ -172,13 +169,13 @@ export class Events extends Component {
         let aux2 = aux.split(" ", 1).toString();
 
         this.setState({TypePlanName: aux2});
-        this.setState({Data:event.target.value});
+        this.setState({Data: event.target.value});
     }
 
     checkerEvent = () => {
         const promise = axios.get('http://3.95.8.159:44360/api/Event/Check?id=' + this.state.EventId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
-                if (resolveResult.data == true) {
+                if (resolveResult.data === true) {
                     console.log(resolveResult.data);
                     this.setState({isHidden: !this.state.isHidden})
 
@@ -201,38 +198,20 @@ export class Events extends Component {
     }
 
     filterType = () => {
-
-        if (this.state.TypePlanName == 'sport') {
-            const promise = axios.get('http://3.95.8.159:44360/api/Eventsport', {headers: {'Access-Control-Allow-Origin': '*'}})
-                .then(response => {
-                    this.setState({Events: response.data})
-                    console.log("filter: " + response)
-                }).catch(e => {
-                    console.log(e)
-
-                });
-        } else if (this.state.TypePlanName == 'leisure') {
-            const promise = axios.get('http://3.95.8.159:44360/api/Eventleisure', {headers: {'Access-Control-Allow-Origin': '*'}})
-                .then(response => {
-                    this.setState({Events: response.data})
-                    console.log("filter: " + response)
-                }).catch(e => {
-                    console.log(e)
-
-                });
-        } else if (this.state.TypePlanName == 'food') {
-            const promise = axios.get('http://3.95.8.159:44360/api/Eventfood', {headers: {'Access-Control-Allow-Origin': '*'}})
-                .then(response => {
-                    this.setState({Events: response.data})
-                    console.log("filter: " + response)
-                }).catch(e => {
-                    console.log(e)
-
-                });
-        } else {
-            alert("Error");
-        }
-
+        axios.get('http://3.95.8.159:44360/api/Event/CheckType?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then((respuesta) => {
+            if (respuesta.data === true) {
+                axios.get('http://3.95.8.159:44360/api/Eventtype?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then
+                (response => {
+                        this.setState({Events: response.data})
+                    console.log(response.data);
+                    }
+                )
+            } else {
+                alert("No existe ese Tipo de Plan");
+            }
+        }).catch(e => {
+            console.log("Error de conexion con la API");
+        });
     }
 
     render() {
@@ -294,7 +273,7 @@ export class Events extends Component {
                                         />
 
                                         <InputMask id="date" type={'text'} mask="9999-99-99" value={this.state.date}
-                                                   placeholder="yyyy/mm/dd" slotChar="yyyy/mm/dd"
+                                                   placeholder="Date Event" slotChar="yyyy/mm/dd"
                                                    onChange={this.onInputDate}/>
 
                                         <InputText placeholder={"Event Direction"} type={'text'}

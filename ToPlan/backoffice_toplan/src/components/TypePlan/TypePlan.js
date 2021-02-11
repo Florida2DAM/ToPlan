@@ -14,14 +14,15 @@ import {InputTextarea} from "primereact/inputtextarea";
 import {InputMask} from "primereact/inputmask";
 
 
-export class TypePlan extends Component{
+export class TypePlan extends Component {
 
     constructor(props) {
         super(props);
-        this.state ={
-            TypePlans:[],
-            Data:'',
+        this.state = {
+            TypePlans: [],
+            Data: '',
         }
+        this.onInputChange = this.onInputChange.bind(this);
     }
 
     componentDidMount() {
@@ -33,32 +34,108 @@ export class TypePlan extends Component{
         }));
     }
 
-    onInputTypeFilter = (event)=>{
-        this.setState({Data:event.target.value});
+    onInputTypeFilter = (event) => {
+        this.setState({Data: event.target.value});
+    }
+
+    onInputChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    onSubmitUpdate = () => {
+
+        const promiseUpdate = axios.put("http://3.95.8.159:44360/api/TypesPlan/id?=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
+        ).then(response => {
+            console.log("Update succesfully: " + response)
+        }).catch(e => {
+            console.log(e);
+        });
+
+    }
+    onSubmitDelete = () => {
+        const promiseUpdate = axios.delete("http://3.95.8.159:44360/api/TypesPlan/id?=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
+        ).then(response => {
+            console.log("Update succesfully: " + response)
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+    onSubmitInsert = () => {
+        axios.get('http://3.95.8.159:44360/api/Event/CheckType?id=' + this.state.TypeName, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
+            (response) => {
+                if (response.data === true) {
+                    axios.post('http://3.95.8.159:44360/api/TypePlan', {
+                        Name: this.state.NameType,
+                        Subtype: this.state.Subtype
+                    }).catch(e => {
+                        console.log(e);
+                    });
+                } else {
+                    alert("No existe ese Tipo de Plan");
+                }
+            }).catch(e => {
+                console.log(e);
+            }
+        )
     }
 
     render() {
-        return(
+        return (
             <div>
                 <div className="groupUpdate">
                     <div className="tabview-demo">
                         <div className="card">
                             <TabView>
                                 <TabPanel header="Modificar">
-
+                                    <div className="update">
+                                        <h5>Update TypePlan</h5>
+                                        <InputText placeholder={"TypeId"} type={'number'}
+                                                   name="IdTypePlan"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <InputText placeholder={"Type Name"} type={'text'}
+                                                   name="TypeName"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <InputText placeholder={"Type Subtype"} type={'text'}
+                                                   name="Subtype"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <p>
+                                            <Button label={"Update Event"} onClick={this.onSubmitUpdate}/>
+                                        </p>
+                                    </div>
                                 </TabPanel>
                                 <TabPanel header="Insertar">
-
+                                    <div className="update">
+                                        <h5>Insert TypePlan</h5>
+                                        <InputText placeholder={"Type Name"} type={'text'}
+                                                   name="NameType"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <InputText placeholder={"Type Subtype"} type={'text'}
+                                                   name="TypeSub"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <p>
+                                            <Button label={"Insert TypePlan"} onClick={this.onSubmitInsert}/>
+                                        </p>
+                                    </div>
                                 </TabPanel>
                                 <TabPanel header="Eliminar">
-
+                                    <div className="update">
+                                        <h5>Delete Event</h5>
+                                        <InputText placeholder={"TypeId"} type={'number'}
+                                                   name="IdTypePlan"
+                                                   onChange={this.onInputChange}
+                                        />
+                                        <p><Button label={"Delete Event"} onClick={this.onSubmitDelete}/></p>
+                                    </div>
                                 </TabPanel>
                                 <TabPanel header="Filtrar">
-                                    <div className="InputFiltrado">
-                                        <Dropdown autoWidth={true} value={this.state.Data}
-                                                  options={this.state.TypePlans.map(elem => (elem.Subtype))}
-                                                  onChange={this.onInputTypeFilter} placeholder="Select a Subtype Plan"/>
-                                    </div>
                                     <div className="DataTable">
                                         <DataTable value={this.state.TypePlans}>
                                             <Column field="TypePlanId" header="TypeId"/>
