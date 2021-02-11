@@ -3,23 +3,75 @@ import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonPlan from '../Components/button/ButtonPlan';
+import axios from 'axios';
+const urlCheckEmail ='http://3.95.8.159:44360/api/User/Check?id=';
+const urlGetUser ='http://3.95.8.159:44360/api/User/GetUserId?id=';
 
 
 
 export class LoginScreen extends Component {
-
-    query = (url, param) => {
-
-        axios.get(url + '=' + param).then((respuesta) => {
-            if (respuesta.data.length === 0) {
-                alert("ningun usuario coincide con el nombre introducido");
-            } else {
-                this.setState({users: respuesta.data});
-            }
-        }).catch(e => {
-            console.log("Error de conexion con la API")
-        })
+    constructor(props) {
+        super();
+        this.state={
+            email:'',
+            checkE:false,
+        }
     }
+
+
+
+
+    checkEmail = async (email) => {
+        let exist;
+        try {
+            axios
+                .get(urlCheckEmail+email)
+                .then(response => {
+                        return response.data;
+
+
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
+    checkPassword = async (email) => {
+        let user=[];
+        try {
+            axios
+                .get(urlGetUser+email)
+                .then(response => {
+                    //alert(response.data);
+                    user = response.data;
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+
+
+    }
+
+    login = () => {
+
+        if (this.checkEmail(this.state.email)===true) {
+            alert('existe');
+        }
+        this.setState({checkE:false});
+
+
+
+
+
+
+    }
+
     transitionScreen = () => {
 
         // añadir codigo para comprar si el usuario existe en la base de datos.
@@ -42,12 +94,12 @@ export class LoginScreen extends Component {
                             <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
                         </View>
                         <View style={styleLogin.inputContainer}>
-                            <Input placeholder='Email' leftIcon={<Icon name='user' size={24} color='black'/>}/>
+                            <Input placeholder='Email' value={this.state.email} onChangeText={(text) => this.setState({email:text})} leftIcon={<Icon name='user' size={24} color='black'/>}/>
                             <Input placeholder='Password' secureTextEntry={true}
                                    leftIcon={<Icon name='lock' size={24} color='black'/>}/>
                         </View>
                         <View style={styleLogin.buttonsContainer}>
-                            <View><ButtonPlan metodo={this.transitionScreen} size={140} topmargin={10} title={'Login'} /></View>
+                            <View><ButtonPlan metodo={this.login} size={140} topmargin={10} title={'Login'} /></View>
                             <View><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10} title={'Register'} /></View>
 
                         </View>
