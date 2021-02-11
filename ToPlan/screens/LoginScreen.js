@@ -1,54 +1,74 @@
+import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonPlan from '../Components/button/ButtonPlan';
 import axios from 'axios';
-const urlCheckEmail ='http://3.95.8.159:44360/api/User/Check?id=';
-const urlGetUser ='http://3.95.8.159:44360/api/User/GetUserId?id=';
 
+const urlCheckEmail = 'http://3.95.8.159:44360/api/User/Check?id=';
+const urlGetUser = 'http://3.95.8.159:44360/api/User/GetUserId?id=';
+const errorInputEmail = React.createRef();
+const errorInputPassword = React.createRef();
 
 
 export class LoginScreen extends Component {
+    exist: Promise<false>;
+
     constructor(props) {
         super();
-        this.state={
-            email:'',
-            checkE:false,
-        }
+        this.state = {
+            email: '',
+            verify: false,
+            user: [],
+            password: '',
+            errorEmail: '',
+            errorPassword: '',
+
+        };
     }
 
 
-
-
-    checkEmail = async (email) => {
-        let exist;
+    checkEmail = (email) => {
         try {
             axios
-                .get(urlCheckEmail+email)
+                .get(urlCheckEmail + email)
                 .then(response => {
-                        return response.data;
+                    if (response.data) {
+                        this.checkPassword(this.state.email);
 
 
+                    } else {
+                        alert('Ningun usuario existe en la base de datos');
+                    }
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     alert(error);
                 });
         } catch (error) {
             console.log(error);
         }
+        return this.exist;
 
     };
+
     checkPassword = async (email) => {
-        let user=[];
         try {
             axios
-                .get(urlGetUser+email)
+                .get(urlGetUser + email)
                 .then(response => {
-                    //alert(response.data);
-                    user = response.data;
+                    this.setState({user: response.data}, () => {
+
+                        if (this.state.password === this.state.user[0].Password) {
+                            this.transitionScreen(this.props.route.params.screen);
+                        } else {
+                            this.setState({errorPassword: 'PASWORD OR EMAIL WRONG'});
+                            errorInputPassword.current.shake();
+                        }
+                    });
+
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     alert(error);
                 });
         } catch (error) {
@@ -56,32 +76,37 @@ export class LoginScreen extends Component {
         }
 
 
-    }
+    };
+    resetError = () => {
+        this.setState({errorEmail: ''});
+        this.setState({errorPassword: ''});
+    };
 
     login = () => {
+        this.resetError();
+        if (this.state.email.length <= 10) {
+            this.setState({errorEmail:'INSERT A VALID EMAIL'});
 
-        if (this.checkEmail(this.state.email)===true) {
-            alert('existe');
+            errorInputEmail.current.shake();
+        } else if (this.state.password.length === 0) {
+            this.setState({errorPassword: 'INSERT PASSWORD'});
+            errorInputPassword.current.shake();
+        } else {
+            this.checkEmail(this.state.email);
         }
-        this.setState({checkE:false});
+    };
 
 
+    transitionScreen = (pantallaDestino) => {
 
+        this.props.navigation.navigate(pantallaDestino);
 
-
-
-    }
-
-    transitionScreen = () => {
-
-        // añadir codigo para comprar si el usuario existe en la base de datos.
-
-        alert('Loggin OK');
-
-
-    }
+    };
     registerScreen = () => {
         this.props.navigation.navigate('Register');
+    };
+    componentDidMount() {
+
     }
 
 
@@ -94,13 +119,19 @@ export class LoginScreen extends Component {
                             <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
                         </View>
                         <View style={styleLogin.inputContainer}>
-                            <Input placeholder='Email' value={this.state.email} onChangeText={(text) => this.setState({email:text})} leftIcon={<Icon name='user' size={24} color='black'/>}/>
-                            <Input placeholder='Password' secureTextEntry={true}
+                            <Input ref={errorInputEmail} placeholder='Email' value={this.state.email}
+                                   errorStyle={{color: 'red'}} errorMessage={this.state.errorEmail}
+                                   onChangeText={(text) => this.setState({email: text})}
+                                   leftIcon={<Icon name='user' size={24} color='black'/>}/>
+                            <Input ref={errorInputPassword} placeholder='Password' secureTextEntry={true}
+                                   errorStyle={{color: 'red'}} errorMessage={this.state.errorPassword}
+                                   value={this.state.password} onChangeText={(text) => this.setState({password: text})}
                                    leftIcon={<Icon name='lock' size={24} color='black'/>}/>
                         </View>
                         <View style={styleLogin.buttonsContainer}>
-                            <View><ButtonPlan metodo={this.login} size={140} topmargin={10} title={'Login'} /></View>
-                            <View><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10} title={'Register'} /></View>
+                            <View><ButtonPlan metodo={this.login} size={140} topmargin={10} title={'Login'}/></View>
+                            <View><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10}
+                                              title={'Register'}/></View>
 
                         </View>
 
@@ -127,7 +158,7 @@ const styleLogin = StyleSheet.create({
         width: '80%',
     },
     buttonsContainer: {
-        display:'flex',
+        display: 'flex',
         width: '80%',
         flexDirection: 'row',
         justifyContent: 'space-around',

@@ -6,6 +6,8 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import React, {Component} from 'react';
 import {
@@ -60,7 +62,7 @@ export class InicioScreen extends Component {
         this.props.navigation.navigate('Details')
     }
     loginScreen = () => {
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('Login',{screen:'Details'});
         //this.props.navigation.navigate('Details')
     }
     exploreScreen = () => {
@@ -88,7 +90,7 @@ export class InicioScreen extends Component {
                             data={this.state.planes}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5}}
-                            renderItem={({item}) => (<Pressable onPress={this.nextScreen}><EventMiddle element={item}/></Pressable>)}>
+                            renderItem={({item}) => (<Pressable onPress={this.loginScreen}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
                     <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>

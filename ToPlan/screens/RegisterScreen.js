@@ -14,9 +14,9 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePicker from '@react-native-community/datetimepicker';
 const errorInputEmail = React.createRef();
+const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
 const errorInputSurname = React.createRef();
-const errorInputPassword = React.createRef();
 
 
 export class RegisterScreen extends React.Component {
