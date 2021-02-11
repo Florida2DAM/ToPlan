@@ -38,6 +38,27 @@ namespace ToPlan.Models
             }
         }
 
+        internal List<TypePlanDTO> GetTypesDTO()
+        {
+            ToPlanContext context = new ToPlanContext();
+            List<TypePlan> lista = new List<TypePlan>();
+            List<TypePlanDTO> final = new List<TypePlanDTO>();
+            try
+            {
+                lista = context.TypePlans.ToList();
+                for(int i = 0; i < lista.Count; i++)
+                {
+                    final.Add(ToDTO(lista[i]));
+                }
+                return final;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
+                return null;
+            }
+        }
+
         internal void UpdateType(int id, string n, string s)
         {
             ToPlanContext context = new ToPlanContext();
@@ -67,6 +88,11 @@ namespace ToPlan.Models
             {
                 Debug.WriteLine("Error de conexion");
             }
+        }
+
+        private TypePlanDTO ToDTO(TypePlan p)
+        {
+            return new TypePlanDTO(p.TypePlanId, p.Subtype);
         }
     }
 }

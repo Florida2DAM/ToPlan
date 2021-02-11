@@ -17,6 +17,14 @@ namespace ToPlan.Controllers
             return rep.GetTypes();
         }
 
+        //Devuelve una lista con los tipos de planes en formato TypePlanDTO
+        [Route("api/TypePlan/ListDTO")]
+        public List<TypePlanDTO> GetListTypesDTO()
+        {
+            TypePlansRepository rep = new TypePlansRepository();
+            return rep.GetTypesDTO();
+        }
+
         // Inserta un nuevo tipo
         [Route("api/TypePlan")]
         public void Post([FromBody] TypePlan t)

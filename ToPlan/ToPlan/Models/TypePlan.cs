@@ -21,4 +21,16 @@ namespace ToPlan.Models
         public TypePlan() { }
 
     }
+
+    public class TypePlanDTO
+    {
+        public int value { get; set; }
+        public string label { get; set; }
+
+        public TypePlanDTO(int i, string t)
+        {
+            this.value = i;
+            this.label = t;
+        }
+    }
 }
