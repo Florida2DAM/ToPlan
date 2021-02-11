@@ -5,11 +5,16 @@ import {
   StyleSheet,
   View,
   ScrollView,
+  Pressable,
 } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text,Input } from 'react-native-elements';
 import { NavBar } from '../Components/navBar/NavBar';
 import ButtonPlan from '../Components/button/ButtonPlan';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import axios from 'axios';
 
+const urlTypes = 'http://3.95.8.159:44360/api/TypePlan/List';
 
 export class CreatePlanScreen extends Component {
   constructor(props) {
@@ -17,12 +22,45 @@ export class CreatePlanScreen extends Component {
 
     this.state = {
       location: '',
-      date: '',
+      adress: '',
+      date: new Date(Date.now()),
       activity: '',
       description: '',
+      visibleDataTimePicker: false,
+      options:[],
     }
 
   }
+  showDate = () => {
+    this.setState({ visibleDataTimePicker: true });
+  };
+  dateSelect = (e, dataNova) => {
+    this.setState({visibleDataTimePicker:false})
+    if (e.type === 'set') {
+        this.setState({date:new Date(dataNova)});
+    }
+  };
+
+  getTypes = async () =>{
+    try{
+      axios 
+        .get(urlTypes)
+        .then(response => {
+          if (response.data === null || response.data.length === 0) {
+            alert('error de conexion');
+        }else {
+            this.setState({options: response.data});
+        }
+        })
+
+    }catch (error){
+      console.log(err);
+    }
+  }
+
+  componentDidMount = () => {
+    this.getTypes(urlTypes)
+  };
 
   render() {
     return (
@@ -49,21 +87,29 @@ export class CreatePlanScreen extends Component {
                   <View>
                     <View style={styleCreate.planOption}>
                       <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
-                      <TextInput
-                        style={styleCreate.inputPanels}
-                      />
+                      <Input placeholder='Location' value={this.state.location} onChangeText={(text) => this.setState({location:text})}/>
                     </View>
                     <View style={styleCreate.planOption}>
+                      <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
+                      <Input placeholder='Adress' value={this.state.adress} onChangeText={(text) => this.setState({adress:text})}/>
+                    </View>
+                    <View style={styleCreate.planOption}>
+                      <Pressable onPress={this.showDate}>
                       <Image style={styleCreate.Icons} source={require('../Assets/clock.png')} />
-                      <TextInput
-                        style={styleCreate.inputPanels}
-                      />
+                      </Pressable>
+                      <Input placeholder='Date' value={this.state.date.toDateString()}/>
+                        {this.state.visibleDataTimePicker=== true ? (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={this.state.date}
+                                mode='date'
+                                display="default"
+                                onChange={this.dateSelect}
+                            />):null
+                        }
                     </View>
                     <View style={styleCreate.planOption}>
                       <Image style={styleCreate.Icons} source={require('../Assets/tenis.png')} />
-                      <TextInput
-                        style={styleCreate.inputPanels}
-                      />
                     </View>
                   </View>
                   <TextInput style={styleCreate.description} />
