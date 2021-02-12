@@ -1,24 +1,69 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
-import {ButtonPlan} from "../Components/button/ButtonPlan"
 import {NavBar} from "../Components/navBar/NavBar"
-
-
+import axios from 'axios';
+import TagUser from '../Components/TagUser';
+const urlGetEventsById = 'http://3.95.8.159:44360/api/Event/EventsUser?id=';
+const urlGetUserById = 'http://3.95.8.159:44360/api/User1?id=';
 
 export class UserScreen extends React.Component {
     constructor(props) {
         super();
         this.state ={
-            name:'TestName',
-            surname:'TestSurName',
-            mail:'test@test.com',
-            phoneNumber:'testNumber',
-            age:'23',
-            birthDate:'test/test/test',
-            planes:[{user: 'Rafa', location: 'Alaquas', date: '20/02/2021', category: 'Deportes', type: 'Football'}]
+            planes:[],
+            user:{},
         }
     }
+    getEventsByIdUser = async (user) => {
+        try {
+            axios
+                .get(urlGetEventsById + user )
+                .then(response => {
+                    if (response.data === null || response.data.length === 0) {
+                        alert('error de conexion');
+                    }else {
+                        this.setState({planes: response.data});
+                    }
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    getUserById = async (user) => {
+        try {
+            axios
+                .get(urlGetUserById + user )
+                .then(response => {
+                    if (response.data === null || response.data.length === 0) {
+                        alert('error de conexion');
+                    }else {
+                        this.setState({user: response.data});
+                    }
+                })
+                .catch(function(error) {
+                    alert(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    exploreScreen = () => {
+        this.props.navigation.navigate('Explore');
+    }
+    createPlanScreen = () => {
+        this.props.navigation.navigate('CreatePlan');
+
+    }
+
+    componentDidMount() {
+        this.getEventsByIdUser('admin');
+        this.getUserById('rafa@mail.com');
+    }
+
     render() {
         return (
                 <View style={styles.mainContainer}>
@@ -26,50 +71,28 @@ export class UserScreen extends React.Component {
                     <View style={styles.containerLogo}>
                         <Image
                             style={styles.mainLogo}
-                            source={require('../Assets/LogoSimple.png')}
-                        />
+                            source={require('../Assets/LogoSimple.png')}/>
                     </View>
-                    <View style={styles.containerUser}>
-                        <Image
-                            style={styles.userLogo}
-                            source={require('../Assets/user.png')}
-                        />
-                        <View style={styles.containerInfo}>
-                            <Text style={{fontSize: 20}}>{this.state.name} {this.state.surname},{this.state.age}</Text>
-                            <Text style={{fontSize: 18}}>{this.state.mail}</Text>
-                            <Text style={{fontSize: 18}}>{this.state.phoneNumber}</Text>
-                            <Text style={{fontSize: 18}}>{this.state.birthDate}</Text>
+                        <View>
+                            <TagUser user={this.state.user}/>
 
 
-                            <ButtonPlan size={100} topmargin={10} title={'Edit'} />
 
-                        </View>
 
 
                     </View>
-                    <EventMiddle element={this.state.planes[0]} />
-                    <EventMiddle element={this.state.planes[0]}/>
-                    <Text style={{padding: 20, fontSize: 20}}>Plan Preferences</Text>
-                    <View style={styles.containerPreferences}>
-                        <Image
-                            style={styles.preferences}
-                            source={require('../Assets/ITALIAN.png')}
-                        />
-                        <Image
-                            style={styles.preferences}
-                            source={require('../Assets/ITALIAN.png')}
-                        /><Image
-                        style={styles.preferences}
-                        source={require('../Assets/ITALIAN.png')}
-                    />
-                        <Image
-                            style={styles.preferences}
-                            source={require('../Assets/ITALIAN.png')}
-                        />
-                    </View>
+
+                        <FlatList
+                            data={this.state.planes}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={{padding: 5}}
+                            renderItem={({item}) => (<Pressable onPress={this.loginScreen}><EventMiddle element={item}/></Pressable>)}>
+                        </FlatList>
+
+
                     </View>
                     <View style={styles.navigationContainer}>
-                        <NavBar ></NavBar>
+                        <NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/>
                     </View>
                 </View>
 

@@ -65,11 +65,11 @@ export class InicioScreen extends Component {
         this.props.navigation.navigate('Login',{screen:'Details'});
         //this.props.navigation.navigate('Details')
     }
-    exploreScreen = () => {
-        this.props.navigation.navigate('Explore');
-    }
     userScreen = () => {
         this.props.navigation.navigate('User');
+    }
+    exploreScreen = () => {
+        this.props.navigation.navigate('Explore');
     }
     createPlanScreen = () => {
         this.props.navigation.navigate('CreatePlan');

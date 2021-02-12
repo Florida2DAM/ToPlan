@@ -12,7 +12,10 @@ export class ButtonPlan extends Component {
     render(){
         return(
             <>
-            <Button title={this.props.title} onPress={this.props.metodo} buttonStyle={[styleButton.button,{width:this.props.size,marginTop:this.props.topmargin}]}></Button>
+            <Button title={this.props.title} onPress={this.props.metodo} buttonStyle={[styleButton.button, {
+    width: this.props.size,
+    marginTop: this.props.topmargin,
+}]}/>
             </>
         );
     }
