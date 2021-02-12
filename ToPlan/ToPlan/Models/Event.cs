@@ -108,14 +108,16 @@ namespace ToPlan.Models
         public string Description { get; set; }
         public string Direction { get; set; }
         public string EventDate { get; set; }
+        public string Type { get; set; }
         public List<string> Lista { get; set; }
 
-        public EventDTO4(string d, string dir, string e, List<string> l)
+        public EventDTO4(string d, string dir, string e, List<string> l, string t)
         {
             this.Description = d;
             this.Direction = dir;
             this.EventDate = e;
             this.Lista = l;
+            this.Type = char.ToUpper(t[0]) + t.Substring(1);
         }
     }
 }

@@ -542,7 +542,7 @@ namespace ToPlan.Models
                         aux2.Add(char.ToUpper(u.Name[0]) + u.Name.Substring(1)+" "+ char.ToUpper(u.Surname[0]) + u.Surname.Substring(1));
                     }
                 }
-                return new EventDTO4(e.Description, e.Direccion, e.EventDate, aux2);
+                return new EventDTO4(e.Description, e.Direccion, e.EventDate, aux2, t.Subtype);
             }catch (Exception e2)
             {
                 Debug.WriteLine("Error de conexion:");
