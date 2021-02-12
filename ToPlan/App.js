@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {StyleSheet} from 'react-native';
 // Imports de pantallas.
-import InicioScreen from './screens/InicioScreen';
+import InicioScreen from './screens/inicioScreen';
 import LoginScreen from './screens/LoginScreen';
 import ExploreScreen from './screens/ExploreScreen';
 import UserScreen from './screens/UserScreen';
