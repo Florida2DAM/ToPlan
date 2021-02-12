@@ -5,10 +5,20 @@ import {
   StyleSheet,
   View,
   ScrollView,
+  FlatList,
+  ActivityIndicatorComponent,
 } from 'react-native';
 import { Text } from 'react-native-elements';
 import { NavBar } from '../Components/navBar/NavBar';
 import ButtonPlan from '../Components/button/ButtonPlan';
+import PlanPeople from '../Components/planPeople/PlanPeople';
+import axios from 'axios';
+
+const urlEventsData = 'http://3.95.8.159:44360/api/Event4?id=';
+const urlCheck = ' http://3.95.8.159:44360/api/Event/CheckUser?id=';
+const urlAddUser = 'http://3.95.8.159:44360/api/Event/AddUser?id=';
+const urlRemoveUser = 'http://3.95.8.159:44360/api/Event/RemoveUser?id=';
+
 
 
 export class PlanDetailsScreen extends Component {
@@ -16,35 +26,84 @@ export class PlanDetailsScreen extends Component {
     super(props);
 
     this.state = {
-      planTitle: "Cinema",
-      planDescription: "The idea is to go see the movie before dinner, to be able to eat popcorn! \nThe movie that we are going to see will be 'Godzilla vs Kong' , at the moment we are all Team Godzilla but there is room for someone Team Kong",
-      planLocation: "Av de la Vital, 10, Valencia",
-      planTime: "14/02/21",
-      planSubtype: "Cines",
-
+      PlanObject: {},
+      IdEvent: 1,
+      IdUser: 'admin',
+      messageBtn: '',
+      visibilityBtnConfirm:'flex',
+      visibilityBtnDeny:'none'
     }
-
-    getPlanDescription = async () => {
-      try {
-          axios
-              .get(urlEventsBySport)
-              .then(response => {
-                  if (response.data === null || response.data.length === 0) {
-                      alert('error de conexion');
-                  }else {
-                      this.setState({sports: response.data});
-                  }
-              })
-              .catch(function(error) {
-                  alert(error);
-              });
-      } catch (error) {
-          console.log(err);
-      }
   };
 
-
+  componentDidMount = () => {
+    this.getPlanData();
+    this.getCheck();
   }
+
+  getPlanData = () => {
+    try {
+      axios
+        .get(urlEventsData + this.state.IdEvent)
+        .then(response => {
+          if (response.data === null || response.data.length === 0) {
+            alert('error de conexion');
+          } else {
+            this.setState({ PlanObject: response.data });
+          }
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  addUser = () =>{
+    try{
+        axios
+        .put(urlAddUser+this.state.IdEvent+'&n='+this.state.IdUser)
+        .then(this.setState({visibilityBtnConfirm:'none'}))
+        .then(this.setState({visibilityBtnDeny:'flex'}))
+        .then(this.setState({messageBtn:'Deny assistance'}))
+        .then(this.getPlanData)
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  RemoveUser = () =>{
+    try{
+        axios
+        .put(urlRemoveUser+this.state.IdEvent+'&n='+this.state.IdUser)
+        .then(this.setState({visibilityBtnConfirm:'flex'}))
+        .then(this.setState({visibilityBtnDeny:'none'}))
+        .then(this.setState({messageBtn:'Confirm assistance'}))
+        .then(this.getPlanData)
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  getCheck = async () =>{
+    try{
+        axios.get(urlCheck+this.state.IdEvent+'&n='+this.state.IdUser)
+        .then(response =>{
+            this.setState({aux:response.data});
+            if(this.state.aux){
+              this.setState({visibilityBtnDeny:'flex'});
+              this.setState({visibilityBtnConfirm:'none'});
+            }else{
+              this.setState({visibilityBtnDeny:'none'});
+              this.setState({visibilityBtnConfirm:'flex'});
+            }
+        })
+    }catch (error){
+      console.log(error);
+    }
+  }
+
+
 
   render() {
     return (
@@ -63,21 +122,21 @@ export class PlanDetailsScreen extends Component {
               <View>
                 <View style={[styleDetails.inputContainer, styleDetails.shadow]}>
                   <View style={styleDetails.menuContainer}>
-                    <Text style={{ fontSize: 16 }}>{this.state.planDescription}</Text>
+                    <Text style={{ fontSize: 16 }}>{this.state.PlanObject.Description}</Text>
                   </View>
                   <View>
                     <View>
                       <View style={styleDetails.planOption}>
                         <Image style={styleDetails.Icons} source={require('../Assets/location.png')} />
-                        <Text style={styleDetails.inputPanels}>{this.state.planLocation}</Text>
+                        <Text style={styleDetails.inputPanels}>{this.state.PlanObject.Direction}</Text>
                       </View>
                       <View style={styleDetails.planOption}>
                         <Image style={styleDetails.Icons} source={require('../Assets/clock.png')} />
-                        <Text style={styleDetails.inputPanels}>{this.state.planTime}</Text>
+                        <Text style={styleDetails.inputPanels}>{this.state.PlanObject.EventDate}</Text>
                       </View>
                       <View style={styleDetails.planOption}>
                         <Image style={styleDetails.Icons} source={require('../Assets/cine.png')} />
-                        <Text style={styleDetails.inputPanels}>{this.state.planSubtype}</Text>
+                        <Text style={styleDetails.inputPanels}>{this.state.PlanObject.Type}</Text>
                       </View>
                     </View>
                     <View style={styleDetails.separador}>
@@ -85,26 +144,24 @@ export class PlanDetailsScreen extends Component {
                     </View>
                     <View>
                       {/* Aqui los componentes de las personas en una flatlist primero hacer pruebas*/}
-                      <View>
-                        <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
-                          <Text style={styleDetails.peopleText}>Adrián Pérez</Text>
-                        </View>
-                        <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
-                          <Text style={styleDetails.peopleText}>Rafa Olaya</Text>
-                        </View>
-                        <View style={styleDetails.planOption}>
-                          <Image style={styleDetails.peopleImg} source={require('../Assets/user.png')} />
-                          <Text style={styleDetails.peopleText}>Jordi Cervera</Text>
-                        </View>
-
+                      <View style={styleDetails.planOption}>
+                        <ScrollView>
+                          <FlatList
+                            data={this.state.PlanObject.Lista}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={{ padding: 2, width: 500 }}
+                            renderItem={({ item }) => (<PlanPeople element={item} />)}>
+                          </FlatList>
+                        </ScrollView>
                       </View>
                     </View>
                   </View>
                 </View>
-                <View style={[styleDetails.confirmBtn, styleDetails.shadow]}>
-                  <ButtonPlan metodo={this.loginCheck} title={'Confirm assistance'} />
+                <View style={[styleDetails.confirmBtn, styleDetails.shadow, {display:this.state.visibilityBtnConfirm}]}>
+                  <ButtonPlan metodo={this.addUser} title="Confirm Assistence"/>
+                </View>
+                <View style={[styleDetails.confirmBtn, styleDetails.shadow, {display:this.state.visibilityBtnDeny}]}>
+                  <ButtonPlan metodo={this.RemoveUser} title="Deny Assistence"/>
                 </View>
               </View>
             </View>

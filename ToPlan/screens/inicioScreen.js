@@ -48,7 +48,7 @@ export class InicioScreen extends Component {
                     alert(error);
                 });
         } catch (error) {
-            console.log(err);
+            console.log(error);
         }
     };
 

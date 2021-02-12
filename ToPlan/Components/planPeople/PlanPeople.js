@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import { Button } from "react-native-elements";
-import { StyleSheet } from 'react-native';
-
-
+import { StyleSheet, Text,Image,View } from 'react-native';
 
 export class PlanPeople extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        }
     }
 
+
+
     render() {
+        let plan = this.props.element;
         return (
             <>
-                <Image style={stylePlanPeople.peopleImg} source={require('./Assets/user.png')} />
-                <Text style={stylePlanPeople.peopleText}>Adrián Pérez</Text>
+            <View style={stylePlanPeople.peopleView}>
+                <Image style={stylePlanPeople.peopleImg} source={require('../../Assets/user.png')} />
+                <Text style={stylePlanPeople.peopleText}>{plan}</Text>
+            </View>
             </>
         );
     }
@@ -24,11 +30,16 @@ const stylePlanPeople = StyleSheet.create({
         width: 40
     },
     peopleText: {
-        height: 40,
-        width: 200,
-        backgroundColor: 'white',
-        textAlignVertical: 'center',
+        paddingTop:10,
+        paddingLeft:20
     },
+    peopleView:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        paddingTop:10
+
+    }
 }
 );
 
