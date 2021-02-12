@@ -102,4 +102,20 @@ namespace ToPlan.Models
             this.listaMiembros = l;
         }
     }
+
+    public class EventDTO4
+    {
+        public string Description { get; set; }
+        public string Direction { get; set; }
+        public string EventDate { get; set; }
+        public List<string> Lista { get; set; }
+
+        public EventDTO4(string d, string dir, string e, List<string> l)
+        {
+            this.Description = d;
+            this.Direction = dir;
+            this.EventDate = e;
+            this.Lista = l;
+        }
+    }
 }

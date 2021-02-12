@@ -108,6 +108,14 @@ namespace ToPlan.Controllers
             return rep.Even2(id);
         }
 
+        [Route("api/Event4")]
+        //Devuelve un EventDTO4
+        public EventDTO4 GetEvent3(int id)
+        {
+            EventsRepository rep = new EventsRepository();
+            return rep.Event4(id);
+        }
+
         [Route("api/Event/Type")]
         //Devuelve la id del tipo del evento
         public int GetType(int id)

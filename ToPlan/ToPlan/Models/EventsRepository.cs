@@ -515,5 +515,39 @@ namespace ToPlan.Models
                 return true;
             }
         }
+
+        internal EventDTO4 Event4(int id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            Event e;
+            EventDTO4 final;
+            TypePlan t;
+            string[] aux;
+            User u;
+            List<string >aux2=new List<string>();
+            try
+            {
+                e = context.Events.Single(p => p.EventId == id);
+                t = context.TypePlans.Single(p => p.TypePlanId == e.TypePlanId);
+                if (e.ListMembers == null)
+                {
+                    aux2 = null;
+                }
+                else
+                {
+                    aux = e.ListMembers.Split(';');
+                    for(int i = 0; i < aux.Length; i++)
+                    {
+                        u = context.Users.Single(p => p.UserId.Equals(aux[i]));
+                        aux2.Add(char.ToUpper(u.Name[0]) + u.Name.Substring(1)+" "+ char.ToUpper(u.Surname[0]) + u.Surname.Substring(1));
+                    }
+                }
+                return new EventDTO4(e.Description, e.Direccion, e.EventDate, aux2);
+            }catch (Exception e2)
+            {
+                Debug.WriteLine("Error de conexion:");
+                return null;
+            }
+        }
     }
 }
