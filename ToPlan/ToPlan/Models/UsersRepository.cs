@@ -327,7 +327,7 @@ namespace ToPlan.Models
                 aux = context.Users.Single(p => p.UserId.Equals(id.ToLower()));
                 date = DateTime.Parse(aux.FechaNacimiento);
                 age = DateTime.Today.AddTicks(-date.Ticks).Year - 1;
-                return new UserDTO2(aux.Name, aux.Surname, age, aux.UserId, aux.Preferences);
+                return new UserDTO2(aux.Name, aux.Surname,aux.UserId, aux.Preferences,aux.FechaNacimiento);
 
             }
             catch (Exception e)

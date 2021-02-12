@@ -49,12 +49,14 @@ namespace ToPlan.Models
     {
         public string Name { get; set; }
         public string Email { get; set; }
+        public string FechaNacimiento { get; set; }
         public string[] Preferences { get; set; }
 
-        public UserDTO2(string n, string s, int ed, string e, string p)
+        public UserDTO2(string n, string s, string e, string p, string f)
         {
-            this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1) + "," + ed.ToString();
+            this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1);
             this.Email = e;
+            this.FechaNacimiento = f;
             if (p == null)
             {
                 this.Preferences = null;
