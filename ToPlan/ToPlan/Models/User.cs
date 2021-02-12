@@ -55,7 +55,14 @@ namespace ToPlan.Models
         {
             this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1) + "," + ed.ToString();
             this.Email = e;
-            this.Preferences = p.Split(';');
+            if (p == null)
+            {
+                this.Preferences = null;
+            }
+            else
+            {
+                this.Preferences = p.Split(';');
+            }
         }
     }
 }
