@@ -257,7 +257,7 @@ namespace ToPlan.Models
                             u2 = context.Users.Single(p => p.UserId.Equals(aux3[j]));
                             lista.Add(char.ToUpper(u2.Name[0]) + u2.Name.Substring(1) + " " + char.ToUpper(u2.Surname[0]) + u2.Surname.Substring(1));
                         }
-                        final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista));
+                        final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista, aux2[i].EventId));
                         aux++;
                     }
                     if (aux == 4)
@@ -304,7 +304,7 @@ namespace ToPlan.Models
                         }
                         if (t.Name.Equals(g))
                         {
-                            final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista));
+                            final.Add(new EventDTO3(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].Direccion, aux2[i].Description, aux2[i].MaxMembers, lista, aux2[i].EventId));
                         }
                     }
                 }

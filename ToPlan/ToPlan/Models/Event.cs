@@ -79,6 +79,7 @@ namespace ToPlan.Models
     }
     public class EventDTO3
     {
+        public int EventId { get; set; }
         public string City { get; set; }
         public string Date { get; set; }
         public string Category { get; set; }
@@ -89,7 +90,7 @@ namespace ToPlan.Models
         public int MaxMembers { get; set; }
         public List<string> listaMiembros { get; set; }
 
-        public EventDTO3(string c, string d, string cat, string t, string n, string s, string dir, string des, int max, List<string> l)
+        public EventDTO3(string c, string d, string cat, string t, string n, string s, string dir, string des, int max, List<string> l, int id)
         {
             this.City = char.ToUpper(c[0]) + c.Substring(1);
             this.Date = d;
@@ -100,6 +101,7 @@ namespace ToPlan.Models
             this.Description = des;
             this.MaxMembers = max;
             this.listaMiembros = l;
+            this.EventId = id;
         }
     }
 
