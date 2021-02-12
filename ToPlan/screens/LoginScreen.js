@@ -5,6 +5,7 @@ import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonPlan from '../Components/button/ButtonPlan';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const urlCheckEmail = 'http://3.95.8.159:44360/api/User/Check?id=';
 const urlGetUser = 'http://3.95.8.159:44360/api/User/GetUserId?id=';
@@ -26,6 +27,13 @@ export class LoginScreen extends Component {
             errorPassword: '',
 
         };
+    }
+    storeData = async (idUser) => {
+        try {
+            await AsyncStorage.setItem('userKey', idUser)
+        } catch (e) {
+            alert(e)
+        }
     }
 
 
@@ -98,9 +106,8 @@ export class LoginScreen extends Component {
 
 
     transitionScreen = (pantallaDestino) => {
-
+        this.storeData(this.state.email).then(r => {});
         this.props.navigation.navigate(pantallaDestino);
-
     };
     registerScreen = () => {
         this.props.navigation.navigate('Register');

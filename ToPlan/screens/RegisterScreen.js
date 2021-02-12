@@ -71,8 +71,9 @@ export class RegisterScreen extends React.Component {
     }
     checkConditions = () => {
         this.resetError();
+        let email = '@gmail.com';
 
-        if (!this.state.email.endsWith('@*')){
+        if (this.state.email.length <= 8){
             this.setState({errorEmail:'INSERT A VALID EMAIL'});
             errorInputEmail.current.shake();
         }

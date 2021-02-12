@@ -9,6 +9,7 @@ import {
 import { Text } from 'react-native-elements';
 import { NavBar } from '../Components/navBar/NavBar';
 import ButtonPlan from '../Components/button/ButtonPlan';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export class PlanDetailsScreen extends Component {
@@ -26,6 +27,8 @@ export class PlanDetailsScreen extends Component {
 
 
   }
+
+
 
   render() {
     return (

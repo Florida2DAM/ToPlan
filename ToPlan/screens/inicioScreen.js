@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import React, {Component} from 'react';
 import {
@@ -30,8 +30,24 @@ export class InicioScreen extends Component {
         super(props);
 
         this.state = {
+            userEmail:'',
             planes: [],
         };
+    }
+    storeData = async (idUser) => {
+        try {
+            await AsyncStorage.setItem('userKey', idUser)
+        } catch (e) {
+            alert(e)
+        }
+    }
+    async getStorage() {
+        try{
+            this.setState({userEmail: await AsyncStorage.getItem('userKey')});
+
+        }catch (e) {
+
+        }
     }
     getEventsByDate = async () => {
         try {
@@ -52,27 +68,63 @@ export class InicioScreen extends Component {
         }
     };
 
+    removeValue = async () => {
+        try {
+            await AsyncStorage.removeItem('userKey');
+        } catch(e) {
+            // remove error
+        }
+
+        console.log('Done.')
+    }
+
+    /*dropStoreg = () =>  {
+        setInterval(function(){
+
+                AsyncStorage.removeItem('userKey');
+                alert('hola');
+
+        },90000);
+
+
+    }*/
+
     componentDidMount = () => {
       this.getEventsByDate(urlEventsByDate);
+      /*this.dropStoreg();*/
 
 
     };
     nextScreen = () => {
         //this.props.navigation.navigate('Login');
-        this.props.navigation.navigate('Details')
+        this.getStorage().then(r => alert(this.state.userEmail))
+
+        /*this.props.navigation.navigate('Details')*/
     }
     loginScreen = () => {
         this.props.navigation.navigate('Login',{screen:'Details'});
-        //this.props.navigation.navigate('Details')
     }
     userScreen = () => {
-        this.props.navigation.navigate('User');
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'User'});
+            }else {this.props.navigation.navigate('User');}
+        })
     }
     exploreScreen = () => {
-        this.props.navigation.navigate('Explore');
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Explore'});
+            }else {this.props.navigation.navigate('Explore');}
+        })
     }
     createPlanScreen = () => {
-        this.props.navigation.navigate('CreatePlan');
+
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'CreatePlan'});
+            }else {this.props.navigation.navigate('CreatePlan');}
+        })
 
     }
 

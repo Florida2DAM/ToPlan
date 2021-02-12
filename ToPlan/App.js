@@ -13,6 +13,7 @@ import CreatePlanScreen from './screens/CreatePlan';
 import PlanDetailsScreen from './screens/PlanDetails';
 
 const pilaNavegacion = createStackNavigator();
+const user = React.createRef()
 
 export class App extends Component {
     constructor(props) {
