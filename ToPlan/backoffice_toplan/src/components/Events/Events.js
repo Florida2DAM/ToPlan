@@ -12,6 +12,8 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {InputTextarea} from "primereact/inputtextarea";
 import {InputMask} from "primereact/inputmask";
+import {Toast} from 'primereact/toast';
+
 
 export class Events extends Component {
 
@@ -30,11 +32,14 @@ export class Events extends Component {
             typeName: '',
             Data: '',
             isHidden: false,
+            isHidden2: false,
             ListMembers: '',
             direction: '',
             TypePlanArray: [],
             TypePlanId: '',
+            ListMembersPlan: [],
         }
+        this.onInputChangeTypePlan = this.onInputChangeTypePlan.bind(this);
     }
 
 
@@ -51,7 +56,6 @@ export class Events extends Component {
     getEvents = () => {
         axios.get('http://3.95.8.159:44360/api/Event').then((respuesta) => {
             this.setState({Events: respuesta.data});
-            console.log(respuesta.data);
         }).catch(e => {
             console.log("Error de conexion con la API");
         });
@@ -63,7 +67,7 @@ export class Events extends Component {
         const TypePlanId = parseInt(Type);
         console.log(TypePlanId);
 
-        /*axios.post('http://3.95.8.159:44360/api/Event', {
+        axios.post('http://3.95.8.159:44360/api/Event', {
             UserId: this.state.UserId,
             EventDate: this.state.date,
             City: this.state.city,
@@ -78,18 +82,19 @@ export class Events extends Component {
                 console.log(response);
             }, (error) => {
                 console.log(error);
-            })*/
+            })
     }
+
 
     onSubmitUpdate = () => {
 
-        const promiseUpdate = axios.put("http://3.95.8.159:44360/api/Event/Put/id=" + this.state.EventId + "&dir=" + this.state.direction + "&f=" + this.state.date + "&c=" + this.state.city + "&p=" + this.state.province + "&d=" + this.state.description + "&max=" + this.state.maxMembers, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.put("http://3.95.8.159:44360/api/Event?id=" + this.state.EventId + "&dir=" + this.state.direction + "&f=" + this.state.date + "&c=" + this.state.city + "&p=" + this.state.province + "&d=" + this.state.description + "&max=" + this.state.Members, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
-            console.log("Update succesfully: " + response)
+
+            console.log("Update succesfully: " + response);
         }).catch(e => {
             console.log(e);
         });
-
     }
 
 
@@ -139,8 +144,20 @@ export class Events extends Component {
 
         let promisePost = axios.delete("http://3.95.8.159:44360/api/Event?id=" + this.state.EventId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
-            console.log("Delete successfully")
-            window.location.reload(true);
+            console.log("Delete successfully");
+        }).catch(e => {
+            console.log(e)
+
+        });
+    }
+
+    onSubmitPutEventType = () => {
+        const Type = this.state.TypePlanId[0];
+        const TypePlanId = parseInt(Type);
+        console.log(TypePlanId);
+
+        let promisePost = axios.put("http://3.95.8.159:44360/api/Event/Type?id=" + this.state.IdEvent+"&t="+TypePlanId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        ).then(response => {
         }).catch(e => {
             console.log(e)
 
@@ -173,14 +190,14 @@ export class Events extends Component {
     }
 
     checkerEvent = () => {
+
         const promise = axios.get('http://3.95.8.159:44360/api/Event/Check?id=' + this.state.EventId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 if (resolveResult.data === true) {
                     console.log(resolveResult.data);
                     this.setState({isHidden: !this.state.isHidden})
-
                 } else {
-                    console.log("No existe ese evento id")
+                    alert("No existe ese evento id");
                 }
             }
             , (rejectedResult) => {
@@ -188,13 +205,20 @@ export class Events extends Component {
             });
     }
 
-    GetEvents = () => {
-        axios.get('http://3.95.8.159:44360/api/Event', {headers: {'Access-Control-Allow-Origin': '*'}}).then((respuesta) => {
-            this.setState({Events: respuesta.data});
-            console.log(this.state.Events);
-        }).catch(e => {
-            console.log("Error de conexion con la API");
-        });
+    checkerEvent2 = () => {
+
+        const promise = axios.get('http://3.95.8.159:44360/api/Event/Check?id=' + this.state.IdEvent, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promiseResult = promise.then((resolveResult) => {
+                if (resolveResult.data === true) {
+                    console.log(resolveResult.data);
+                    this.setState({isHidden2: !this.state.isHidden2})
+                } else {
+                    alert("No existe ese evento id");
+                }
+            }
+            , (rejectedResult) => {
+                console.error(rejectedResult.statusText)
+            });
     }
 
     filterType = () => {
@@ -203,7 +227,7 @@ export class Events extends Component {
                 axios.get('http://3.95.8.159:44360/api/Eventtype?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then
                 (response => {
                         this.setState({Events: response.data})
-                    console.log(response.data);
+                        console.log(response.data);
                     }
                 )
             } else {
@@ -211,6 +235,12 @@ export class Events extends Component {
             }
         }).catch(e => {
             console.log("Error de conexion con la API");
+        });
+    }
+
+    onInputChangeTypePlan(event) {
+        this.setState({
+            [event.target.name]: event.target.value
         });
     }
 
@@ -238,7 +268,7 @@ export class Events extends Component {
                                                    name="EventDate" value={this.state.city}
                                                    onChange={this.onInputCity}
                                         />
-                                        <InputText placeholder={"Direccion"} type={'text'}
+                                        <InputText placeholder={"Direction"} type={'text'}
                                                    name="Direccion" value={this.state.direction}
                                                    onChange={this.onInputChangeDirection}
                                         />
@@ -260,7 +290,24 @@ export class Events extends Component {
                                             <Button label={"Update Event"} onClick={this.onSubmitUpdate}/>
                                         </p>
                                     </div>
-
+                                    <h5>Update EventType</h5>
+                                    <div>
+                                        <InputText placeholder={"EventId"} type={'number'}
+                                                   name="IdEvent"
+                                                   onChange={this.onInputChangeTypePlan}
+                                        />
+                                        <Button style={{marginLeft: 10}} onClick={this.checkerEvent2}
+                                                icon={'pi pi-check'}/>
+                                        <div hidden={!this.state.isHidden2}>
+                                            <Dropdown style={{margin:10}} autoWidth={true} value={this.state.TypePlanId}
+                                                      options={this.state.TypePlanArray.map(elem => {
+                                                          return elem.TypePlanId + " - " + elem.Subtype
+                                                      })}
+                                                      onChange={this.onInputChangeType}
+                                                      placeholder="Select a Subtype Plan"/>
+                                            <p><Button label={"Update Event"} onClick={this.onSubmitPutEventType}/></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </TabPanel>
                             <TabPanel header="Insertar">
@@ -324,10 +371,10 @@ export class Events extends Component {
                             </TabPanel>
                             <TabPanel header="Filtrar">
                                 <div className="InputFiltrado">
-                                    <label>Get all Events: </label>
+                                    <label>Get All Events </label>
                                     <Button style={{margin: 10}} onClick={this.getEvents}
                                             icon={'pi pi-check'}/>
-                                    <label>Filtrar por el tipo de evento: </label>
+                                    <label>Filter by type: </label>
                                     <Dropdown autoWidth={true} value={this.state.Data}
                                               options={this.state.TypePlanArray.map(elem => (elem.Name + " - " + elem.Subtype))}
                                               onChange={this.onInputTypeFilter} placeholder="Select a Type Plan"/>
@@ -335,18 +382,23 @@ export class Events extends Component {
                                             icon={'pi pi-check'}/>
                                 </div>
                                 <div className="DataTable">
-                                    <DataTable value={this.state.Events}>
+                                    <DataTable className="p-datatable-gridlines" value={this.state.Events}>
                                         <Column field="EventId" header="EventId"/>
                                         <Column field="EventDate" header="Date"/>
                                         <Column field="City" header="City"/>
-                                        <Column field="Direccion" header="Direccion"/>
+                                        <Column style={{width: 350}} field="Direccion" header="Direction"/>
                                         <Column field="Province" header="Province"/>
-                                        <Column field="Description" header="Description"/>
+                                        <Column style={{width: 500}} field="Description" header="Description"/>
                                         <Column field="UserId" header="UserId"/>
                                         <Column field="TypePlanId" header="TypeId"/>
-                                        <Column field="ListMembers" header="List Members"/>
                                         <Column field="MaxMembers" header="Max Members"/>
                                     </DataTable>
+                                    <p>
+                                        <DataTable className="p-datatable-gridlines" value={this.state.Events}>
+                                            <Column style={{width: 100}} field="EventId" header="EventId"/>
+                                            <Column field="ListMembers" header="List Members"/>
+                                        </DataTable>
+                                    </p>
                                 </div>
                             </TabPanel>
                         </TabView>

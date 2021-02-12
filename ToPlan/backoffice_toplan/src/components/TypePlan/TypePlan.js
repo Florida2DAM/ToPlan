@@ -54,6 +54,7 @@ export class TypePlan extends Component {
         });
 
     }
+
     onSubmitDelete = () => {
         const promiseUpdate = axios.delete("http://3.95.8.159:44360/api/TypesPlan/id?=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
