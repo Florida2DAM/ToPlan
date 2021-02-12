@@ -423,11 +423,15 @@ namespace ToPlan.Models
             {
                 e1 = context.Events.Single(p => p.EventId == id);
                 aux = e1.ListMembers.Split(';');
-                for (int i = 0; i < aux.Length; i++)
+                if (!(n == null))
                 {
-                    if (aux[i].Equals(n.ToLower()))
+
+                    for (int i = 0; i < aux.Length; i++)
                     {
-                        aux2 = true;
+                        if (aux[i].Equals(n.ToLower()))
+                        {
+                            aux2 = true;
+                        }
                     }
                 }
                 return aux2;
