@@ -50,7 +50,7 @@ namespace ToPlan.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string FechaNacimiento { get; set; }
-        public string[] Preferences { get; set; }
+        public string Preferences { get; set; }
 
         public UserDTO2(string n, string s, string e, string p, string f)
         {
@@ -63,7 +63,12 @@ namespace ToPlan.Models
             }
             else
             {
-                this.Preferences = p.Split(';');
+                this.Preferences = "";
+                string[] aux = p.Split(';');
+                for(int i = 0; i < aux.Length; i++)
+                {
+                    this.Preferences = this.Preferences + char.ToUpper(aux[i][0]) + aux[i].Substring(1) + " ";
+                }
             }
         }
     }
