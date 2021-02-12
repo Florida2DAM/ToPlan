@@ -54,7 +54,7 @@ export class CreatePlanScreen extends Component {
 
   getTypes = async () =>{
     try{
-      axios 
+      axios
         .get(urlTypes)
         .then(response => {
             if (response.data === null || response.data.length === 0) {
@@ -162,17 +162,12 @@ resetError = () => {
                   {/* Hacer un componente de esto pero me saltaban errores al crearlo */}
                   <View>
                     <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
+
                       <Input ref={errorInputProvince} placeholder='Province' value={this.state.province} errorStyle={{ color: 'red' }} errorMessage={this.state.errorProvince} onChangeText={(text) => this.setState({province:text})}/>
-                    </View>
-                    <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
                       <Input ref={errorInputCity} placeholder='City' value={this.state.city} errorStyle={{ color: 'red' }} errorMessage={this.state.errorCity} onChangeText={(text) => this.setState({city:text})}/>
-                    </View>
-                    <View style={styleCreate.planOption}>
-                      <Image style={styleCreate.Icons} source={require('../Assets/location.png')} />
                       <Input ref={errorInputAdress} placeholder='Adress' value={this.state.adress} errorStyle={{ color: 'red' }} errorMessage={this.state.errorAdress} onChangeText={(text) => this.setState({adress:text})}/>
                     </View>
+
                     <View style={styleCreate.planOption}>
                       <Pressable onPress={this.showDate}>
                       <Image style={styleCreate.Icons} source={require('../Assets/clock.png')} />
@@ -208,14 +203,14 @@ resetError = () => {
                       />
                     </View>
                     <Text style={styleCreate.errorMembers}>{this.state.errorMembers}</Text>
-                  </View> 
+                  </View>
                   <TextInput
                   multiline={true}
                   style={styleCreate.description}
                   placeholder='Description...'
                   value={this.state.description}
                   onChangeText={(text) => this.setState({description:text})}
-                  />                 
+                  />
                 </View>
               </View>
               <View>
