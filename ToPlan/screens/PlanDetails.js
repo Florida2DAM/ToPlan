@@ -24,6 +24,25 @@ export class PlanDetailsScreen extends Component {
 
     }
 
+    getPlanDescription = async () => {
+      try {
+          axios
+              .get(urlEventsBySport)
+              .then(response => {
+                  if (response.data === null || response.data.length === 0) {
+                      alert('error de conexion');
+                  }else {
+                      this.setState({sports: response.data});
+                  }
+              })
+              .catch(function(error) {
+                  alert(error);
+              });
+      } catch (error) {
+          console.log(err);
+      }
+  };
+
 
   }
 
