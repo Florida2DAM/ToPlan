@@ -105,9 +105,9 @@ export class TypePlan extends Component {
                                                    name="Subtype"
                                                    onChange={this.onInputChange}
                                         />
-                                        <p>
-                                            <Button label={"Update Event"} onClick={this.onSubmitUpdate}/>
-                                        </p>
+                                        <br/>
+                                        <Button style={{margin: 15}} label={"Update Type"}
+                                                onClick={this.onSubmitUpdate}/>
                                     </div>
                                 </TabPanel>
                                 <TabPanel header="Insertar">
@@ -121,9 +121,9 @@ export class TypePlan extends Component {
                                                    name="TypeSub"
                                                    onChange={this.onInputChange}
                                         />
-                                        <p>
-                                            <Button label={"Insert TypePlan"} onClick={this.onSubmitInsert}/>
-                                        </p>
+                                        <br/>
+                                        <Button style={{margin: 15}} label={"Insert TypePlan"}
+                                                onClick={this.onSubmitInsert}/>
                                     </div>
                                 </TabPanel>
                                 <TabPanel header="Eliminar">
@@ -133,7 +133,9 @@ export class TypePlan extends Component {
                                                    name="IdTypePlan"
                                                    onChange={this.onInputChange}
                                         />
-                                        <p><Button label={"Delete Event"} onClick={this.onSubmitDelete}/></p>
+                                        <br/>
+                                        <Button style={{margin: 15}} label={"Delete Type"}
+                                                onClick={this.onSubmitDelete}/>
                                     </div>
                                 </TabPanel>
                                 <TabPanel header="Filtrar">

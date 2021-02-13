@@ -156,7 +156,7 @@ export class Events extends Component {
         const TypePlanId = parseInt(Type);
         console.log(TypePlanId);
 
-        let promisePost = axios.put("http://3.95.8.159:44360/api/Event/Type?id=" + this.state.IdEvent+"&t="+TypePlanId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        let promisePost = axios.put("http://3.95.8.159:44360/api/Event/Type?id=" + this.state.IdEvent + "&t=" + TypePlanId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
         }).catch(e => {
             console.log(e)
@@ -299,7 +299,8 @@ export class Events extends Component {
                                         <Button style={{marginLeft: 10}} onClick={this.checkerEvent2}
                                                 icon={'pi pi-check'}/>
                                         <div hidden={!this.state.isHidden2}>
-                                            <Dropdown style={{margin:10}} autoWidth={true} value={this.state.TypePlanId}
+                                            <Dropdown style={{margin: 10}} autoWidth={true}
+                                                      value={this.state.TypePlanId}
                                                       options={this.state.TypePlanArray.map(elem => {
                                                           return elem.TypePlanId + " - " + elem.Subtype
                                                       })}
@@ -335,14 +336,15 @@ export class Events extends Component {
                                                    name="EventDate" value={this.state.province}
                                                    onChange={this.onInputProvince}
                                         />
-                                        <p>
-                                            <InputTextarea placeholder={"EventDescription"} rows={5}
-                                                           cols={30}
-                                                           name="EventDate" value={this.state.description}
-                                                           onChange={this.onInputDescription}
-                                            />
+                                        <br/>
+                                        <InputTextarea placeholder={"EventDescription"} rows={5}
+                                                       cols={30}
+                                                       name="EventDate" value={this.state.description}
+                                                       onChange={this.onInputDescription}
+                                        />
+                                        <br/>
 
-                                        </p>
+
                                         <InputText placeholder={"Event Members"} type={'number'}
                                                    name="Event Members" value={this.state.Members}
                                                    onChange={this.onInputMembers}
@@ -354,7 +356,8 @@ export class Events extends Component {
                                                   onChange={this.onInputChangeType}
                                                   placeholder="Select a Subtype Plan"/>
                                     </div>
-                                    <p><Button label={"Insert Event"} onClick={this.onSubmitInsertEvent}/></p>
+                                    <br/>
+                                    <Button label={"Insert Event"} onClick={this.onSubmitInsertEvent}/>
                                 </div>
                             </TabPanel>
                             <TabPanel header="Eliminar">
@@ -383,7 +386,7 @@ export class Events extends Component {
                                 </div>
                                 <div className="DataTable">
                                     <DataTable className="p-datatable-gridlines" value={this.state.Events}>
-                                        <Column field="EventId" header="EventId"/>
+                                        <Column style={{width: 80}} field="EventId" header="EventId"/>
                                         <Column field="EventDate" header="Date"/>
                                         <Column field="City" header="City"/>
                                         <Column style={{width: 350}} field="Direccion" header="Direction"/>
@@ -393,12 +396,11 @@ export class Events extends Component {
                                         <Column field="TypePlanId" header="TypeId"/>
                                         <Column field="MaxMembers" header="Max Members"/>
                                     </DataTable>
-                                    <p>
-                                        <DataTable className="p-datatable-gridlines" value={this.state.Events}>
-                                            <Column style={{width: 100}} field="EventId" header="EventId"/>
-                                            <Column field="ListMembers" header="List Members"/>
-                                        </DataTable>
-                                    </p>
+                                    <br/>
+                                    <DataTable className="p-datatable-gridlines" value={this.state.Events}>
+                                        <Column style={{width: 100}} field="EventId" header="EventId"/>
+                                        <Column field="ListMembers" header="List Members"/>
+                                    </DataTable>
                                 </div>
                             </TabPanel>
                         </TabView>

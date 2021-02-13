@@ -7,6 +7,7 @@
 
 .update{
     text-align: center;
+    height: 1000px;
 }
 
 .update input{
@@ -34,4 +35,5 @@
 
 .DataTable{
     margin: 20px;
+    height: 1000px;
 }
