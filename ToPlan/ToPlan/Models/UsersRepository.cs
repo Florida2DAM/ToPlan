@@ -385,6 +385,8 @@ namespace ToPlan.Models
                     {
                         u.Preferences = u.Preferences + ";" + p1;
                     }
+                    context.Users.Update(u);
+                    context.SaveChanges();
                     return true;
                 }
             }catch (Exception e)
