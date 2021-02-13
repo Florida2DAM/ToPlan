@@ -11,8 +11,6 @@ import 'primereact/resources/themes/vela-orange/theme.css';
 import 'primereact/resources/primereact.css';
 import {InputMask} from "primereact/inputmask";
 import {Checkbox} from "primereact/checkbox";
-import {TriStateCheckbox} from "primereact/tristatecheckbox";
-import {MultiSelect} from "primereact/multiselect";
 
 
 export class Users extends React.Component {
@@ -30,8 +28,8 @@ export class Users extends React.Component {
             visible: true,
             token: this.props.token,
 
-            preferencesArr:[],
-            preferences:[],
+            preferencesArr: [],
+            preferences: [],
 
 
         }
@@ -85,7 +83,7 @@ export class Users extends React.Component {
 
                         </div>
                     </TabPanel>
-                    <TabPanel header={'Get by Id'} >
+                    <TabPanel header={'Get by Id'}>
                         <div className={'grupo'}>
                             <div className={'separador'}>
 
@@ -132,10 +130,10 @@ export class Users extends React.Component {
 
                                     <label>Update User&nbsp;</label>
                                     <div hidden={!this.state.visible}>
-                                        <InputText  placeholder={"User Mail"} className={'inputText'} name="userId"
+                                        <InputText placeholder={"User Mail"} className={'inputText'} name="userId"
                                                    onChange={this.onInputchange}/>
-                                        <Button  style={{marginLeft: 10}} onClick={this.checkerUser}
-                                                 icon={'pi pi-check'}></Button>
+                                        <Button style={{marginLeft: 10}} onClick={this.checkerUser}
+                                                icon={'pi pi-check'}></Button>
                                     </div>
 
                                     <div className={"updateInputs"} hidden={this.state.visible}>
@@ -156,13 +154,31 @@ export class Users extends React.Component {
                                                 icon={'pi pi-check'}></Button>
                                         <h5>Preferences</h5>
                                         <label>Sport</label>
-                                        <Checkbox style={{marginLeft:20,marginRight:10}}  name="preferences" value="sport;" onChange={(e)=>{this.setState({preferences:this.state.preferences+e.value,sportPreference:!this.state.sportPreference})}} checked={this.state.sportPreference==true}></Checkbox>
+                                        <Checkbox style={{marginLeft: 20, marginRight: 10}} name="preferences"
+                                                  value="sport;" onChange={(e) => {
+                                            this.setState({
+                                                preferences: this.state.preferences + e.value,
+                                                sportPreference: !this.state.sportPreference
+                                            })
+                                        }} checked={this.state.sportPreference == true}></Checkbox>
                                         <label>Gastronomy</label>
 
-                                        <Checkbox style={{marginLeft:20,marginRight:10}} name="preferences" value="gastronomy;" onChange={(e)=>{this.setState({preferences:this.state.preferences+e.value,gastronomyPreference:!this.state.gastronomyPreference})}} checked={this.state.gastronomyPreference==true}></Checkbox>
+                                        <Checkbox style={{marginLeft: 20, marginRight: 10}} name="preferences"
+                                                  value="gastronomy;" onChange={(e) => {
+                                            this.setState({
+                                                preferences: this.state.preferences + e.value,
+                                                gastronomyPreference: !this.state.gastronomyPreference
+                                            })
+                                        }} checked={this.state.gastronomyPreference == true}></Checkbox>
                                         <label>Leisure</label>
 
-                                        <Checkbox style={{marginLeft:20,marginRight:10}} name="preferences" value="leisure;" onChange={(e)=>{this.setState({preferences:this.state.preferences+e.value,leisurePreference:!this.state.leisurePreference})}} checked={this.state.leisurePreference==true}></Checkbox>
+                                        <Checkbox style={{marginLeft: 20, marginRight: 10}} name="preferences"
+                                                  value="leisure;" onChange={(e) => {
+                                            this.setState({
+                                                preferences: this.state.preferences + e.value,
+                                                leisurePreference: !this.state.leisurePreference
+                                            })
+                                        }} checked={this.state.leisurePreference == true}></Checkbox>
 
 
                                         <div className={"admin"}>
@@ -171,8 +187,9 @@ export class Users extends React.Component {
                                             <Button style={{marginLeft: 10}} onClick={this.deleteAdmin}
                                                     label={"Remove Admin"}></Button>
                                         </div>
-                                        <Button style={{marginTop: 50,width:300}}  label={"Update user with id "+this.state.userId}onClick={this.updateUser}/>
-
+                                        <Button style={{marginTop: 50, width: 300}}
+                                                label={"Update user with id " + this.state.userId}
+                                                onClick={this.updateUser}/>
 
 
                                     </div>
@@ -209,35 +226,28 @@ export class Users extends React.Component {
                         <div className={'grupo'}>
                             <div className={'separador'}>
 
-                                    <label>Create User&nbsp;</label>
+                                <label>Create User&nbsp;</label>
                                 <br/>
-                                    <InputText placeholder={"User Mail"} className={'inputText'} name="userId"
-                                               onChange={this.onInputchange}/>
+                                <InputText placeholder={"User Mail"} className={'inputText'} name="userId"
+                                           onChange={this.onInputchange}/>
 
 
+                                <InputText placeholder={"User Name"} className={'inputText'} name="name"
+                                           onChange={this.onInputchange}/>
+                                <InputText placeholder={"User SurName"} className={'inputText'}
+                                           name="surname" onChange={this.onInputchange}/>
+                                <InputText placeholder={"User Password"} className={'inputText'}
+                                           name="password" onChange={this.onInputchange}/>
 
-                                    <InputText placeholder={"User Name"} className={'inputText'} name="name"
-                                               onChange={this.onInputchange}/>
-                                    <InputText placeholder={"User SurName"} className={'inputText'}
-                                               name="surname" onChange={this.onInputchange}/>
-                                    <InputText placeholder={"User Password"} className={'inputText'}
-                                               name="password" onChange={this.onInputchange}/>
 
-
-                                    <InputMask mask="9999-99-99" placeholder={"birthDate"} name={"birthDate"}
-                                               value={this.state.birthDate} slotChar={"yyyy-mm-dd"}
-                                               onChange={this.onInputchange}></InputMask>
+                                <InputMask mask="9999-99-99" placeholder={"birthDate"} name={"birthDate"}
+                                           value={this.state.birthDate} slotChar={"yyyy-mm-dd"}
+                                           onChange={this.onInputchange}></InputMask>
                                 <label>&nbsp; &nbsp;Admin &nbsp;</label>
-                                <TriStateCheckbox style={{marginBottom:10}} value={this.state.admin} onChange={(e) =>  this.setState({admin:e.value})}/>
-
-
 
 
                                 <Button style={{marginLeft: 10}} onClick={this.validUserId}
-                                            icon={'pi pi-check'}></Button>
-
-
-
+                                        icon={'pi pi-check'}></Button>
 
 
                                 <DataTable value={this.state.users}>
@@ -254,15 +264,9 @@ export class Users extends React.Component {
         )
     }
 
-    onInputchange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    getAllUsers=() => {
+    componentDidMount() {
         console.log(this.state.token)
-        const promise = axios.get('http://3.95.8.159:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://54.234.64.228:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -276,26 +280,49 @@ export class Users extends React.Component {
             console.log(e);
         });
     }
-    getUserById=() => {
-            const promise = axios.get('http://3.95.8.159:44360/api/User/GetUserId?id='+this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
-            const promiseResult = promise.then((respuesta) => {
-                respuesta.data.forEach(m => {
-                    if (m.Admin === true) {
-                        m.Admin = '✓';
-                    } else {
-                        m.Admin = 'X';
-                    }
-                })
-                console.log(respuesta.data)
-                this.setState({users: respuesta.data});
-            }).catch(e => {
-                console.log(e);
-            });
+
+    onInputchange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    getAllUsers = () => {
+        console.log(this.state.token)
+        const promise = axios.get('http://54.234.64.228:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promiseResult = promise.then((respuesta) => {
+            respuesta.data.forEach(m => {
+                if (m.Admin === true) {
+                    m.Admin = '✓';
+                } else {
+                    m.Admin = 'X';
+                }
+            })
+            this.setState({users: respuesta.data});
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+    getUserById = () => {
+        const promise = axios.get('http://54.234.64.228:44360/api/User/GetUserId?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promiseResult = promise.then((respuesta) => {
+            respuesta.data.forEach(m => {
+                if (m.Admin === true) {
+                    m.Admin = '✓';
+                } else {
+                    m.Admin = 'X';
+                }
+            })
+            console.log(respuesta.data)
+            this.setState({users: respuesta.data});
+        }).catch(e => {
+            console.log(e);
+        });
 
 
     }
-    getUserByName =() => {
-        const promise = axios.get('http://3.95.8.159:44360/api/User/GetUserName?n='+this.state.name, {headers: {'Access-Control-Allow-Origin': '*'}})
+    getUserByName = () => {
+        const promise = axios.get('http://54.234.64.228:44360/api/User/GetUserName?n=' + this.state.name, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -313,46 +340,45 @@ export class Users extends React.Component {
     checkerUser = () => {
 
 
-            const promise = axios.get('http://3.95.8.159:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
-            const promiseResult = promise.then((resolveResult) => {
-                    this.setState({visible:false})
+        const promise = axios.get('http://54.234.64.228:44360//api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promiseResult = promise.then((resolveResult) => {
+                this.setState({visible: false})
 
-                }
-                , (rejectedResult) => {
+            }
+            , (rejectedResult) => {
 
-                    console.error(rejectedResult.statusText)
-                });
+                console.error(rejectedResult.statusText)
+            });
 
 
     }
     updateUser = () => {
-            const promise = axios.put('http://3.95.8.159:44360/api/User?id=' + this.state.userId.toLocaleLowerCase() + '&n=' + this.state.name.toLocaleLowerCase() + '&s=' + this.state.surname.toLocaleLowerCase() + '&f=' + this.state.birthDate + '&p=' + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
-
-            const promiseResult = promise.then((resolveResult) => {
-
-                    console.log(resolveResult);
-                    alert("el Usuario "+ this.state.userId + " ha sido Modificado")
-
-
-                }
-                , (rejectedResult) => {
-
-                    console.error(rejectedResult.statusText)
-                });
-
-
-
-    }
-    validUserId =() => {
-        console.log(this.state.userId.toLocaleLowerCase())
-        const promise = axios.get('http://3.95.8.159:44360/api/User/CheckMail?m=' + this.state.userId.toLocaleLowerCase(), {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://54.234.64.228:44360/api/User?id=' + this.state.userId.toLocaleLowerCase() + '&n=' + this.state.name.toLocaleLowerCase() + '&s=' + this.state.surname.toLocaleLowerCase() + '&f=' + this.state.birthDate + '&p=' + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
 
         const promiseResult = promise.then((resolveResult) => {
 
-            console.log(resolveResult.data)
-                if(resolveResult.data==1){
+                console.log(resolveResult);
+                alert("el Usuario " + this.state.userId + " ha sido Modificado")
+
+
+            }
+            , (rejectedResult) => {
+
+                console.error(rejectedResult.statusText)
+            });
+
+
+    }
+    validUserId = () => {
+        console.log(this.state.userId.toLocaleLowerCase())
+        const promise = axios.get('http://54.234.64.228:44360/api/User/CheckMail?m=' + this.state.userId.toLocaleLowerCase(), {headers: {'Access-Control-Allow-Origin': '*'}})
+
+        const promiseResult = promise.then((resolveResult) => {
+
+                console.log(resolveResult.data)
+                if (resolveResult.data == 1) {
                     this.createUser()
-                }else{
+                } else {
                     alert("ID INCORRECTA")
                 }
             }
@@ -363,7 +389,7 @@ export class Users extends React.Component {
     }
     createUser = () => {
 
-        const promise = axios.post('http://3.95.8.159:44360/api/User',{
+        const promise = axios.post('http://54.234.64.228:44360/api/User', {
             UserId: this.state.userId.toLocaleLowerCase(),
             Name: this.state.name.toLocaleLowerCase(),
             Surname: this.state.surname.toLocaleLowerCase(),
@@ -371,11 +397,12 @@ export class Users extends React.Component {
             FechaNacimiento: this.state.birthDate,
             Preferences: "1234",
             Admin: this.state.admin,
-            Events: null} ,{headers: {'Access-Control-Allow-Origin': '*'}})
+            Events: null
+        }, {headers: {'Access-Control-Allow-Origin': '*'}})
 
-        const promiseResult = promise.then((resolveResult) => {
-                console.log(resolveResult);
-                alert("El Usuario "+ this.state.userId + " ha sido Creado")
+        const promiseResult = promise.then(() => {
+                this.getAllUsers()
+                alert("El Usuario " + this.state.userId + " ha sido Creado")
 
             }
             , (rejectedResult) => {
@@ -385,10 +412,10 @@ export class Users extends React.Component {
 
     }
     makeAdmin = () => {
-        const promise = axios.put('http://3.95.8.159:44360/api/User/AdminT?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://54.234.64.228:44360/api/User/AdminT?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 console.log(resolveResult);
-                alert("Ahora "+ this.state.userId + " Es Admin")
+                alert("Ahora " + this.state.userId + " Es Admin")
 
 
             }
@@ -400,7 +427,7 @@ export class Users extends React.Component {
 
     }
     deleteAdmin = () => {
-        const promise = axios.put('http://3.95.8.159:44360/api/User/AdminF?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://54.234.64.228:44360/api/User/AdminF?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 resolveResult.data.forEach(m => {
                     if (m.Admin === true) {
@@ -410,7 +437,7 @@ export class Users extends React.Component {
                     }
                 })
                 console.log(resolveResult);
-                alert("Ahora "+ this.state.userId + " No es Admin")
+                alert("Ahora " + this.state.userId + " No es Admin")
 
             }
             , (rejectedResult) => {
@@ -425,22 +452,20 @@ export class Users extends React.Component {
             alert('Debes Introducir un Valor')
 
         } else {
-            const promise = axios.get('http://3.95.8.159:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+            const promise = axios.get('http://54.234.64.228:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
             const promiseResult = promise.then((resolveResult) => {
                     if (resolveResult.data == true) {
                         const promise = axios.delete('http://3.95.8.159:44360/api/User?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
-                        const promiseResult = promise.then((resolveResult) => {
+                        const promiseResult = promise.then(() => {
+                                this.getAllUsers()
 
                                 console.log(resolveResult);
-                                alert("Se ha borrado el usuario "+this.state.userId)
-
+                                alert("Se ha borrado el usuario " + this.state.userId)
                             }
-                            , (rejectedResult) => {
+                        )
 
-                                console.error(rejectedResult.statusText)
-                            });
 
-                    }else{
+                    } else {
                         alert("La id Introducida incorrecta ")
 
                     }
@@ -452,7 +477,6 @@ export class Users extends React.Component {
         }
 
     }
-
 
 
 }

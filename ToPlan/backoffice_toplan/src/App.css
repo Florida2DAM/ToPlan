@@ -1,6 +1,5 @@
 body{
     scroll-behavior: smooth;
-    overflow: hidden;
 }
 .App {
     display: flex;
