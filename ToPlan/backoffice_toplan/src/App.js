@@ -22,6 +22,7 @@ import {InputMask} from "primereact/inputmask";
 import {InputText} from "primereact/inputtext";
 import axios from "axios";
 import logo from "./assets/circulos.png"
+import {Password} from "primereact/password";
 
 
 
@@ -60,6 +61,7 @@ export class App extends React.Component  {
                                 <Link className={"link"} to="/users">Users </Link><br/>
                                 <span></span>
                                 <Link className={"link"} to="/events">Events</Link>
+                                <Link className={"link"} to="/typePlan">TypePlan</Link>
                             </nav>
                             <Switch>
                                 <Route path="/users">
@@ -67,6 +69,9 @@ export class App extends React.Component  {
                                 </Route>
                                 <Route path="/events">
                                     <Events/>
+                                </Route>
+                                <Route path="/typePlan">
+                                    <TypePlan/>
                                 </Route>
 
 
@@ -96,7 +101,7 @@ export class App extends React.Component  {
                             <div className={"inputs"}>
                                 <InputText  name="userId" placeholder={"User Mail"} onChange={this.onInputchange}  />
                                 <br />
-                                <InputText style={{marginTop:10}} name ="password"placeholder={"Password"} onChange={this.onInputchange}/>
+                                <Password style={{marginTop:10}} name ="password"placeholder={"Password"} onChange={this.onInputchange}/>
                             </div>
                             <div style={{ display:"flex",
                                 flexDirection: "row",
@@ -194,30 +199,32 @@ export class App extends React.Component  {
 
     }
 
-    login = async ()=>{
-            console.log(this.state.checker,this.state.checkeruser)
+    login = async ()=> {
+        console.log(this.state.checker, this.state.checkeruser)
 
-            if (this.state.checker==true && this.state.checkeruser) {
-                console.log("Entro")
+        if (this.state.checker == true && this.state.checkeruser) {
+            console.log("Entro")
 
-                const promise = axios.get('http://3.95.8.159:44360/api/User/GetPassword?id=' + this.state.userId + "&p=" + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
-                const promiseResult = promise.then((respuesta) => {
-                    console.log(respuesta.data)
-                    if (respuesta.data == true) {
-                        alert('correct')
+            const promise = axios.get('http://3.95.8.159:44360/api/User/GetPassword?id=' + this.state.userId + "&p=" + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
+            const promiseResult = promise.then((respuesta) => {
+                console.log(respuesta.data)
+                if (respuesta.data == true) {
+                    alert('correct')
 
-                        this.setState({visible: false,displayModal:true})
-                    } else {
-                        alert('Login Incorrecto')
+                    this.setState({visible: false, displayModal: true})
+                } else {
+                    alert('Login Incorrecto')
 
-                        return false
-                    }
-                }).catch(e => {
-                    console.log(e);
-                    return null
+                    return false
+                }
+            }).catch(e => {
+                console.log(e);
+                return null
 
-                });
-            }
-
+            });
         }
+
+    }
+}
+export default App
 
