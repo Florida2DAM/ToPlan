@@ -77,12 +77,13 @@ export class PlanDetailsScreen extends Component {
         .put(urlAddUser+this.props.route.params.planScreen+'&n='+this.state.idUser)
             .then(response => {
               if (response.data) {
+                alert(response.data)
                 this.getPlanData();
                 this.setState({visibilityBtnConfirm:'none'})
                 this.setState({visibilityBtnDeny:'flex'})
 
               } else {
-                alert('Ningun ');
+                alert(response.data);
               }
             })
     }catch(e){
@@ -130,13 +131,6 @@ export class PlanDetailsScreen extends Component {
     }catch (error){
       console.log(error);
     }
-  }
-  evenOfScreen = () => {
-    let plan = this.props.route.params.planScreen;
-   this.setState({IdEvent:plan})
-
-
-
   }
 
 

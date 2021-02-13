@@ -91,21 +91,24 @@ export class InicioScreen extends Component {
 
     componentDidMount = () => {
       this.getEventsByDate(urlEventsByDate);
-      /*this.dropStoreg();*/
+
 
 
     };
-    nextScreen = () => {
-        //this.props.navigation.navigate('Login');
-        this.getStorage().then(r => alert(this.state.userEmail))
 
-        /*this.props.navigation.navigate('Details')*/
-    }
-    loginScreen = (evento) => {
+    detailsScreen = (evento) => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Details'});
+            }else {this.props.navigation.navigate('Details',{planScreen:evento});}
+        })
 
-        let eventId = this.state.planes[0].EventId;
-        this.props.navigation.navigate('Details',{planScreen:evento});
+
+
     }
+    registerScreen = () => {
+        this.props.navigation.navigate('Register');
+    };
     userScreen = () => {
         this.getStorage().then(r => {
             if (this.state.userEmail === null){
@@ -135,7 +138,7 @@ export class InicioScreen extends Component {
             <>
                 <View style={styleLogin.loginContainer}>
                     <View style={styleLogin.logoContainer}>
-                        <Pressable onPress={this.loginScreen}><Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/></Pressable>
+                        <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
 
                         <Text h3>ToPlan</Text>
                     </View>
@@ -144,10 +147,10 @@ export class InicioScreen extends Component {
                             data={this.state.planes}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5}}
-                            renderItem={({item}) => (<Pressable onPress={() => this.loginScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
-                    <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>
+                    <View style={styleLogin.navContainer}><NavBar create={this.registerScreen} user={this.userScreen} find={this.exploreScreen}/></View>
                 </View>
             </>
         );

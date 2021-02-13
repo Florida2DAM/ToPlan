@@ -14,6 +14,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const urlTypes = 'http://3.95.8.159:44360/api/TypePlan/ListDTO';
 const errorInputProvince = React.createRef();
@@ -25,6 +26,7 @@ export class CreatePlanScreen extends Component {
         super(props);
 
         this.state = {
+            userEmail:'',
             city: '',
             province: '',
             adress: '',
@@ -80,7 +82,7 @@ export class CreatePlanScreen extends Component {
             Description: this.state.description,
             MaxMembers: Number.parseInt(this.state.max, 10),
             Direccion: this.state.adress,
-            UserId: 'admin',
+            UserId: this.state.userEmail,
             TypePlanId: this.state.type,
         };
         try {
@@ -126,7 +128,6 @@ export class CreatePlanScreen extends Component {
             this.setState({errorMembers: 'INSERT A VALID NUMBER OF MEMBERS'});
             aux = false;
         }
-        alert;
         if (aux) {
             this.createEvent();
         }
@@ -140,9 +141,18 @@ export class CreatePlanScreen extends Component {
         this.setState({errorType: ''});
         this.setState({errorMembers: ''});
     };
+    async getStorage() {
+        try{
+            this.setState({userEmail: await AsyncStorage.getItem('userKey')});
+
+        }catch (e) {
+
+        }
+    }
 
     componentDidMount = () => {
-        this.getTypes(urlTypes);
+        this.getStorage().then(r => {this.getTypes(urlTypes);})
+
     };
 
     render() {

@@ -9,6 +9,7 @@ import {Text} from 'react-native-elements';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const urlEventsBySport = 'http://3.95.8.159:44360/api/Event/Sport';
 const urlEventsByLeisure = 'http://3.95.8.159:44360/api/Event/Leisure';
@@ -118,6 +119,20 @@ export class ExploreScreen extends Component {
         this.props.navigation.navigate('CreatePlan');
 
     }
+    async getStorage() {
+        try{
+            this.setState({userEmail: await AsyncStorage.getItem('userKey')});
+
+        }catch (e) {
+
+        }
+    }
+    detailsScreen = (evento) => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Details'});
+            }else {this.props.navigation.navigate('Details',{planScreen:evento});}
+        })}
 
     render() {
         return (
@@ -147,19 +162,19 @@ export class ExploreScreen extends Component {
                             data={this.state.sports}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5, display:this.state.sportVisibility }}
-                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                         <FlatList
                             data={this.state.leisure}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5, display:this.state.leisureVisibility }}
-                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                         <FlatList
                             data={this.state.gastronomy}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5, display:this.state.gastronomyVisibility }}
-                            renderItem={({item}) => (<EventMiddle element={item}/>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
                     <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>

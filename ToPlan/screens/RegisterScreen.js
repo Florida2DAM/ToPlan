@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Linking,
     Image,
@@ -8,7 +8,7 @@ import {
     View,
     Pressable, Alert,
 } from 'react-native';
-import {CheckBox, Input} from 'react-native-elements';
+import {CheckBox, Input, Overlay} from 'react-native-elements';
 import {ButtonPlan} from "../Components/button/ButtonPlan"
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,6 +17,8 @@ const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
 const errorInputSurname = React.createRef();
+
+
 
 
 export class RegisterScreen extends React.Component {
@@ -36,6 +38,7 @@ export class RegisterScreen extends React.Component {
             date: new Date(Date.now()),
             password:'',
             confirmPassword:'',
+            visibilityOverlay:false,
         }
     }
     setLink = () =>{
@@ -53,6 +56,7 @@ export class RegisterScreen extends React.Component {
             Surname: this.state.surname,
             Password: this.state.password,
             FechaNacimiento: birthDate,
+
         };
 
             try {
@@ -118,7 +122,13 @@ export class RegisterScreen extends React.Component {
         this.setState({ visibleDataTimePicker: true });
     };
 
+    /*componentDidMount() {
+        alert(this.state.visibilityOverlay);
+    }*/
+
+
     render() {
+
 
         return (
             <ScrollView>
@@ -130,6 +140,9 @@ export class RegisterScreen extends React.Component {
                         />
                     </View>
                     <View style={styles.containerInfo}>
+                        <Overlay isVisible={this.state.visibilityOverlay} onBackdropPress={() => {this.setState({visibilityOverlay:false})}}>
+                            <Text>Hello from Overlay!</Text>
+                        </Overlay>
                         <Image
                             style={styles.userLogo}
                             source={require('../Assets/user.png')}
@@ -156,7 +169,7 @@ export class RegisterScreen extends React.Component {
                         <View style={styles.containerCheckBox}>
                             <CheckBox checked={this.state.checked}
                                       onPress={() => this.setState({checked: !this.state.checked})}/>
-                            <Text style={{color: 'blue',marginTop:8}} onPress={() => Linking.openURL('http://google.com')}>Aceptar Terminos y Condiciones</Text>
+                            <Text style={{color: 'blue',marginTop:8}} onPress={() => this.setState({visibilityOverlay:true})}>Aceptar Terminos y Condiciones</Text>
                         </View>
                     </View>
                         <ButtonPlan metodo={this.checkConditions} title={'Sign Up'} color={'orange'} style={styles.button} />
@@ -166,6 +179,7 @@ export class RegisterScreen extends React.Component {
 
         )
     }
+
 
 }
 const styles = StyleSheet.create({

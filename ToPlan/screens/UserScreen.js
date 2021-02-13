@@ -4,6 +4,7 @@ import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from "../Components/navBar/NavBar"
 import axios from 'axios';
 import TagUser from '../Components/TagUser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const urlGetEventsById = 'http://3.95.8.159:44360/api/Event/EventsUser?id=';
 const urlGetUserById = 'http://3.95.8.159:44360/api/User1?id=';
 
@@ -11,8 +12,19 @@ export class UserScreen extends React.Component {
     constructor(props) {
         super();
         this.state ={
+            userEmail:'',
             planes:[],
             user:{},
+            displayErrorEvents:'none',
+        }
+    }
+
+    async getStorage() {
+        try{
+            this.setState({userEmail: await AsyncStorage.getItem('userKey')});
+
+        }catch (e) {
+
         }
     }
     getEventsByIdUser = async (user) => {
@@ -21,7 +33,7 @@ export class UserScreen extends React.Component {
                 .get(urlGetEventsById + user )
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+                        this.setState({displayErrorEvents:'flex'});
                     }else {
                         this.setState({planes: response.data});
                     }
@@ -58,10 +70,23 @@ export class UserScreen extends React.Component {
         this.props.navigation.navigate('CreatePlan');
 
     }
+    detailsScreen = (evento) => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Details'});
+            }else {this.props.navigation.navigate('Details',{planScreen:evento});}
+        })
+
+
+
+    }
 
     componentDidMount() {
-        this.getEventsByIdUser('admin');
-        this.getUserById('rafa@mail.com');
+        this.getStorage().then(r => {
+            this.getUserById(this.state.userEmail);
+            this.getEventsByIdUser(this.state.userEmail);
+        })
+
     }
 
     render() {
@@ -75,18 +100,17 @@ export class UserScreen extends React.Component {
                     </View>
                         <View>
                             <TagUser user={this.state.user}/>
-
-
-
-
-
                     </View>
+                        <View style={{alignItems:'center',marginTop:'50%',display:this.state.displayErrorEvents}}>
+                            <Text>Todavia no has creado ningun evento</Text>
+                        </View>
+
 
                         <FlatList
                             data={this.state.planes}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5}}
-                            renderItem={({item}) => (<Pressable onPress={this.loginScreen}><EventMiddle element={item}/></Pressable>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
 
 
