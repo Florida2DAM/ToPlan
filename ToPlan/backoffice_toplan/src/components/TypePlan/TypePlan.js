@@ -21,12 +21,13 @@ export class TypePlan extends Component {
         this.state = {
             TypePlans: [],
             Data: '',
+            isHidden: false,
         }
         this.onInputChange = this.onInputChange.bind(this);
     }
 
     componentDidMount() {
-        axios.get("http://3.95.8.159:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
+        axios.get("http://54.234.64.228:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
             this.setState({TypePlans: response.data})
             console.log(response);
         })).catch((error => {
@@ -46,7 +47,7 @@ export class TypePlan extends Component {
 
     onSubmitUpdate = () => {
 
-        const promiseUpdate = axios.put("http://3.95.8.159:44360/api/TypesPlan/id?=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.put("http://54.234.64.228:44360/api/TypesPlan/id?=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
             console.log("Update succesfully: " + response)
         }).catch(e => {
@@ -56,7 +57,7 @@ export class TypePlan extends Component {
     }
 
     onSubmitDelete = () => {
-        const promiseUpdate = axios.delete("http://3.95.8.159:44360/api/TypesPlan/id?=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.delete("http://54.234.64.228:44360/api/TypesPlan/id?=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(response => {
             console.log("Update succesfully: " + response)
         }).catch(e => {
@@ -65,7 +66,7 @@ export class TypePlan extends Component {
     }
 
     onSubmitInsert = () => {
-        axios.get('http://3.95.8.159:44360/api/Event/CheckType?id=' + this.state.TypeName, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
+        axios.get('http://54.234.64.228:44360/api/Event/CheckType?id=' + this.state.TypeName, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
             (response) => {
                 if (response.data === true) {
                     axios.post('http://3.95.8.159:44360/api/TypePlan', {
@@ -83,6 +84,22 @@ export class TypePlan extends Component {
         )
     }
 
+    checkerType = () => {
+
+        const promise = axios.get('http://54.234.64.228:44360/api/TypePlan/Check?id=' + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promiseResult = promise.then((resolveResult) => {
+                if (resolveResult.data === true) {
+                    console.log(resolveResult.data);
+                    this.setState({isHidden: !this.state.isHidden});
+                } else {
+                    alert("No existe ese evento id");
+                }
+            }
+            , (rejectedResult) => {
+                console.error(rejectedResult.statusText)
+            });
+    }
+
     render() {
         return (
             <div>
@@ -97,17 +114,21 @@ export class TypePlan extends Component {
                                                    name="IdTypePlan"
                                                    onChange={this.onInputChange}
                                         />
-                                        <InputText placeholder={"Type Name"} type={'text'}
-                                                   name="TypeName"
-                                                   onChange={this.onInputChange}
-                                        />
-                                        <InputText placeholder={"Type Subtype"} type={'text'}
-                                                   name="Subtype"
-                                                   onChange={this.onInputChange}
-                                        />
-                                        <br/>
-                                        <Button style={{margin: 15}} label={"Update Type"}
-                                                onClick={this.onSubmitUpdate}/>
+                                        <Button style={{marginLeft: 10}} onClick={this.checkerType}
+                                                icon={'pi pi-check'}/>
+                                        <div hidden={!this.state.isHidden}>
+                                            <InputText placeholder={"Type Name"} type={'text'}
+                                                       name="TypeName"
+                                                       onChange={this.onInputChange}
+                                            />
+                                            <InputText placeholder={"Type Subtype"} type={'text'}
+                                                       name="Subtype"
+                                                       onChange={this.onInputChange}
+                                            />
+                                            <br/>
+                                            <Button style={{margin: 15}} label={"Update Type"}
+                                                    onClick={this.onSubmitUpdate}/>
+                                        </div>
                                     </div>
                                 </TabPanel>
                                 <TabPanel header="Insertar">
