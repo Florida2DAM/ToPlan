@@ -13,6 +13,7 @@ import {ButtonPlan} from "../Components/button/ButtonPlan"
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Terms from '../Components/terms/Terms';
 const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
@@ -141,7 +142,15 @@ export class RegisterScreen extends React.Component {
                     </View>
                     <View style={styles.containerInfo}>
                         <Overlay isVisible={this.state.visibilityOverlay} onBackdropPress={() => {this.setState({visibilityOverlay:false})}}>
-                            <Text>Hello from Overlay!</Text>
+                            <View>
+                                <ScrollView>
+                                    <Terms/>
+                                    <ButtonPlan metodo={() => {this.setState({visibilityOverlay:false})}} title={'Readed'} color={'orange'} style={styles.button} />
+
+                                </ScrollView>
+
+                            </View>
+
                         </Overlay>
                         <Image
                             style={styles.userLogo}
