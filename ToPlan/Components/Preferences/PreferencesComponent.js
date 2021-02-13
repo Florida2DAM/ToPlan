@@ -26,69 +26,35 @@ import {
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import DropDownPicker from "react-native-dropdown-picker";
 
 
 
 class PreferencesComponent extends React.Component {
     constructor(props) {
         super();
-        this.state={
-            opacityCinema:.2,
-            opacityOcio:.2,
-            opacityPark:.2,
-            opacityMuseum:.2,
-            preferences: '',
-
-            pressedCinema:false,
-            pressedMuseum:false,
-            pressedSport:false,
-            pressedFood:false,
-
-
-            changedOpacity:false
+        this.state= {
+            preference:'',
         }
-        this.updatePreferences=this.updatePreferences.bind(this)
     }
     render()
     {
-        const user=[this.props.user]
-
         return (
             <>
                 <View style={{display:"flex",flexDirection:"column"}}>
-                    
+                    <DropDownPicker
+                        items={this.props.options}
+                        placeholder='Chose a type'
+                        containerStyle={{height: 40, width: '80%'}}
+                        onChangeItem={item =>this.props.vueltaPreference({preference:item.label})}
+                    />
+
                 </View>
             </>
         );
 
     }
-    updatePreferences = () => {
 
-        let date = this.user.date;
-        let birthDate = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
-        let user = {
-            UserId: this.user.Email,
-            Name: this.user.Name,
-            Surname: this.user.Surname,
-            Password: this.user.Password,
-            FechaNacimiento: this.user.FechaNacimiento,
-            Preferences: this.state.preferences,
-        };
-
-        try {
-            axios.post('http://3.95.8.159:44360/api/User', user)
-                .then((response) => {
-                    alert("Insertado correctamente");
-                }, (error) => {
-                    alert(error);
-                })
-                .catch(function(error) {
-                    alert(error);
-                });
-        } catch (error) {
-            /*console.log(err);*/
-        }
-    }
 
 
 };

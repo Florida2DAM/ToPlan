@@ -97,7 +97,7 @@ export class CreatePlanScreen extends Component {
                     alert(error);
                 });
         } catch (error) {
-            console.log(err);
+            console.log(error);
         }
     };
 

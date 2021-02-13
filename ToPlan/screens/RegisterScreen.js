@@ -18,6 +18,7 @@ const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
 const errorInputSurname = React.createRef();
+const urlPostUser= 'http://3.95.8.159:44360/api/User/WithoutPreferences';
 
 
 
@@ -61,7 +62,7 @@ export class RegisterScreen extends React.Component {
         };
 
             try {
-                axios.post('http://3.95.8.159:44360/api/User/WithoutPreferences', user)
+                axios.post(urlPostUser, user)
                     .then((response) => {
                         alert("Insertado correctamente");
                     }, (error) => {
