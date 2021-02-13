@@ -193,7 +193,7 @@ namespace ToPlan.Models
                 x = context.Events.Single(p => p.EventId == id);
                 t = context.TypePlans.Single(p => p.TypePlanId == x.TypePlanId);
                 u = context.Users.Single(p => p.UserId == x.UserId);
-                return new EventDTO(x.City, x.EventDate, t.Name, t.Subtype, u.Name, u.Surname);
+                return new EventDTO(x.City, x.EventDate, t.Name, t.Subtype, u.Name, u.Surname, x.EventId);
             }
             catch (Exception e)
             {
@@ -335,7 +335,7 @@ namespace ToPlan.Models
                     {
                         t = context.TypePlans.Single(p => p.TypePlanId == aux2[i].TypePlanId);
                         u = context.Users.Single(p => p.UserId == aux2[i].UserId);
-                        final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname));
+                        final.Add(new EventDTO(aux2[i].City, aux2[i].EventDate, t.Name, t.Subtype, u.Name, u.Surname, aux2[i].EventId));
                     }
                 }
                 return final;

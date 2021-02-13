@@ -45,14 +45,16 @@ namespace ToPlan.Models
         public string Category { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
+        public int EventId { get; set; }
 
-        public EventDTO(string c, string d, string cat, string t, string n, string s)
+        public EventDTO(string c, string d, string cat, string t, string n, string s, int i)
         {
             this.City = char.ToUpper(c[0]) + c.Substring(1);
             this.Date = d;
             this.Category = char.ToUpper(cat[0]) + cat.Substring(1);
             this.Type = char.ToUpper(t[0]) + t.Substring(1);
             this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1);
+            this.EventId = i;
         }
     }
 
