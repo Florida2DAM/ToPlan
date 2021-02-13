@@ -101,8 +101,10 @@ export class InicioScreen extends Component {
 
         /*this.props.navigation.navigate('Details')*/
     }
-    loginScreen = () => {
-        this.props.navigation.navigate('Login',{screen:'Details'});
+    loginScreen = (evento) => {
+
+        let eventId = this.state.planes[0].EventId;
+        this.props.navigation.navigate('Details',{planScreen:evento});
     }
     userScreen = () => {
         this.getStorage().then(r => {
@@ -142,7 +144,7 @@ export class InicioScreen extends Component {
                             data={this.state.planes}
                             keyExtractor={(item, index) => index.toString()}
                             style={{padding: 5}}
-                            renderItem={({item}) => (<Pressable onPress={this.loginScreen}><EventMiddle element={item}/></Pressable>)}>
+                            renderItem={({item}) => (<Pressable onPress={() => this.loginScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
                     <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>

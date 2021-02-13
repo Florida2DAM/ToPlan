@@ -28,23 +28,34 @@ export class PlanDetailsScreen extends Component {
 
     this.state = {
       PlanObject: {},
-      IdEvent: 1,
-      IdUser: 'admin',
-      messageBtn: '',
+      idUser: '',
       visibilityBtnConfirm:'flex',
       visibilityBtnDeny:'none'
     }
   };
+  async getStorage() {
+    try{
+      this.setState({idUser: await AsyncStorage.getItem('userKey')});
+
+    }catch (e) {
+
+    }
+  }
 
   componentDidMount = () => {
-    this.getPlanData();
-    this.getCheck();
+
+    this.getStorage().then(r => {
+      this.getPlanData();
+
+      this.getCheck()})
+
+
   }
 
   getPlanData = () => {
     try {
       axios
-        .get(urlEventsData + this.state.IdEvent)
+        .get(urlEventsData + this.props.route.params.planScreen)
         .then(response => {
           if (response.data === null || response.data.length === 0) {
             alert('error de conexion');
@@ -63,32 +74,49 @@ export class PlanDetailsScreen extends Component {
   addUser = () =>{
     try{
         axios
-        .put(urlAddUser+this.state.IdEvent+'&n='+this.state.IdUser)
-        .then(this.setState({visibilityBtnConfirm:'none'}))
-        .then(this.setState({visibilityBtnDeny:'flex'}))
-        .then(this.setState({messageBtn:'Deny assistance'}))
-        .then(this.getPlanData)
+        .put(urlAddUser+this.props.route.params.planScreen+'&n='+this.state.idUser)
+            .then(response => {
+              if (response.data) {
+                this.getPlanData();
+                this.setState({visibilityBtnConfirm:'none'})
+                this.setState({visibilityBtnDeny:'flex'})
+
+              } else {
+                alert('Ningun ');
+              }
+            })
     }catch(e){
       console.log(e);
     }
+    this.getPlanData();
   }
 
   RemoveUser = () =>{
     try{
         axios
-        .put(urlRemoveUser+this.state.IdEvent+'&n='+this.state.IdUser)
-        .then(this.setState({visibilityBtnConfirm:'flex'}))
-        .then(this.setState({visibilityBtnDeny:'none'}))
-        .then(this.setState({messageBtn:'Confirm assistance'}))
-        .then(this.getPlanData)
+        .put(urlRemoveUser+this.props.route.params.planScreen+'&n='+this.state.idUser)
+            .then(response => {
+              if (response.data) {
+                this.getPlanData();
+                this.setState({visibilityBtnConfirm:'flex'})
+                this.setState({visibilityBtnDeny:'none'})
+
+              } else {
+                alert('Ningun ');
+              }
+            })
+
+
     }catch(e){
       console.log(e);
     }
+    this.getPlanData();
+
   }
 
   getCheck = async () =>{
     try{
-        axios.get(urlCheck+this.state.IdEvent+'&n='+this.state.IdUser)
+        axios.get(urlCheck+this.props.route.params.planScreen+'&n='+this.state.idUser)
         .then(response =>{
             this.setState({aux:response.data});
             if(this.state.aux){
@@ -102,6 +130,13 @@ export class PlanDetailsScreen extends Component {
     }catch (error){
       console.log(error);
     }
+  }
+  evenOfScreen = () => {
+    let plan = this.props.route.params.planScreen;
+   this.setState({IdEvent:plan})
+
+
+
   }
 
 
@@ -146,14 +181,12 @@ export class PlanDetailsScreen extends Component {
                     <View>
                       {/* Aqui los componentes de las personas en una flatlist primero hacer pruebas*/}
                       <View style={styleDetails.planOption}>
-                        <ScrollView>
                           <FlatList
                             data={this.state.PlanObject.Lista}
                             keyExtractor={(item, index) => index.toString()}
                             style={{ padding: 2, width: 500 }}
                             renderItem={({ item }) => (<PlanPeople element={item} />)}>
                           </FlatList>
-                        </ScrollView>
                       </View>
                     </View>
                   </View>
@@ -169,7 +202,7 @@ export class PlanDetailsScreen extends Component {
           </View>
         </ScrollView>
         <View style={styleDetails.navContainer}>
-          <NavBar></NavBar>
+          <NavBar/>
         </View>
       </>
     );
