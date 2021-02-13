@@ -377,7 +377,7 @@ namespace ToPlan.Models
                             return false;
                         }
                     }
-                    if (aux.Length == 0)
+                    if (u.Preferences==null||aux.Length==0||u.Preferences.Equals(""))
                     {
                         u.Preferences = p1;
                     }
