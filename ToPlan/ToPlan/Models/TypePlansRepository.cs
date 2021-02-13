@@ -90,6 +90,30 @@ namespace ToPlan.Models
             }
         }
 
+        internal bool CheckId(int id)
+        {
+            ToPlanContext context = new ToPlanContext();
+            List<TypePlan> t;
+            bool aux = false; ;
+            try
+            {
+                t = context.TypePlans.ToList();
+                for(int i = 0; i < t.Count; i++)
+                {
+                    if(id == t[i].TypePlanId)
+                    {
+                        aux = true;
+                    }
+                }
+                return aux;
+            }catch (Exception e)
+            {
+                Debug.WriteLine("Error de conexion");
+                return false;
+            }
+
+        }
+
         private TypePlanDTO ToDTO(TypePlan p)
         {
             return new TypePlanDTO(p.TypePlanId, p.Subtype);

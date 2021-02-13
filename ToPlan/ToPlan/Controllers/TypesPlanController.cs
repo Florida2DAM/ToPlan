@@ -17,6 +17,14 @@ namespace ToPlan.Controllers
             return rep.GetTypes();
         }
 
+        //Devuelve true si existe un type con esa id
+        [Route("api/TypePlan/Check")]
+        public bool GetCheckTypes(int id)
+        {
+            TypePlansRepository rep = new TypePlansRepository();
+            return rep.CheckId(id);
+        }
+
         //Devuelve una lista con los tipos de planes en formato TypePlanDTO
         [Route("api/TypePlan/ListDTO")]
         public List<TypePlanDTO> GetListTypesDTO()
