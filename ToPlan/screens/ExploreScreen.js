@@ -95,7 +95,7 @@ export class ExploreScreen extends Component {
     };
 
     showGastronomy = () => {
-        this.setState({sporVisibility: 'none'});
+        this.setState({sportVisibility: 'none'});
         this.setState({leisureVisibility: 'none'});
         this.setState({gastronomyVisibility: 'flex'});
     }

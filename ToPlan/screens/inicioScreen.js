@@ -150,7 +150,7 @@ export class InicioScreen extends Component {
                             renderItem={({item}) => (<Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle element={item}/></Pressable>)}>
                         </FlatList>
                     </View>
-                    <View style={styleLogin.navContainer}><NavBar create={this.registerScreen} user={this.userScreen} find={this.exploreScreen}/></View>
+                    <View style={styleLogin.navContainer}><NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/></View>
                 </View>
             </>
         );

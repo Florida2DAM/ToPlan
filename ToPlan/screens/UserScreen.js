@@ -5,6 +5,7 @@ import {NavBar} from "../Components/navBar/NavBar"
 import axios from 'axios';
 import TagUser from '../Components/TagUser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PreferencesComponent from '../Components/Preferences/PreferencesComponent';
 const urlGetEventsById = 'http://3.95.8.159:44360/api/Event/EventsUser?id=';
 const urlGetUserById = 'http://3.95.8.159:44360/api/User1?id=';
 
@@ -25,6 +26,13 @@ export class UserScreen extends React.Component {
 
         }catch (e) {
 
+        }
+    }
+    removeUserStorage = async () => {
+        try {
+            await AsyncStorage.removeItem('userKey');
+        } catch(e) {
+            // remove error
         }
     }
     getEventsByIdUser = async (user) => {
@@ -76,9 +84,12 @@ export class UserScreen extends React.Component {
                 this.props.navigation.navigate('Login',{screen:'Details'});
             }else {this.props.navigation.navigate('Details',{planScreen:evento});}
         })
+    }
+    logoutUser = () => {
+        this.removeUserStorage().then(r => {
+            this.props.navigation.navigate('Inicio');
 
-
-
+        })
     }
 
     componentDidMount() {
@@ -99,7 +110,8 @@ export class UserScreen extends React.Component {
                             source={require('../Assets/LogoSimple.png')}/>
                     </View>
                         <View>
-                            <TagUser user={this.state.user}/>
+                            <TagUser metodo={this.logoutUser} user={this.state.user}/>
+
                     </View>
                         <View style={{alignItems:'center',marginTop:'50%',display:this.state.displayErrorEvents}}>
                             <Text>Todavia no has creado ningun evento</Text>
@@ -119,11 +131,6 @@ export class UserScreen extends React.Component {
                         <NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/>
                     </View>
                 </View>
-
-
-
-
-
         );
     }
 

@@ -23,7 +23,7 @@ export class TagUser extends Component {
                         <Text style={{fontSize: 18}}>{user.FechaNacimiento}</Text>
                         <Text style={{fontSize: 18}}>{user.Preferences}</Text>
                         <View style={styleTag.containerButton}>
-                            <ButtonPlan size={100} topmargin={10} title={'Edit'}/>
+                            <ButtonPlan metodo={this.props.metodo} size={100} topmargin={10} title={'Logout'}/>
                         </View>
                     </View>
                 </View>
