@@ -23,30 +23,6 @@ import {TypePlan} from "./components/TypePlan/TypePlan";
 function App() {
   return (
       <div className="App">
-          <Router>
-              <div className={"link"}>
-                  <nav className={"navBar"}>
-                      <Link className={"link"} to="/users">Users &nbsp; &nbsp;</Link><br/>
-                      <Link className={"link"} to="/events">Events &nbsp; &nbsp;</Link>
-                      <Link className={"link"} to="/TypePlan">TypePlan</Link>
-                  </nav>
-                  <Switch>
-                      <Route path="/users">
-                          <Users />
-                      </Route>
-                      <Route path="/events">
-                          <Events/>
-                      </Route>
-                      <Route path="/TypePlan">
-                          <TypePlan/>
-                      </Route>
-                  </Switch>
-              </div>
-          </Router>
-
-
-
-
       </div>
   );
 }

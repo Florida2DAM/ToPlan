@@ -146,7 +146,7 @@ export class Events extends Component {
         ).then(response => {
             console.log("Delete successfully");
         }).catch(e => {
-            console.log(e)
+            console.log(e);
 
         });
     }
