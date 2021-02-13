@@ -355,5 +355,43 @@ namespace ToPlan.Models
                
             }
         }
+
+        internal bool PreferencesUpdate(string id, string p1)
+        {
+            ToPlanContext context = new ToPlanContext();
+            User u;
+            string[] aux;
+            try
+            {
+                u = context.Users.Single(p => p.UserId.Equals(id.ToLower()));
+                aux = u.Preferences.Split(';');
+                if (aux.Length>= 4){
+                    return false;
+                }
+                else
+                {
+                    for(int i =0; i < aux.Length; i++)
+                    {
+                        if (aux[i].Equals(p1.ToLower()))
+                        {
+                            return false;
+                        }
+                    }
+                    if (aux.Length == 0)
+                    {
+                        u.Preferences = p1;
+                    }
+                    else
+                    {
+                        u.Preferences = u.Preferences + ";" + p1;
+                    }
+                    return true;
+                }
+            }catch (Exception e)
+            {
+                Debug.WriteLine("Error de conéxion");
+                return false;
+            }
+        }
     }
 }

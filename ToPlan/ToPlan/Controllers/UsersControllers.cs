@@ -125,6 +125,13 @@ namespace ToPlan.Controllers
             UsersRepository rep = new UsersRepository();
             rep.BecomeAdmin(id);
         }
+        [Route("api/User/Preferences")]
+        //Añade preferencias a un ususario
+        public bool PutPreferences(string id, string p)
+        {
+            UsersRepository rep = new UsersRepository();
+            return rep.PreferencesUpdate(id, p);
+        }
         [Route("api/User/NewMail")]
         //Añade otro valor a los mails permitidos
         public bool PutMail(string id)
