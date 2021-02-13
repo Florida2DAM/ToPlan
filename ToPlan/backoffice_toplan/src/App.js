@@ -7,9 +7,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import {GetUsers} from "./components/Users/GetUsers";
-import {UpdateUser} from "./components/Users/UpdateUser";
-import {DeleteUser} from "./components/Users/DeleteUser";
+
 import {Users} from "./components/Users/Users";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-orange/theme.css';
