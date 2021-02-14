@@ -164,6 +164,7 @@ const styleLogin = StyleSheet.create({
 
     },
     logoContainer: {
+        marginTop:20,
         flex: 1,
         alignItems: 'center',
     },

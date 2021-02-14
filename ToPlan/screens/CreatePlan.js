@@ -37,7 +37,7 @@ export class CreatePlanScreen extends Component {
             visibleDataTimePicker: false,
             options: [],
             type: 0,
-            max: '',
+            max: '0',
             errorProvince: '',
             errorCity: '',
             errorAdress: '',
@@ -126,7 +126,7 @@ export class CreatePlanScreen extends Component {
             this.setState({errorType: 'INSERT A VALID TYPE'});
             aux = false;
         }
-        if (Number.parseInt(this.state.max, 10) === 0) {
+        if (Number.parseInt(this.state.max, 10) === 0 || this.state.max === '' ) {
             this.setState({errorMembers: 'INSERT A VALID NUMBER OF MEMBERS'});
             aux = false;
         }
@@ -233,7 +233,7 @@ export class CreatePlanScreen extends Component {
                                         <Text style={styleCreate.members}>Max Members:</Text>
                                         <TextInput
                                             style={{fontSize: 20, paddingRight: 50}}
-                                            placeholder={'Max'}
+                                            placeholder={'0'}
                                             keyboardType='numeric'
                                             onChangeText={(text) => this.setState({max: text})}
                                             value={this.state.max}
