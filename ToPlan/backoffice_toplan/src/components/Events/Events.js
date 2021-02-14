@@ -250,7 +250,7 @@ export class Events extends Component {
         return (
             <div className="groupUpdate">
                 <TabView>
-                    <TabPanel header="Modificar">
+                    <TabPanel header="Update">
                         <div className="update">
                             <h5>Update Event</h5>
                             <InputText placeholder={"EventId"} type={'number'}
@@ -324,7 +324,7 @@ export class Events extends Component {
                             </DataTable>
                         </div>
                     </TabPanel>
-                    <TabPanel header="Insertar">
+                    <TabPanel header="Create">
                         <div className="update">
                             <h5>Insert Event</h5>
                             <div>
@@ -385,7 +385,7 @@ export class Events extends Component {
                             </DataTable>
                         </div>
                     </TabPanel>
-                    <TabPanel header="Eliminar">
+                    <TabPanel header="Delete">
                         <div className="update">
                             <h5>Delete Event</h5>
                             <div>

@@ -33,6 +33,16 @@ export class TypePlan extends Component {
         })).catch((error => {
             console.log(error)
         }));
+
+    }
+
+    GetTypePlans = () => {
+        axios.get("http://54.234.64.228:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
+            this.setState({TypePlans: response.data})
+            console.log(response);
+        })).catch((error => {
+            console.log(error)
+        }));
     }
 
     onInputTypeFilter = (event) => {
@@ -47,9 +57,9 @@ export class TypePlan extends Component {
 
     onSubmitUpdate = () => {
 
-        const promiseUpdate = axios.put("http://54.234.64.228:44360/api/TypesPlan/id?=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
-        ).then(response => {
-            console.log("Update succesfully: " + response)
+        const promiseUpdate = axios.put("http://54.234.64.228:44360/api/TypePlan?id=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
+        ).then(() => {
+            this.GetTypePlans();
         }).catch(e => {
             console.log(e);
         });
@@ -57,22 +67,22 @@ export class TypePlan extends Component {
     }
 
     onSubmitDelete = () => {
-        const promiseUpdate = axios.delete("http://54.234.64.228:44360/api/TypesPlan/id?=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
-        ).then(response => {
-            console.log("Update succesfully: " + response)
+        const promiseUpdate = axios.delete("http://54.234.64.228:44360/api/TypePlan?id=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
+        ).then(() => {
+            this.GetTypePlans();
         }).catch(e => {
             console.log(e);
         });
     }
 
     onSubmitInsert = () => {
-        axios.get('http://54.234.64.228:44360/api/Event/CheckType?id=' + this.state.TypeName, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
+        axios.get('http://54.234.64.228:44360/api/Event/CheckType?id=' + this.state.NameType, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
             (response) => {
                 if (response.data === true) {
-                    axios.post('http://3.95.8.159:44360/api/TypePlan', {
+                    axios.post('http://54.234.64.228:44360/api/TypePlan', {
                         Name: this.state.NameType,
-                        Subtype: this.state.Subtype
-                    }).catch(e => {
+                        Subtype: this.state.TypeSub
+                    }(this.GetTypePlans())).catch(e => {
                         console.log(e);
                     });
                 } else {
@@ -107,7 +117,7 @@ export class TypePlan extends Component {
                     <div className="tabview-demo">
                         <div className="card">
                             <TabView>
-                                <TabPanel header="Modificar">
+                                <TabPanel header="Update">
                                     <div className="update">
                                         <h5>Update TypePlan</h5>
                                         <InputText placeholder={"TypeId"} type={'number'}
@@ -129,9 +139,14 @@ export class TypePlan extends Component {
                                             <Button style={{margin: 15}} label={"Update Type"}
                                                     onClick={this.onSubmitUpdate}/>
                                         </div>
+                                        <DataTable style={{marginTop: 10}} value={this.state.TypePlans}>
+                                            <Column field="TypePlanId" header="TypeId"/>
+                                            <Column field="Name" header="Name"/>
+                                            <Column field="Subtype" header="Subtype"/>
+                                        </DataTable>
                                     </div>
                                 </TabPanel>
-                                <TabPanel header="Insertar">
+                                <TabPanel header="Create">
                                     <div className="update">
                                         <h5>Insert TypePlan</h5>
                                         <InputText placeholder={"Type Name"} type={'text'}
@@ -145,11 +160,16 @@ export class TypePlan extends Component {
                                         <br/>
                                         <Button style={{margin: 15}} label={"Insert TypePlan"}
                                                 onClick={this.onSubmitInsert}/>
+                                        <DataTable style={{marginTop: 10}} value={this.state.TypePlans}>
+                                            <Column field="TypePlanId" header="TypeId"/>
+                                            <Column field="Name" header="Name"/>
+                                            <Column field="Subtype" header="Subtype"/>
+                                        </DataTable>
                                     </div>
                                 </TabPanel>
-                                <TabPanel header="Eliminar">
+                                <TabPanel header="Delete">
                                     <div className="update">
-                                        <h5>Delete Event</h5>
+                                        <h5>Delete TypePlan</h5>
                                         <InputText placeholder={"TypeId"} type={'number'}
                                                    name="IdTypePlan"
                                                    onChange={this.onInputChange}
@@ -157,11 +177,19 @@ export class TypePlan extends Component {
                                         <br/>
                                         <Button style={{margin: 15}} label={"Delete Type"}
                                                 onClick={this.onSubmitDelete}/>
+                                        <DataTable style={{marginTop: 10}} value={this.state.TypePlans}>
+                                            <Column field="TypePlanId" header="TypeId"/>
+                                            <Column field="Name" header="Name"/>
+                                            <Column field="Subtype" header="Subtype"/>
+                                        </DataTable>
                                     </div>
                                 </TabPanel>
-                                <TabPanel header="Filtrar">
+                                <TabPanel header="Get">
                                     <div className="DataTable">
-                                        <DataTable value={this.state.TypePlans}>
+                                        <label>Get All TypePlans </label>
+                                        <Button style={{marginLeft: 10}} onClick={this.GetTypePlans}
+                                                icon={'pi pi-check'}/>
+                                        <DataTable style={{marginTop: 10}} value={this.state.TypePlans}>
                                             <Column field="TypePlanId" header="TypeId"/>
                                             <Column field="Name" header="Name"/>
                                             <Column field="Subtype" header="Subtype"/>
