@@ -15,10 +15,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import PlanPeople from '../Components/planPeople/PlanPeople';
 import axios from 'axios';
 
-const urlEventsData = 'http://3.95.8.159:44360/api/Event4?id=';
-const urlCheck = ' http://3.95.8.159:44360/api/Event/CheckUser?id=';
-const urlAddUser = 'http://3.95.8.159:44360/api/Event/AddUser?id=';
-const urlRemoveUser = 'http://3.95.8.159:44360/api/Event/RemoveUser?id=';
+const urlEventsData = 'http://54.234.64.228:44360/api/Event4?id=';
+const urlCheck = ' http://54.234.64.228:44360/api/Event/CheckUser?id=';
+const urlAddUser = 'http://54.234.64.228:44360/api/Event/AddUser?id=';
+const urlRemoveUser = 'http://54.234.64.228:44360/api/Event/RemoveUser?id=';
 
 
 
@@ -41,6 +41,29 @@ export class PlanDetailsScreen extends Component {
 
     }
   }
+  userScreen = () => {
+    this.getStorage().then(r => {
+      if (this.state.userEmail === null){
+        this.props.navigation.navigate('Login',{screen:'User'});
+      }else {this.props.navigation.navigate('User');}
+    })
+  }
+  exploreScreen = () => {
+    this.getStorage().then(r => {
+      if (this.state.userEmail === null){
+        this.props.navigation.navigate('Login',{screen:'Explore'});
+      }else {this.props.navigation.navigate('Explore');}
+    })
+  }
+  createPlanScreen = () => {
+
+    this.getStorage().then(r => {
+      if (this.state.userEmail === null){
+        this.props.navigation.navigate('Login',{screen:'CreatePlan'});
+      }else {this.props.navigation.navigate('CreatePlan');}
+    })
+
+  }
 
   componentDidMount = () => {
 
@@ -58,7 +81,7 @@ export class PlanDetailsScreen extends Component {
         .get(urlEventsData + this.props.route.params.planScreen)
         .then(response => {
           if (response.data === null || response.data.length === 0) {
-            alert('error de conexion');
+            alert('Error. Try Again');
           } else {
             this.setState({ PlanObject: response.data });
           }
@@ -77,13 +100,12 @@ export class PlanDetailsScreen extends Component {
         .put(urlAddUser+this.props.route.params.planScreen+'&n='+this.state.idUser)
             .then(response => {
               if (response.data) {
-                alert(response.data)
                 this.getPlanData();
                 this.setState({visibilityBtnConfirm:'none'})
                 this.setState({visibilityBtnDeny:'flex'})
 
               } else {
-                alert(response.data);
+                alert('Error. Try Again');
               }
             })
     }catch(e){
@@ -103,7 +125,7 @@ export class PlanDetailsScreen extends Component {
                 this.setState({visibilityBtnDeny:'none'})
 
               } else {
-                alert('Ningun ');
+                alert('Error. Try Again');
               }
             })
 
@@ -170,7 +192,7 @@ export class PlanDetailsScreen extends Component {
                       </View>
                     </View>
                     <View style={styleDetails.separador}>
-                      <Text h4>PLAN PEOPLE</Text>
+                      <Text h4>PARTICIPANTS</Text>
                     </View>
                     <View>
                       {/* Aqui los componentes de las personas en una flatlist primero hacer pruebas*/}
@@ -196,7 +218,7 @@ export class PlanDetailsScreen extends Component {
           </View>
         </ScrollView>
         <View style={styleDetails.navContainer}>
-          <NavBar/>
+          <NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/>
         </View>
       </>
     );

@@ -7,8 +7,8 @@ import ButtonPlan from '../Components/button/ButtonPlan';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const urlCheckEmail = 'http://3.95.8.159:44360/api/User/Check?id=';
-const urlGetUser = 'http://3.95.8.159:44360/api/User/GetUserId?id=';
+const urlCheckEmail = 'http://54.234.64.228:44360/api/User/Check?id=';
+const urlGetUser = 'http://54.234.64.228:44360/api/User/GetUserId?id=';
 const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 
@@ -45,9 +45,8 @@ export class LoginScreen extends Component {
                     if (response.data) {
                         this.checkPassword(this.state.email);
 
-
                     } else {
-                        alert('Ningun usuario existe en la base de datos');
+                        alert('Email not exist');
                     }
                 })
                 .catch(function (error) {
@@ -68,7 +67,7 @@ export class LoginScreen extends Component {
                     this.setState({user: response.data}, () => {
 
                         if (this.state.password === this.state.user[0].Password) {
-                            this.transitionScreen(this.props.route.params.screen);
+                            this.transitionScreen(this.props.route.params.screen, this.props.route.params.planScreen);
                         } else {
                             this.setState({errorPassword: 'PASWORD OR EMAIL WRONG'});
                             errorInputPassword.current.shake();
@@ -105,9 +104,9 @@ export class LoginScreen extends Component {
     };
 
 
-    transitionScreen = (pantallaDestino) => {
+    transitionScreen = (pantallaDestino, evento) => {
         this.storeData(this.state.email).then(r => {});
-        this.props.navigation.navigate(pantallaDestino);
+        this.props.navigation.navigate(pantallaDestino,{planScreen:evento});
     };
     registerScreen = () => {
         this.props.navigation.navigate('Register');

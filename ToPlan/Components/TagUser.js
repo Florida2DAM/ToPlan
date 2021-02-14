@@ -4,7 +4,7 @@ import ButtonPlan from './button/ButtonPlan';
 import DropDownPicker from "react-native-dropdown-picker";
 import PreferencesComponent from './Preferences/PreferencesComponent';
 import axios from 'axios';
-const urlUpdatePreferences = 'http://3.95.8.159:44360/api/User/Preferences?id='
+const urlUpdatePreferences = 'http://54.234.64.228:44360/api/User/Preferences?id='
 
 export class TagUser extends Component {
     constructor(props) {

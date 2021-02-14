@@ -11,9 +11,9 @@ import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const urlEventsBySport = 'http://3.95.8.159:44360/api/Event/Sport';
-const urlEventsByLeisure = 'http://3.95.8.159:44360/api/Event/Leisure';
-const urlEventsByGastronomy = 'http://3.95.8.159:44360/api/Event/Food';
+const urlEventsBySport = 'http://54.234.64.228:44360/api/Event/Sport';
+const urlEventsByLeisure = 'http://54.234.64.228:44360/api/Event/Leisure';
+const urlEventsByGastronomy = 'http://54.234.64.228:44360/api/Event/Food';
 
 export class ExploreScreen extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ export class ExploreScreen extends Component {
                 .get(urlEventsBySport)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+
                     }else {
                         this.setState({sports: response.data});
                     }
@@ -55,7 +55,7 @@ export class ExploreScreen extends Component {
                 .get(urlEventsByLeisure)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+
                     }else {
                         this.setState({leisure: response.data});
                     }
@@ -73,7 +73,7 @@ export class ExploreScreen extends Component {
                 .get(urlEventsByGastronomy)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+
                     }else {
                         this.setState({gastronomy: response.data});
                     }
@@ -109,14 +109,27 @@ export class ExploreScreen extends Component {
         this.setState({leisureVisibility: 'flex'});
         this.setState({gastronomyVisibility: 'none'});
     }
-    exploreScreen = () => {
-        this.props.navigation.navigate('Explore');
-    }
     userScreen = () => {
-        this.props.navigation.navigate('User');
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'User'});
+            }else {this.props.navigation.navigate('User');}
+        })
+    }
+    exploreScreen = () => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Explore'});
+            }else {this.props.navigation.navigate('Explore');}
+        })
     }
     createPlanScreen = () => {
-        this.props.navigation.navigate('CreatePlan');
+
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'CreatePlan'});
+            }else {this.props.navigation.navigate('CreatePlan');}
+        })
 
     }
     async getStorage() {

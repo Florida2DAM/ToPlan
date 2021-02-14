@@ -21,7 +21,7 @@ import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 
-const urlEventsByDate = 'http://3.95.8.159:44360/api/Event3';
+const urlEventsByDate = 'http://54.234.64.228:44360/api/Event3';
 
 
 
@@ -99,7 +99,7 @@ export class InicioScreen extends Component {
     detailsScreen = (evento) => {
         this.getStorage().then(r => {
             if (this.state.userEmail === null){
-                this.props.navigation.navigate('Login',{screen:'Details'});
+                this.props.navigation.navigate('Login',{screen:'Details',planScreen:evento});
             }else {this.props.navigation.navigate('Details',{planScreen:evento});}
         })
 

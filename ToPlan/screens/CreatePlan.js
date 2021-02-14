@@ -16,7 +16,8 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const urlTypes = 'http://3.95.8.159:44360/api/TypePlan/ListDTO';
+const urlTypes = 'http://54.234.64.228:44360/api/TypePlan/ListDTO';
+const urlPostEvent = 'http://54.234.64.228:44360/api/Event';
 const errorInputProvince = React.createRef();
 const errorInputCity = React.createRef();
 const errorInputAdress = React.createRef();
@@ -87,9 +88,10 @@ export class CreatePlanScreen extends Component {
         };
         try {
             axios
-                .post('http://3.95.8.159:44360/api/Event', event)
+                .post(urlPostEvent, event)
                 .then((response) => {
-                    alert('Insertado correctamente');
+                    alert('Event Added');
+                    this.exploreScreen();
                 }, (error) => {
                     alert(error);
                 })
@@ -148,6 +150,29 @@ export class CreatePlanScreen extends Component {
         }catch (e) {
 
         }
+    }
+    userScreen = () => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'User'});
+            }else {this.props.navigation.navigate('User');}
+        })
+    }
+    exploreScreen = () => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Explore'});
+            }else {this.props.navigation.navigate('Explore');}
+        })
+    }
+    createPlanScreen = () => {
+
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'CreatePlan'});
+            }else {this.props.navigation.navigate('CreatePlan');}
+        })
+
     }
 
     componentDidMount = () => {
@@ -227,7 +252,8 @@ export class CreatePlanScreen extends Component {
 
                     </View>
                     <View style={styleCreate.navContainer}><ButtonPlan metodo={this.checkConditions}
-                                                                       title={'Create Plan'}/><NavBar/>
+                                                                       title={'Create Plan'}/>
+                        <NavBar create={this.createPlanScreen} user={this.userScreen} find={this.exploreScreen}/>
                     </View>
                 </View>
             </>

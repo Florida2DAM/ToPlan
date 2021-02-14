@@ -14,11 +14,12 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Terms from '../Components/terms/Terms';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
 const errorInputSurname = React.createRef();
-const urlPostUser= 'http://3.95.8.159:44360/api/User/WithoutPreferences';
+const urlPostUser= 'http://54.234.64.228:44360/api/User/WithoutPreferences';
 
 
 
@@ -43,11 +44,14 @@ export class RegisterScreen extends React.Component {
             visibilityOverlay:false,
         }
     }
-    setLink = () =>{
-        const link=this.props.linkTerms;
-    Linking.openURL(link.toString())
-
+    storeData = async (idUser) => {
+        try {
+            await AsyncStorage.setItem('userKey', idUser)
+        } catch (e) {
+            alert(e)
+        }
     }
+
 
     postUser = async () => {
         let date = this.state.date;
@@ -65,6 +69,9 @@ export class RegisterScreen extends React.Component {
                 axios.post(urlPostUser, user)
                     .then((response) => {
                         alert("Insertado correctamente");
+                        this.storeData(this.state.email);
+                        this.props.navigation.navigate('Inicio');
+
                     }, (error) => {
                         alert(error);
                     })

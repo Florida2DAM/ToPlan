@@ -5,12 +5,10 @@ import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 import TagUser from '../Components/TagUser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PreferencesComponent from '../Components/Preferences/PreferencesComponent';
 
-const urlGetEventsById = 'http://3.95.8.159:44360/api/Event/EventsUser?id=';
-const urlGetUserById = 'http://3.95.8.159:44360/api/User1?id=';
-const urlTypes = 'http://3.95.8.159:44360/api/TypePlan/ListDTO';
-const urlUpdatePreferences = 'http://3.95.8.159:44360/api/User/Preferences?id='
+const urlGetEventsById = 'http://54.234.64.228:44360/api/Event/EventsUser?id=';
+const urlGetUserById = 'http://54.234.64.228:44360/api/User1?id=';
+const urlTypes = 'http://54.234.64.228:44360/api/TypePlan/ListDTO';
 
 export class UserScreen extends React.Component {
     constructor(props) {
@@ -28,6 +26,7 @@ export class UserScreen extends React.Component {
         try {
             this.setState({userEmail: await AsyncStorage.getItem('userKey')});
 
+
         } catch (e) {
 
         }
@@ -37,10 +36,11 @@ export class UserScreen extends React.Component {
         try {
             await AsyncStorage.removeItem('userKey');
         } catch (e) {
-            // remove error
+
         }
     };
     getEventsByIdUser = async (user) => {
+
         try {
             axios
                 .get(urlGetEventsById + user)
@@ -64,7 +64,7 @@ export class UserScreen extends React.Component {
                 .get(urlGetUserById + user)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+                        alert('Error. Try Again');
                     } else {
                         this.setState({user: response.data});
                     }
@@ -76,13 +76,7 @@ export class UserScreen extends React.Component {
             console.log(error);
         }
     };
-    exploreScreen = () => {
-        this.props.navigation.navigate('Explore');
-    };
-    createPlanScreen = () => {
-        this.props.navigation.navigate('CreatePlan');
 
-    };
     detailsScreen = (evento) => {
         this.getStorage().then(r => {
             if (this.state.userEmail === null) {
@@ -104,7 +98,7 @@ export class UserScreen extends React.Component {
                 .get(urlTypes)
                 .then(response => {
                     if (response.data === null || response.data.length === 0) {
-                        alert('error de conexion');
+
                     } else {
                         this.setState({options: response.data});
                     }
@@ -114,6 +108,29 @@ export class UserScreen extends React.Component {
             console.log(error);
         }
     };
+    userScreen = () => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'User'});
+            }else {this.props.navigation.navigate('User');}
+        })
+    }
+    exploreScreen = () => {
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'Explore'});
+            }else {this.props.navigation.navigate('Explore');}
+        })
+    }
+    createPlanScreen = () => {
+
+        this.getStorage().then(r => {
+            if (this.state.userEmail === null){
+                this.props.navigation.navigate('Login',{screen:'CreatePlan'});
+            }else {this.props.navigation.navigate('CreatePlan');}
+        })
+
+    }
 
 
 
@@ -153,7 +170,6 @@ export class UserScreen extends React.Component {
                             <Pressable onPress={() => this.detailsScreen(item.EventId)}><EventMiddle
                                 element={item}/></Pressable>)}>
                     </FlatList>
-
 
                 </View>
                 <View style={styles.navigationContainer}>

@@ -26,13 +26,13 @@ export class App extends Component {
     return (
         <NavigationContainer>
             <pilaNavegacion.Navigator>
-                <pilaNavegacion.Screen name="Inicio" component={InicioScreen} />
-                <pilaNavegacion.Screen name="Login" component={LoginScreen} />
-                <pilaNavegacion.Screen name="Explore" component={ExploreScreen} />
-                <pilaNavegacion.Screen name="User" component={UserScreen} />
-                <pilaNavegacion.Screen name="Register" component={RegisterScreen} />
-                <pilaNavegacion.Screen name="Details" component={PlanDetailsScreen} />
-                <pilaNavegacion.Screen name="CreatePlan" component={CreatePlanScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="Inicio" component={InicioScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="Explore" component={ExploreScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="User" component={UserScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="Register" component={RegisterScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="Details" component={PlanDetailsScreen} />
+                <pilaNavegacion.Screen options={{ headerShown: false }} name="CreatePlan" component={CreatePlanScreen} />
 
             </pilaNavegacion.Navigator>
         </NavigationContainer>
