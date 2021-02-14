@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TypesPlanController : ApiController
     {
         // Devuelve una lista con los tipos de planes

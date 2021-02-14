@@ -8,6 +8,7 @@ using ToPlan.Models;
 
 namespace ToPlan.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         [Route("api/User/Check")]

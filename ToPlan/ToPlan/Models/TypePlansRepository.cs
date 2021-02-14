@@ -68,6 +68,8 @@ namespace ToPlan.Models
                 t = context.TypePlans.Single(p => p.TypePlanId == id);
                 t.Name = n.ToLower();
                 t.Subtype = s.ToLower();
+                context.TypePlans.Update(t);
+                context.SaveChanges();
             }catch (Exception e)
             {
                 Debug.WriteLine("Error de conexion");
