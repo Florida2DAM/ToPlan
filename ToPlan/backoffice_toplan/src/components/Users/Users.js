@@ -5,6 +5,7 @@ import {Button} from "primereact/button";
 import {Column} from "primereact/column";
 import {DataTable} from "primereact/datatable";
 import {InputText} from "primereact/inputtext";
+import './Users.css'
 
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/vela-orange/theme.css';

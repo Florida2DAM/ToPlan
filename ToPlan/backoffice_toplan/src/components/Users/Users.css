@@ -1,4 +1,4 @@
-button{
+button {
     background-color: black;
     font-family: 'Arial';
     font-size: 10px;
@@ -10,52 +10,61 @@ button{
 
 
 }
+
 .grupo {
-    background-color: #FFCC58;
+    background-color: black;
     display: flex;
     flex-direction: row;
 
 }
-label{
-    color:black;
+
+label {
+    color: black;
 }
-.TabView{
+
+.TabView {
     background-color: black;
 }
+
 .separador {
     flex: 1;
     padding: 20px;
+    background-color: #FFCC58;
 }
 
 
-.column{
-    width:100px;
+.column {
+    width: 100px;
 }
-.inputButton{
+
+.inputButton {
     margin-bottom: 10px;
 
 }
 
-.editContainer{
+.editContainer {
     align-self: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.inputText{
+
+.inputText {
     margin-top: 10px;
 
 }
 
-.admin{
-    flex:0;
-    margin-outside: 10px;    justify-content: center;
+.admin {
+    flex: 0;
+    margin-outside: 10px;
+    justify-content: center;
     margin-top: 20px;
 }
-.updateInputs{
+
+.updateInputs {
 
 
-    flex:0;
+    flex: 0;
 
 
     flex-direction: row;
@@ -63,9 +72,11 @@ label{
 
 
 }
-.mainContainerUpdate{
+
+.mainContainerUpdate {
 }
-.edit{
+
+.edit {
     align-self: center;
     display: flex;
     flex-direction: column;
