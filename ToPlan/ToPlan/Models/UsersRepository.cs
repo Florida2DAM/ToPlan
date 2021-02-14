@@ -14,7 +14,11 @@ namespace ToPlan.Models
         {
             ToPlanContext context = new ToPlanContext();
             try
-            {                
+            {          
+                if(u.Preferences == null)
+                {
+                    u.Preferences = "";
+                }
                 context.Users.Add(u);
                 context.SaveChanges();
             }
