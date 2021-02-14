@@ -128,7 +128,7 @@ export class App extends React.Component {
 
         let checker = false
 
-        const promise = axios.get('http://54.234.64.228:44360/api/User/CheckAdmin?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/User/CheckAdmin?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             checker = respuesta.data
 
@@ -154,7 +154,7 @@ export class App extends React.Component {
 
         let checker = false
 
-        const promise = axios.get('http://54.234.64.228:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             checker = respuesta.data
 
@@ -191,7 +191,7 @@ export class App extends React.Component {
         if (this.state.checker == true && this.state.checkeruser) {
             console.log("Entro")
 
-            const promise = axios.get('http://54.234.64.228:44360/api/User/GetPassword?id=' + this.state.userId + "&p=" + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
+            const promise = axios.get('http://100.24.72.24:44360/api/User/GetPassword?id=' + this.state.userId + "&p=" + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
             const promiseResult = promise.then((respuesta) => {
                 console.log(respuesta.data)
                 if (respuesta.data == true) {
