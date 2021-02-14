@@ -344,7 +344,7 @@ namespace ToPlan.Models
             {
                 context.Users.Add(u);
                 string preferences = u.Preferences;
-                preferences = null;
+                preferences = "";
                 context.SaveChanges();
                 
                 
