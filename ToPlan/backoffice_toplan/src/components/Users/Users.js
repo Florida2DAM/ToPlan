@@ -244,14 +244,13 @@ export class Users extends React.Component {
                                 <InputMask mask="9999-99-99" placeholder={"birthDate"} name={"birthDate"}
                                            value={this.state.birthDate} slotChar={"yyyy-mm-dd"}
                                            onChange={this.onInputchange}></InputMask>
-                                <label>&nbsp; &nbsp;Admin &nbsp;</label>
 
 
                                 <Button style={{marginLeft: 10}} onClick={this.validUserId}
                                         icon={'pi pi-check'}></Button>
 
 
-                                <DataTable value={this.state.users}>
+                                <DataTable style={{marginTop:10}} value={this.state.users}>
                                     {dynamicColumns}
                                 </DataTable>
                             </div>
