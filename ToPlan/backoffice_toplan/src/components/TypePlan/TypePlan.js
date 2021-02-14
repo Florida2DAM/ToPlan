@@ -58,7 +58,7 @@ export class TypePlan extends Component {
     onSubmitUpdate = () => {
 
         const promiseUpdate = axios.put("http://100.24.72.24:44360/api/TypePlan?id=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
-        ).then(() => {
+        ).then(response => {
             this.GetTypePlans();
         }).catch(e => {
             console.log(e);
@@ -81,8 +81,8 @@ export class TypePlan extends Component {
                 if (response.data === true) {
                     axios.post('http://100.24.72.24:44360/api/TypePlan', {
                         Name: this.state.NameType,
-                        Subtype: this.state.TypeSub
-                    }(this.GetTypePlans())).catch(e => {
+                        Subtype: this.state.TypeSub,
+                    }).then(response =>{this.GetTypePlans()}).catch(e => {
                         console.log(e);
                     });
                 } else {
@@ -90,8 +90,10 @@ export class TypePlan extends Component {
                 }
             }).catch(e => {
                 console.log(e);
+
             }
         )
+
     }
 
     checkerType = () => {
