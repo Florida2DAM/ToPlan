@@ -44,7 +44,7 @@ export class Events extends Component {
 
 
     componentDidMount() {
-        axios.get("http://54.234.64.228:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
+        axios.get("http://100.24.72.24:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
             console.log(response)
             this.setState({TypePlanArray: response.data})
         })).catch((error => {
@@ -55,7 +55,7 @@ export class Events extends Component {
 
 
     getEvents = () => {
-        axios.get('http://54.234.64.228:44360/api/Event').then((respuesta) => {
+        axios.get('http://100.24.72.24:44360/api/Event').then((respuesta) => {
             this.setState({Events: respuesta.data});
         }).catch(e => {
             console.log("Error de conexion con la API");
@@ -68,7 +68,7 @@ export class Events extends Component {
         const TypePlanId = parseInt(Type);
         console.log(TypePlanId);
 
-        axios.post('http://54.234.64.228:44360/api/Event', {
+        axios.post('http://100.24.72.24:44360/api/Event', {
             UserId: this.state.UserId,
             EventDate: this.state.date,
             City: this.state.city,
@@ -89,7 +89,7 @@ export class Events extends Component {
 
     onSubmitUpdate = () => {
 
-        const promiseUpdate = axios.put("http://54.234.64.228:44360/api/Event?id=" + this.state.EventId + "&dir=" + this.state.direction + "&f=" + this.state.date + "&c=" + this.state.city + "&p=" + this.state.province + "&d=" + this.state.description + "&max=" + this.state.Members, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.put("http://100.24.72.24:44360/api/Event?id=" + this.state.EventId + "&dir=" + this.state.direction + "&f=" + this.state.date + "&c=" + this.state.city + "&p=" + this.state.province + "&d=" + this.state.description + "&max=" + this.state.Members, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(() => {
             this.getEvents();
         }).catch(e => {
@@ -142,7 +142,7 @@ export class Events extends Component {
 
     onSubmitDeleteEvent = () => {
 
-        let promisePost = axios.delete("http://54.234.64.228:44360/api/Event?id=" + this.state.EventId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        let promisePost = axios.delete("http://100.24.72.24:44360/api/Event?id=" + this.state.EventId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(() => {
             this.getEvents();
             console.log("Delete successfully");
@@ -157,7 +157,7 @@ export class Events extends Component {
         const TypePlanId = parseInt(Type);
         console.log(TypePlanId);
 
-        let promisePost = axios.put("http://54.234.64.228:44360/api/Event/Type?id=" + this.state.IdEvent + "&t=" + TypePlanId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
+        let promisePost = axios.put("http://100.24.72.24:44360/api/Event/Type?id=" + this.state.IdEvent + "&t=" + TypePlanId, {}, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(() => {
             this.getEvents();
         }).catch(e => {
@@ -193,7 +193,7 @@ export class Events extends Component {
 
     checkerEvent = () => {
 
-        const promise = axios.get('http://54.234.64.228:44360/api/Event/Check?id=' + this.state.EventId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/Event/Check?id=' + this.state.EventId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 if (resolveResult.data === true) {
                     console.log(resolveResult.data);
@@ -209,7 +209,7 @@ export class Events extends Component {
 
     checkerEvent2 = () => {
 
-        const promise = axios.get('http://54.234.64.228:44360/api/Event/Check?id=' + this.state.IdEvent, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/Event/Check?id=' + this.state.IdEvent, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 if (resolveResult.data === true) {
                     console.log(resolveResult.data);
@@ -224,9 +224,9 @@ export class Events extends Component {
     }
 
     filterType = () => {
-        axios.get('http://54.234.64.228:44360/api/Event/CheckType?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then((respuesta) => {
+        axios.get('http://100.24.72.24:44360/api/Event/CheckType?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then((respuesta) => {
             if (respuesta.data === true) {
-                axios.get('http://54.234.64.228:44360/api/Eventtype?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then
+                axios.get('http://100.24.72.24:44360/api/Eventtype?id=' + this.state.TypePlanName, {headers: {'Access-Control-Allow-Origin': '*'}}).then
                 (response => {
                         this.setState({Events: response.data})
                         console.log(response.data);

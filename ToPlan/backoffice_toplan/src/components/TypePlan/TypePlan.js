@@ -27,7 +27,7 @@ export class TypePlan extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://54.234.64.228:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
+        axios.get("http://100.24.72.24:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
             this.setState({TypePlans: response.data})
             console.log(response);
         })).catch((error => {
@@ -37,7 +37,7 @@ export class TypePlan extends Component {
     }
 
     GetTypePlans = () => {
-        axios.get("http://54.234.64.228:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
+        axios.get("http://100.24.72.24:44360/api/TypePlan/List", {}, {headers: {'Access-Control-Allow-Origin': '*'}}).then((response => {
             this.setState({TypePlans: response.data})
             console.log(response);
         })).catch((error => {
@@ -57,7 +57,7 @@ export class TypePlan extends Component {
 
     onSubmitUpdate = () => {
 
-        const promiseUpdate = axios.put("http://54.234.64.228:44360/api/TypePlan?id=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.put("http://100.24.72.24:44360/api/TypePlan?id=" + this.state.IdTypePlan + "&n=" + this.state.TypeName + "+&s=" + this.state.Subtype, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(() => {
             this.GetTypePlans();
         }).catch(e => {
@@ -67,7 +67,7 @@ export class TypePlan extends Component {
     }
 
     onSubmitDelete = () => {
-        const promiseUpdate = axios.delete("http://54.234.64.228:44360/api/TypePlan?id=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
+        const promiseUpdate = axios.delete("http://100.24.72.24:44360/api/TypePlan?id=" + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}}
         ).then(() => {
             this.GetTypePlans();
         }).catch(e => {
@@ -76,10 +76,10 @@ export class TypePlan extends Component {
     }
 
     onSubmitInsert = () => {
-        axios.get('http://54.234.64.228:44360/api/Event/CheckType?id=' + this.state.NameType, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
+        axios.get('http://100.24.72.24:44360/api/Event/CheckType?id=' + this.state.NameType, {headers: {'Access-Control-Allow-Origin': '*'}}).then(
             (response) => {
                 if (response.data === true) {
-                    axios.post('http://54.234.64.228:44360/api/TypePlan', {
+                    axios.post('http://100.24.72.24:44360/api/TypePlan', {
                         Name: this.state.NameType,
                         Subtype: this.state.TypeSub
                     }(this.GetTypePlans())).catch(e => {
@@ -96,7 +96,7 @@ export class TypePlan extends Component {
 
     checkerType = () => {
 
-        const promise = axios.get('http://54.234.64.228:44360/api/TypePlan/Check?id=' + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/TypePlan/Check?id=' + this.state.IdTypePlan, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 if (resolveResult.data === true) {
                     console.log(resolveResult.data);

@@ -266,7 +266,7 @@ export class Users extends React.Component {
 
     componentDidMount() {
         console.log(this.state.token)
-        const promise = axios.get('http://54.234.64.228:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -289,7 +289,7 @@ export class Users extends React.Component {
 
     getAllUsers = () => {
         console.log(this.state.token)
-        const promise = axios.get('http://54.234.64.228:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/Users', {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -304,7 +304,7 @@ export class Users extends React.Component {
         });
     }
     getUserById = () => {
-        const promise = axios.get('http://54.234.64.228:44360/api/User/GetUserId?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/User/GetUserId?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -322,7 +322,7 @@ export class Users extends React.Component {
 
     }
     getUserByName = () => {
-        const promise = axios.get('http://54.234.64.228:44360/api/User/GetUserName?n=' + this.state.name, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/User/GetUserName?n=' + this.state.name, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((respuesta) => {
             respuesta.data.forEach(m => {
                 if (m.Admin === true) {
@@ -340,7 +340,7 @@ export class Users extends React.Component {
     checkerUser = () => {
 
 
-        const promise = axios.get('http://54.234.64.228:44360//api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360//api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 this.setState({visible: false})
 
@@ -353,7 +353,7 @@ export class Users extends React.Component {
 
     }
     updateUser = () => {
-        const promise = axios.put('http://54.234.64.228:44360/api/User?id=' + this.state.userId.toLocaleLowerCase() + '&n=' + this.state.name.toLocaleLowerCase() + '&s=' + this.state.surname.toLocaleLowerCase() + '&f=' + this.state.birthDate + '&p=' + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://100.24.72.24:44360/api/User?id=' + this.state.userId.toLocaleLowerCase() + '&n=' + this.state.name.toLocaleLowerCase() + '&s=' + this.state.surname.toLocaleLowerCase() + '&f=' + this.state.birthDate + '&p=' + this.state.password, {headers: {'Access-Control-Allow-Origin': '*'}})
 
         const promiseResult = promise.then((resolveResult) => {
 
@@ -371,7 +371,7 @@ export class Users extends React.Component {
     }
     validUserId = () => {
         console.log(this.state.userId.toLocaleLowerCase())
-        const promise = axios.get('http://54.234.64.228:44360/api/User/CheckMail?m=' + this.state.userId.toLocaleLowerCase(), {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.get('http://100.24.72.24:44360/api/User/CheckMail?m=' + this.state.userId.toLocaleLowerCase(), {headers: {'Access-Control-Allow-Origin': '*'}})
 
         const promiseResult = promise.then((resolveResult) => {
 
@@ -389,7 +389,7 @@ export class Users extends React.Component {
     }
     createUser = () => {
 
-        const promise = axios.post('http://54.234.64.228:44360/api/User', {
+        const promise = axios.post('http://100.24.72.24:44360/api/User', {
             UserId: this.state.userId.toLocaleLowerCase(),
             Name: this.state.name.toLocaleLowerCase(),
             Surname: this.state.surname.toLocaleLowerCase(),
@@ -412,7 +412,7 @@ export class Users extends React.Component {
 
     }
     makeAdmin = () => {
-        const promise = axios.put('http://54.234.64.228:44360/api/User/AdminT?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://100.24.72.24:44360/api/User/AdminT?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 console.log(resolveResult);
                 alert("Ahora " + this.state.userId + " Es Admin")
@@ -427,7 +427,7 @@ export class Users extends React.Component {
 
     }
     deleteAdmin = () => {
-        const promise = axios.put('http://54.234.64.228:44360/api/User/AdminF?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+        const promise = axios.put('http://100.24.72.24:44360/api/User/AdminF?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
         const promiseResult = promise.then((resolveResult) => {
                 resolveResult.data.forEach(m => {
                     if (m.Admin === true) {
@@ -452,10 +452,10 @@ export class Users extends React.Component {
             alert('Debes Introducir un Valor')
 
         } else {
-            const promise = axios.get('http://54.234.64.228:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+            const promise = axios.get('http://100.24.72.24:44360/api/User/Check?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
             const promiseResult = promise.then((resolveResult) => {
                     if (resolveResult.data == true) {
-                        const promise = axios.delete('http://3.95.8.159:44360/api/User?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
+                        const promise = axios.delete('http://100.24.72.24:44360/api/User?id=' + this.state.userId, {headers: {'Access-Control-Allow-Origin': '*'}})
                         const promiseResult = promise.then(() => {
                                 this.getAllUsers()
 
