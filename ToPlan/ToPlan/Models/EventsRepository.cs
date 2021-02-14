@@ -250,7 +250,7 @@ namespace ToPlan.Models
                     u = context.Users.Single(p => p.UserId == aux2[i].UserId);
                     date = DateTime.Parse(aux2[i].EventDate);
                     aux3 = aux2[i].ListMembers.Split(';');
-                    if (DateTime.Compare(date, Today) > 0)
+                    if (DateTime.Compare(date, Today) >= 0)
                     {
                         for (int j = 0; j < aux3.Length; j++)
                         {

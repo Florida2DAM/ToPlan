@@ -57,7 +57,7 @@ namespace ToPlan.Models
             this.Name = char.ToUpper(n[0]) + n.Substring(1) + " " + char.ToUpper(s[0]) + s.Substring(1);
             this.Email = e;
             this.FechaNacimiento = f;
-            if (p == null)
+            if (p == null||p.Equals(""))
             {
                 this.Preferences = null;
             }

@@ -346,9 +346,8 @@ namespace ToPlan.Models
             ToPlanContext context = new ToPlanContext();
             try
             {
+                u.Preferences = "";
                 context.Users.Add(u);
-                string preferences = u.Preferences;
-                preferences = "";
                 context.SaveChanges();
                 
                 
@@ -372,11 +371,15 @@ namespace ToPlan.Models
                 if (aux.Length>= 4){
                     return false;
                 }
+                if(p1 == null)
+                {
+                    return false;
+                }
                 else
                 {
                     for(int i =0; i < aux.Length; i++)
                     {
-                        if (aux[i].Equals(p1.ToLower()))
+                        if (aux[i].ToLower().Equals(p1.ToLower()))
                         {
                             return false;
                         }
