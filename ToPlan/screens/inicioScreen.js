@@ -20,8 +20,8 @@ import {Text} from 'react-native-elements';
 import {EventMiddle} from '../Components/eventMiddle/EventMiddle';
 import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
-
-const urlEventsByDate = 'http://54.234.64.228:44360/api/Event3';
+const ip = '100.24.72.24';
+const urlEventsByDate = 'http://' + ip + ':44360/api/Event3';
 
 
 

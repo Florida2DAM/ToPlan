@@ -14,11 +14,11 @@ import ButtonPlan from '../Components/button/ButtonPlan';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PlanPeople from '../Components/planPeople/PlanPeople';
 import axios from 'axios';
-
-const urlEventsData = 'http://54.234.64.228:44360/api/Event4?id=';
-const urlCheck = ' http://54.234.64.228:44360/api/Event/CheckUser?id=';
-const urlAddUser = 'http://54.234.64.228:44360/api/Event/AddUser?id=';
-const urlRemoveUser = 'http://54.234.64.228:44360/api/Event/RemoveUser?id=';
+const ip = '100.24.72.24';
+const urlEventsData = 'http://' + ip + ':44360/api/Event4?id=';
+const urlCheck = ' http://' + ip + ':44360/api/Event/CheckUser?id=';
+const urlAddUser = 'http://' + ip + ':44360/api/Event/AddUser?id=';
+const urlRemoveUser = 'http://' + ip + ':44360/api/Event/RemoveUser?id=';
 
 
 

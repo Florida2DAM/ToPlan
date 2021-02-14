@@ -19,7 +19,8 @@ const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 const errorInputName = React.createRef();
 const errorInputSurname = React.createRef();
-const urlPostUser= 'http://54.234.64.228:44360/api/User/WithoutPreferences';
+const ip = '100.24.72.24';
+const urlPostUser= 'http://' + ip + ':44360/api/User/WithoutPreferences';
 
 
 

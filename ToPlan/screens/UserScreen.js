@@ -5,10 +5,10 @@ import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 import TagUser from '../Components/TagUser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const urlGetEventsById = 'http://54.234.64.228:44360/api/Event/EventsUser?id=';
-const urlGetUserById = 'http://54.234.64.228:44360/api/User1?id=';
-const urlTypes = 'http://54.234.64.228:44360/api/TypePlan/ListDTO';
+const ip = '100.24.72.24';
+const urlGetEventsById = 'http://' + ip + ':44360/api/Event/EventsUser?id=';
+const urlGetUserById = 'http://' + ip + ':44360/api/User1?id=';
+const urlTypes = 'http://' + ip + ':44360/api/TypePlan/ListDTO';
 
 export class UserScreen extends React.Component {
     constructor(props) {

@@ -11,9 +11,10 @@ import {NavBar} from '../Components/navBar/NavBar';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const urlEventsBySport = 'http://54.234.64.228:44360/api/Event/Sport';
-const urlEventsByLeisure = 'http://54.234.64.228:44360/api/Event/Leisure';
-const urlEventsByGastronomy = 'http://54.234.64.228:44360/api/Event/Food';
+const ip = '100.24.72.24';
+const urlEventsBySport = 'http://' + ip + ':44360/api/Event/Sport';
+const urlEventsByLeisure = 'http://' + ip + ':44360/api/Event/Leisure';
+const urlEventsByGastronomy = 'http://' + ip + ':44360/api/Event/Food';
 
 export class ExploreScreen extends Component {
     constructor(props) {

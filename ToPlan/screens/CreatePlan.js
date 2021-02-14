@@ -15,9 +15,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const urlTypes = 'http://54.234.64.228:44360/api/TypePlan/ListDTO';
-const urlPostEvent = 'http://54.234.64.228:44360/api/Event';
+const ip = '100.24.72.24';
+const urlTypes = 'http://' + ip + ':44360/api/TypePlan/ListDTO';
+const urlPostEvent = 'http://' + ip + ':44360/api/Event';
 const errorInputProvince = React.createRef();
 const errorInputCity = React.createRef();
 const errorInputAdress = React.createRef();

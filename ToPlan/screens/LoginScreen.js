@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonPlan from '../Components/button/ButtonPlan';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const urlCheckEmail = 'http://54.234.64.228:44360/api/User/Check?id=';
-const urlGetUser = 'http://54.234.64.228:44360/api/User/GetUserId?id=';
+const ip = '100.24.72.24';
+const urlCheckEmail = 'http://' + ip + ':44360/api/User/Check?id=';
+const urlGetUser = 'http://' + ip + ':44360/api/User/GetUserId?id=';
 const errorInputEmail = React.createRef();
 const errorInputPassword = React.createRef();
 
@@ -119,30 +119,32 @@ export class LoginScreen extends Component {
     render() {
         return (
             <>
-                <ScrollView>
+
                     <View style={styleLogin.loginContainer}>
+                        <ScrollView>
                         <View style={styleLogin.logoContainer}>
                             <Image style={styleLogin.logo} source={require('../Assets/LogoSimple.png')}/>
                         </View>
                         <View style={styleLogin.inputContainer}>
-                            <Input ref={errorInputEmail} placeholder='Email' value={this.state.email}
-                                   errorStyle={{color: 'red'}} errorMessage={this.state.errorEmail}
-                                   onChangeText={(text) => this.setState({email: text})}
-                                   leftIcon={<Icon name='user' size={24} color='black'/>}/>
-                            <Input ref={errorInputPassword} placeholder='Password' secureTextEntry={true}
-                                   errorStyle={{color: 'red'}} errorMessage={this.state.errorPassword}
-                                   value={this.state.password} onChangeText={(text) => this.setState({password: text})}
-                                   leftIcon={<Icon name='lock' size={24} color='black'/>}/>
+
+                                <Input ref={errorInputEmail} placeholder='Email' value={this.state.email}
+                                               errorStyle={{color: 'red'}} errorMessage={this.state.errorEmail}
+                                               onChangeText={(text) => this.setState({email: text})}
+                                               leftIcon={<Icon name='user' size={24} color='black'/>}/>
+                                <Input ref={errorInputPassword} placeholder='Password' secureTextEntry={true}
+                                       errorStyle={{color: 'red'}} errorMessage={this.state.errorPassword}
+                                       value={this.state.password} onChangeText={(text) => this.setState({password: text})}
+                                       leftIcon={<Icon name='lock' size={24} color='black'/>}/>
+
                         </View>
                         <View style={styleLogin.buttonsContainer}>
-                            <View><ButtonPlan metodo={this.login} size={140} topmargin={10} title={'Login'}/></View>
-                            <View><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10}
-                                              title={'Register'}/></View>
+                            <View style={styleLogin.individualButton}><ButtonPlan metodo={this.login} size={140} topmargin={10} title={'Login'}/></View>
+                            <View style={styleLogin.individualButton}><ButtonPlan metodo={this.registerScreen} size={140} topmargin={10} title={'Register'}/></View>
 
                         </View>
-
+                        </ScrollView>
                     </View>
-                </ScrollView>
+
             </>
         );
     };
@@ -161,15 +163,20 @@ const styleLogin = StyleSheet.create({
     },
     inputContainer: {
         marginTop: 50,
-        width: '80%',
+        width: '100%',
     },
     buttonsContainer: {
         display: 'flex',
-        width: '80%',
+        width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-around',
 
+    }, individualButton: {
+        display: 'flex',
+        flex:1,
+        alignItems:'center',
+        justifyContent:'space-around'
     },
+
 });
 
 export default LoginScreen;
