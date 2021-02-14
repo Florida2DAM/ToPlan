@@ -195,7 +195,6 @@ export class App extends React.Component {
             const promiseResult = promise.then((respuesta) => {
                 console.log(respuesta.data)
                 if (respuesta.data == true) {
-                    alert('correct')
 
                     this.setState({visible: false, displayModal: true})
                 } else {
